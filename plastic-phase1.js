@@ -1,11 +1,11 @@
-var name = "Hawke";
-var role = "Mage";
-var vitals = 100;
-var inventory = ["journal pages", "apple", "ring"];
-var money = 20;
-var skills = ["fireball","cone of cold","stone fist"];
-var tool = "Apostate Staff";
-var gear = "Smuggler Outfit";
+var initname = "Hawke";
+var initrole = "Mage";
+var initvitals = 100;
+var initinventory = ["book", "apple", "ring"];
+var initmoney = 20;
+var initskills = ["fireball","cone of cold","stone fist"];
+var inittool = "Apostate Staff";
+var initgear = "Smuggler Outfit";
 
 function Character(name,role,vitals,inventory,money,skills,tools,gear){
   this.name = name;
@@ -18,10 +18,12 @@ function Character(name,role,vitals,inventory,money,skills,tools,gear){
   this.gear = gear;
 };
 
-var hawke = new Character(name,role,vitals,inventory,money,skills,tool,gear);
+var hawke = new Character(initname,initrole,initvitals,initinventory,initmoney,initskills,inittool,initgear);
 
 console.log(hawke);
 
-hawke.vitals -= 10;
+init.vitals -= 10;
 
 console.log(hawke);
+
+document.getElementById('characterinit')
