@@ -29,37 +29,41 @@ var inventory = {
 }
 
 // utilities/tools
-// - damage or heal
+// - take or give
 // - custom purpose
 // can be used for interaction with environment or other characters
 
 var item = {
   class:"Box",
-  interaction: 0, //1 = adds, -1 = subtracts, 0 = no damage/healing
+  interaction: 0, //1 = adds, -1 = subtracts, 0 = no take/give
   purpose: "gift",
   name: "Box of Wonder"
 }
 
 // gear
-// - protection or damage
+// - enhance or degrade
 // can be used to prevent or invite interaction from environment or other characters
-
+//
 // skills
 // - active/inactive
-// - slots for use
-// useful for characters that have various abilities outside of weapons/armor
-
+// - limit slots for use
+// useful for characters that have various abilities outside of tools/gear
+//
 // role
-// - custom types for limiting skills, armor, weapons, etc.
+// - custom types for limiting skills, gear, tools, etc.
 // - adds/subtracts attributes
 
 
 // Interaction Features:
-
+//
 // pickup/drop off
-// - rewards
-
+// - rewards retrieve/discard
+//
 // NPC interaction
-// - nudge counter
+// - vitals counter
 // - rewards
 // - turn counter/toggle
+//
+// tasks
+// - vitals counter
+// - rewards
