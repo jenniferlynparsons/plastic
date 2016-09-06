@@ -1,69 +1,41 @@
-// Modify Stats & Unlock Behaviors:
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// UI functions
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-// vitals meter
-// - custom range
-// - custom title/purpose
-// - positive and negative values
-// can be used for friendship meter, health meter, resource meter, etc.
+// TODO: make navigation between steps/progression more agnostic. right now, navigation must be links with class 'nextStep' as direct child of wrapper div for each step.
 
-var vitals = {
-  name: "Friendship",
-  purpose: "friendship",
-  topRange: 20,
-  bottomRange: -20
+var current, next;
+var anchors = document.getElementsByClassName("nextStep");
+
+for(var i = 0, length = anchors.length; i < length; i++){
+
+    anchors[i].addEventListener("click", function(e) {
+        current = this.parentNode;
+        current = current.matches('div') ? current : null;
+        current.classList.add('hidden');
+
+        next = this.getAttribute("href").replace(/[^a-zA-Z 0-9]+/g,"");
+        next = document.getElementById(next);
+        next.classList.remove('hidden');
+
+        e.preventDefault();
+    });
 }
 
-// inventory
-// - custom maximum
-// - custom minimum for auto re-equipping
-// - sub-categories
-// can have subcategories or multiple instances to track materials, weapons, gifts, etc.
 
-var inventory = {
-  name: "General Inventory",
-  min:0,
-  max:20,
-  autoRenew: true,
-  cat: "General",
-  subCat: ""
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// form element functions
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+
+// TODO: could be handled with an array of elements?
+function getInputVal(inputId){
+    return inputId.value;
 }
 
-// utilities/tools
-// - take or give
-// - custom purpose
-// can be used for interaction with environment or other characters
-
-var item = {
-  class:"Box",
-  interaction: 0, //1 = adds, -1 = subtracts, 0 = no take/give
-  purpose: "gift",
-  name: "Box of Wonder"
+function checkRadio(radioName){
+    for (var i = 0, length = radioName.length; i < length; i++) {
+        if (radioName[i].checked) {
+            return radioName[i].value;
+        }
+    }
 }
-
-// gear
-// - enhance or degrade
-// can be used to prevent or invite interaction from environment or other characters
-//
-// skills
-// - active/inactive
-// - limit slots for use
-// useful for characters that have various abilities outside of tools/gear
-//
-// role
-// - custom types for limiting skills, gear, tools, etc.
-// - adds/subtracts attributes
-
-
-// Interaction Features:
-//
-// pickup/drop off
-// - rewards retrieve/discard
-//
-// NPC interaction
-// - vitals counter
-// - rewards
-// - turn counter/toggle
-//
-// tasks
-// - vitals counter
-// - rewards

@@ -1,24 +1,18 @@
-// todo: figure out how to incorporate multiple meters or have vitals be an array of meters, the same for tools, gear, and inventory
-
-function Character(name,role,vitals,inventory,money,skills,tools,gear){
-  this.name = name;
-  this.role = role;
-  this.vitals = vitals;
-  this.inventory = inventory;
-  this.money = money;
-  this.skills = skills;
-  this.tools = tools;
-  this.gear = gear;
+function Character(name, nameElement, task, taskElement){
+    this.name = name;
+    this.nameElement = nameElement;
+    this.task = task;
+    this.taskElement = taskElement;
 };
 
+Character.prototype.printName = function(){
+    for (var i = 0, length = this.nameElement.length; i < length; ++i) {
+        this.nameElement[i].innerHTML = this.name;
+    }
+}
 
-var vitalsArray = [healthlvl,lovelvl,swaggerlvl];
-var inventoryArray = [valuableslist,herbslist,potionslist];
-var moneyArray = [moneyCurrent,moneyMin,moneyMax];
-var skillsArray = [offensiveSkills,defensiveSkills,gadgetsSkills];
-var toolsArray = [offensiveTools,defensiveTools,gadgetsTools];
-var gearArray = [body,hands,feet,head];
-
-
-// EXAMPLE
-var mage = new Character("Hawke","Mage",vitalsArray,inventoryArray,moneyArray,skillsArray,toolsArray,gearArray);
+Character.prototype.printTask = function(){
+    for (var i = 0, length = this.taskElement.length; i < length; ++i) {
+        this.taskElement[i].innerHTML = this.task;
+    }
+}
