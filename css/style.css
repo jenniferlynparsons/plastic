@@ -1,0 +1,55 @@
+body {
+	font-family: Tahoma,Verdana,Segoe,sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+h1 {
+	font-family: Tahoma,Verdana,Segoe,sans-serif;
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+h3 {
+	font-family: Tahoma,Verdana,Segoe,sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 15.4px;
+}
+
+.box {
+  padding: 1em;
+}
+
+label{
+  display: block;
+}
+
+p{
+  padding: .5em 0;
+}
+
+input[type=button], input[type=text]{
+  margin: 1em 0;
+}
+
+.hidden{
+  display: none;
+}
+
+.button {
+  display: inline-block;
+  width: auto;
+  margin-top: 20px;
+  background-color: #6B828A;
+  border: 0;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #066B8C;
+  color: #ffffff;
+}
