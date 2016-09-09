@@ -28,4 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById('newChar').addEventListener("click", function(e) {
     getStarted();
   });
+
+  
 });
