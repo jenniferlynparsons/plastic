@@ -27,6 +27,19 @@
 
   <div id="step2" class="box hidden">
     <p>Okay, we need to get some ingredients together.</p>
+    <p>Right now we have:</p>
+    <div class="itemListWrapper"></div>
+    <br>
+    <form class="" action="index.html" method="post">
+      <label><input type="radio" name="newIngredient" value="Nutmeg"> Nutmeg</label>
+      <label><input type="radio" name="newIngredient" value="Butter"> Butter</label>
+      <label><input type="radio" name="newIngredient" value="Salt"> Salt</label>
+    </form>
+    <a href="#step3" id="newIngredient" class="button nextStep">Add a new ingredient</a>
+  </div>
+  <div id="step3" class="box hidden">
+    <p>Step 3</p>
+    <p class="updateStatus"></p>
   </div>
 
   <script type="text/javascript" src="plastic.js"></script>
