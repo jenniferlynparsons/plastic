@@ -91,9 +91,13 @@ Inventory.prototype.printItems = function(){
 }
 
 Inventory.prototype.addItem = function(newItem){
-    if(this.itemList.length < this.max){
+    console.log(this.itemList); //returns an array : Array [ "apples", "cinnamon", "crust" ]
+    console.log(newItem); //returns a string with new item name
+    console.log(typeof this.itemList); //returns typeof == object
+     if(this.itemList.length < this.max){
+        // console.log(typeof this.itemList);
         this.itemList = this.itemList.push(newItem);
-        console.log(this.itemList);
+        // console.log(typeof this.itemList);
         return this.updateSuccess;
     }else{
         return this.updateFail;
