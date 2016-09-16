@@ -1,53 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>plastic sample game</title>
-    <link rel="stylesheet" href="/css/reset.css" media="screen" title="no title" charset="utf-8">
-    <style media="screen">
-    .box {
-        padding: 1em;
-    }
-    label{
-        display: block;
-    }
-    p{
-        padding: .5em 0;
-    }
-    input[type=button], input[type=text]{
-        margin: 1em 0;
-    }
-    .hidden{
-        display: none;
-    }
-    </style>
+  <meta charset="utf-8">
+  <title>plastic sample game</title>
+  <link rel="stylesheet" href="/css/reset.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/css/style.css" media="screen" title="no title">
 </head>
 <body>
-    <div id="start" class="box">
-        <p>WELCOME! Time to do some cooking.</p>
-        <p>Start by naming your character and choosing a recipe challenge.</p>
-        <form class="" action="index.html" method="post">
-            <input type="text" name="name" id="newName" value="Enter Character's Name">
-            <label><input type="radio" name="recipe" value="Apple Pie"> Apple Pie</label>
-            <label><input type="radio" name="recipe" value="Cinnamon Rolls"> Cinnamon Rolls</label>
-            <label><input type="radio" name="recipe" value="Chocolate Cupcakes"> Chocolate Cupcakes</label>
-        </form>
-            <a href="#step1" id="newChar" class="nextStep">Create Character</a>
-    </div>
+  <div id="start" class="box">
+    <p>WELCOME! Time to do some cooking.</p>
+    <p>Start by naming your character and choosing a recipe challenge.</p>
+    <form class="" action="index.html" method="post">
+      <input type="text" name="name" id="newName" value="Enter Character's Name">
+      <label><input type="radio" name="recipe" value="Apple Pie"> Apple Pie</label>
+      <label><input type="radio" name="recipe" value="Cinnamon Rolls"> Cinnamon Rolls</label>
+      <label><input type="radio" name="recipe" value="Chocolate Cupcakes"> Chocolate Cupcakes</label>
+    </form>
+    <a href="#step1" id="newChar" class="button nextStep">Create Character</a>
+  </div>
 
-    <div id="step1" class="box hidden">
-        <p>Hello, <span class="charName"></span>!</p>
-        <p>Time to start making your <span class="recipeName"></span>.</p>
-        <a href="#step2" class="nextStep">Get Cooking.</a>
-    </div>
+  <div id="step1" class="box hidden">
+    <p>Hello, <span class="charName"></span>!</p>
+    <p>Time to start making your <span class="recipeName"></span>.</p>
+    <a href="#step2" class="button nextStep">Get Cooking.</a>
+  </div>
 
-    <div id="step2" class="box hidden">
-        <p>Okay, we need to get some ingredients together.</p>
-    </div>
+  <div id="step2" class="box hidden">
+    <p>Okay, we need to get some ingredients together.</p>
+    <p>Right now we have:</p>
+    <div class="itemListWrapper"></div>
+    <br>
+    <form class="" action="index.html" method="post">
+      <label><input type="radio" name="newIngredient" value="Nutmeg"> Nutmeg</label>
+      <label><input type="radio" name="newIngredient" value="Butter"> Butter</label>
+      <label><input type="radio" name="newIngredient" value="Salt"> Salt</label>
+    </form>
+    <a href="#step3" id="newIngredient" class="button nextStep">Add a new ingredient</a>
+  </div>
+  <div id="step3" class="box hidden">
+    <p>Step 3</p>
+    <p class="updateStatus"></p>
+  </div>
 
-    <script type="text/javascript" src="plastic.js"></script>
-    <script type="text/javascript" src="plastic-character.js"></script>
-    <script type="text/javascript" src="plastic-demo1.js"></script>
+  <script type="text/javascript" src="plastic.js"></script>
+  <script type="text/javascript" src="plastic-demo1.js"></script>
 
 </body>
 </html>

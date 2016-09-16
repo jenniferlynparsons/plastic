@@ -4,24 +4,26 @@
 
 // TODO: make navigation between steps/progression more agnostic. right now, navigation must be links with class 'nextStep' as direct child of wrapper div for each step.
 
-var current, next;
-var anchors = document.getElementsByClassName("nextStep");
+var current, next, anchors;
 
-for(var i = 0, length = anchors.length; i < length; i++){
+function navAnchors(anchorClass){
+    anchors = document.getElementsByClassName(anchorClass);
 
-    anchors[i].addEventListener("click", function(e) {
-        current = this.parentNode;
-        current = current.matches('div') ? current : null;
-        current.classList.add('hidden');
+    for(var i = 0, length = anchors.length; i < length; i++){
 
-        next = this.getAttribute("href").replace(/[^a-zA-Z 0-9]+/g,"");
-        next = document.getElementById(next);
-        next.classList.remove('hidden');
+        anchors[i].addEventListener("click", function(e) {
+            current = this.parentNode;
+            current = current.matches('div') ? current : null;
+            current.classList.add('hidden');
 
-        e.preventDefault();
-    });
+            next = this.getAttribute("href").replace(/[^a-zA-Z 0-9]+/g,"");
+            next = document.getElementById(next);
+            next.classList.remove('hidden');
+
+            e.preventDefault();
+        });
+    }
 }
-
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // form element functions
@@ -37,5 +39,28 @@ function checkRadio(radioName){
         if (radioName[i].checked) {
             return radioName[i].value;
         }
+    }
+}
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Character functions
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+
+function Character(name, nameElement, task, taskElement){
+    this.name = name;
+    this.nameElement = nameElement;
+    this.task = task;
+    this.taskElement = taskElement;
+};
+
+Character.prototype.printName = function(){
+    for (var i = 0, length = this.nameElement.length; i < length; ++i) {
+        this.nameElement[i].innerHTML = this.name;
+    }
+}
+
+Character.prototype.printTask = function(){
+    for (var i = 0, length = this.taskElement.length; i < length; ++i) {
+        this.taskElement[i].innerHTML = this.task;
     }
 }
