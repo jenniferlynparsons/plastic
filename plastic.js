@@ -46,7 +46,9 @@ function checkRadio(radioName){
 // Character functions
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-function Character(name, nameElement, task, taskElement){
+function Character(plastic, propList){
+var defaults =
+
     this.name = name;
     this.nameElement = nameElement;
     this.task = task;
@@ -65,37 +67,32 @@ Character.prototype.printTask = function(){
     }
 }
 
+function mergeDefaults(obj, defaults, propList){
+    Object.assign(obj, defaults);
+    Object.assign(obj, propList);
+}
+
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // inventory functions
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-function Inventory(name, min, max, autoRenew, itemList, itemListWrap, updateSuccess, updateFail, removeSuccess, removeFail ){
-    this.name = name;
-    this.min = min;
-    this.max = max;
-    this.autoRenew = autoRenew;
-    this.itemList = itemList;
-    this.itemListWrap = itemListWrap;
-    this.updateSuccess = updateSuccess;
-    this.updateFail = updateFail;
-    this.removeSuccess = removeSuccess;
-    this.removeFail = removeFail;
+function Inventory(propList){
+    var defaults = {name: "Default Inventory", min: 0, max: Infinity};
+    mergeDefaults(this, defaults, propList);
 }
 
-Inventory.prototype.printItems = function(){
+Inventory.prototype.printItems = function(plastic, items){
     for (var i = 0, length = this.itemListWrap.length; i < length; ++i) {
         this.itemListWrap[i].innerHTML = this.itemList;
     }
 }
 
-Inventory.prototype.addItem = function(newItem){
-    console.log(this.itemList); //returns an array : Array [ "apples", "cinnamon", "crust" ]
-    console.log(newItem); //returns a string with new item name
-    console.log(typeof this.itemList); //returns typeof == object
+Inventory.prototype.addItem = function(plastic, newItem){
+    console.log(this.itemList);
+    console.log(newItem);
+    console.log(typeof this.itemList);
      if(this.itemList.length < this.max){
-        // console.log(typeof this.itemList);
-        this.itemList = this.itemList.push(newItem);
-        // console.log(typeof this.itemList);
+        this.itemList.push(newItem);
         return this.updateSuccess;
     }else{
         return this.updateFail;
