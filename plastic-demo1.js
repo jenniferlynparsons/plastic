@@ -1,8 +1,8 @@
 var plastic = new Plastic({});
 var state = {};
 
-function CookingCharacter(plastic){
-  Character.call(this, name, nameElement, task, taskElement);
+function CookingCharacter(plastic, charProperties){
+  Character.call(this, plastic, charProperties);
 }
 
 function PantryItems(plastic, itemProperties){
@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
     plastic.taskNameSpan = document.getElementsByClassName('recipeName');
 
     plastic.cook = new CookingCharacter(plastic);
-    plastic.cook.printName();
-    plastic.cook.printTask();
+    state.cook.printName();
+    state.cook.printTask();
 
     plastic.itemList = ['apples', 'cinnamon', 'crust'];
     plastic.itemListWrap = document.getElementsByClassName('itemListWrapper');
