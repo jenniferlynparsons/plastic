@@ -1,12 +1,12 @@
-var newName, chosenName, recipes, chosenRecipe, cook, charNameSpan, taskNameSpan;
-var itemListWrap, ingredients;
+var plastic = new Plastic({});
+var state = {};
 
-function CookingCharacter(name, nameElement, task, taskElement){
-  Character.call(this, name, nameElement, task, taskElement);
+function CookingCharacter(plastic, charProperties){
+  Character.call(this, plastic, charProperties);
 }
 
-function PantryItems(name, min, max, autoRenew, itemList, itemListWrap, updateSuccess, updateFail, removeSuccess, removeFail){
-    Inventory.call(this, name, min, max, autoRenew, itemList, itemListWrap, updateSuccess, updateFail, removeSuccess, removeFail);
+function PantryItems(plastic, itemProperties){
+    Inventory.call(this, plastic, itemProperties);
 }
 
 CookingCharacter.prototype = Object.create(Character.prototype);
@@ -14,42 +14,43 @@ PantryItems.prototype = Object.create(Inventory.prototype)
 
 document.addEventListener("DOMContentLoaded", function() {
 
-  navAnchors("nextStep");
+  navAnchors("nextStep","box");
 
-  function getStarted(){
-    newName = document.getElementById("newName");
-    chosenName = getInputVal(newName);
+  function getStarted(plastic){
+    plastic.newName = document.getElementById("newName");
+    plastic.chosenName = getInputVal(plastic.newName);
 
-    recipes = document.getElementsByName('recipe');
-    chosenRecipe = checkRadio(recipes);
+    state.recipes = document.getElementsByName('recipe');
+    plastic.chosenRecipe = checkRadio(plastic.recipes);
 
-    charNameSpan = document.getElementsByClassName('charName');
-    taskNameSpan = document.getElementsByClassName('recipeName');
+    plastic.charNameSpan = document.getElementsByClassName('charName');
+    plastic.taskNameSpan = document.getElementsByClassName('recipeName');
 
-    cook = new CookingCharacter(chosenName, charNameSpan, chosenRecipe, taskNameSpan);
-    cook.printName();
-    cook.printTask();
+    plastic.cook = new CookingCharacter(plastic);
+    state.cook.printName();
+    state.cook.printTask();
 
-    itemList = ['apples', 'cinnamon', 'crust'];
-    itemListWrap = document.getElementsByClassName('itemListWrapper');
+    plastic.itemList = ['apples', 'cinnamon', 'crust'];
+    plastic.itemListWrap = document.getElementsByClassName('itemListWrapper');
 
-    pantry = new PantryItems("Pantry", 0, 10, true, itemList, itemListWrap, "It added", "It didn't add", "It removed", "It didn't remove");
+    state.pantry = new PantryItems(plastic, "Pantry", 0, 10, true, "It added", "It didn't add", "It removed", "It didn't remove");
 
-    pantry.printItems();
+    plastic.printItems(state.pantry, state.itemListWrap);
   }
 
-  function step3(){
-      ingredients = document.getElementsByName('newIngredient');
-      chosenIngredient = checkRadio(ingredients);
+  function step3(plastic){
+      plastic.ingredients = document.getElementsByName('newIngredient');
+      plastic.chosenIngredient = checkRadio(plastic.ingredients);
       pantry.addItem(chosenIngredient);
+      pantry.printItems();
   }
 
   document.getElementById('newChar').addEventListener("click", function(e) {
-    getStarted();
+    getStarted(plastic);
   });
 
   document.getElementById('newIngredient').addEventListener("click", function(e) {
-    step3();
+    step3(plastic);
   });
 
 
