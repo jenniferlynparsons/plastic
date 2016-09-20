@@ -14,7 +14,7 @@ PantryItems.prototype = Object.create(Inventory.prototype)
 
 document.addEventListener("DOMContentLoaded", function() {
 
-  navAnchors("nextStep");
+  navAnchors("nextStep","box");
 
   function getStarted(plastic){
     plastic.newName = document.getElementById("newName");

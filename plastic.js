@@ -2,7 +2,7 @@
 // UI functions
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-function navAnchors(anchorClass, anchorDestination){
+function next(anchorClass, anchorParents, anchorDestinations){
   var current, next, anchors;
 
   anchors = document.getElementsByClassName(anchorClass);
@@ -22,6 +22,7 @@ function navAnchors(anchorClass, anchorDestination){
     });
   }
 }
+
 
 // This will always output a <ul> with inner <li>s and insert them into the wrapper element
 function printInventory(plastic, items, wrapper){
