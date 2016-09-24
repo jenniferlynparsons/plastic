@@ -8,14 +8,13 @@ plas·tic  (*plăs′tĭk*)
 3. *(dated)* Creative, formative. [from 17th c.]  
 4. *(biology)* Capable of adapting to varying conditions; characterized by environmental adaptability.
 
-## Current Status
-ACTIVE DEVELOPMENT: OMG do not even try to use this right now. 
-
 ## Purpose
 The purpose of plastic is to provide a simple, flexible engine for handling character creation, meters, inventory and interactions in text-based games.
 
 The language of the functions will be kept as agnostic as possible so as to accommodate any type of game the author imagines, from RPGs with battle mechanics to non-violent games that benefit from a similar mechanic but vastly different purpose.
 
+## Current Status
+ACTIVE DEVELOPMENT: OMG do not even try to use this right now. 
 
 ## Planned features
 
