@@ -1,57 +1,58 @@
-var plastic = new Plastic({});
-var state = {};
-
-function CookingCharacter(plastic, charProperties){
-  Character.call(this, plastic, charProperties);
-}
-
-function PantryItems(plastic, itemProperties){
-    Inventory.call(this, plastic, itemProperties);
-}
-
-CookingCharacter.prototype = Object.create(Character.prototype);
-PantryItems.prototype = Object.create(Inventory.prototype)
-
 document.addEventListener("DOMContentLoaded", function() {
 
-  navAnchors("nextStep","box");
+    var plastic = new Plastic({});
+    var state = {};
 
-  function getStarted(plastic){
-    plastic.newName = document.getElementById("newName");
-    plastic.chosenName = getInputVal(plastic.newName);
+    function Character(plastic, charProperties){
+        Character.call(this, plastic, charProperties);
+    }
 
-    state.recipes = document.getElementsByName('recipe');
-    plastic.chosenRecipe = checkRadio(plastic.recipes);
+    function Items(plastic, itemProperties){
+        Inventory.call(this, plastic, itemProperties);
+    }
 
-    plastic.charNameSpan = document.getElementsByClassName('charName');
-    plastic.taskNameSpan = document.getElementsByClassName('recipeName');
+    Character.prototype = Object.create(Character.prototype);
+    Items.prototype = Object.create(Inventory.prototype)
 
-    plastic.cook = new CookingCharacter(plastic);
-    state.cook.printName();
-    state.cook.printTask();
 
-    plastic.itemList = ['apples', 'cinnamon', 'crust'];
-    plastic.itemListWrap = document.getElementsByClassName('itemListWrapper');
+    function getStarted(plastic){
+        // TODO: this goes into an inifinte loop
+        // plastic.character = new Character(plastic);
 
-    state.pantry = new PantryItems(plastic, "Pantry", 0, 10, true, "It added", "It didn't add", "It removed", "It didn't remove");
+        // TODO: this doesn't work because _p returns an array
+        plastic.chosenName = getInputVal(_p("#newName"));
+        state.chosenQuest = checkRadio(_p("#questpicker1 input"));
 
-    plastic.printItems(state.pantry, state.itemListWrap);
-  }
+        printThing(plastic.chosenName, _p('.charname'));
+        printThing(state.chosenQuest, _p('.questname'));
 
-  function step3(plastic){
-      plastic.ingredients = document.getElementsByName('newIngredient');
-      plastic.chosenIngredient = checkRadio(plastic.ingredients);
-      pantry.addItem(chosenIngredient);
-      pantry.printItems();
-  }
 
-  document.getElementById('newChar').addEventListener("click", function(e) {
-    getStarted(plastic);
-  });
 
-  document.getElementById('newIngredient').addEventListener("click", function(e) {
-    step3(plastic);
-  });
+        plastic.itemList = ['thing one', 'thing two', 'thing three'];
+
+        state.items = new Items(plastic, {name: "Inventory", min: 0, max: 10, autorenew: false, itemList:plastic.itemList, addSuccess:"It added", addFail: "It didn't add", removeSuccess: "It removed", removeFail: "It didn't remove"});
+
+        plastic.printInventory(state.items.itemList, _p('#itemListWrapper'));
+    }
+
+    function step3(plastic){
+        plastic.things = document.getElementsByName('newQuestItem');
+        plastic.chosenThing = checkRadio(plastic.things);
+        state.items.addItem(chosenThing);
+        state.items.printInventory();
+    }
+
+    _p('#newChar').forEach(function(i){
+        i.addEventListener("click", function(e) {
+            getStarted(plastic);
+        });
+    });
+
+    _p('#newItem').forEach(function(i){
+        i.addEventListener("click", function(e) {
+            step3(plastic);
+        });
+    });
 
 
 });
