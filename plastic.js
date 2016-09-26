@@ -2,21 +2,32 @@
 // General plastic functions
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
+// blargh. i don't quite know why i need this right now but i do. once i understand it better, it will all be fixed.
 function Plastic(){
 
 }
 
 // http://libux.co/useful-function-making-queryselectorall-like-jquery/
+// need to update. if the query is for an ID, use querySelector() and return element itself, if the query is for a class, use querySelectorAll() and always return an array, even if there's only one item in it.
+
 function _p(selector, context) {
-    context = context || document;
-    var elements = context.querySelectorAll(selector);
-    return Array.prototype.slice.call(elements);
+  context = context || document;
+  var elementsArray;
+  if(selector === /(#[\s\S]*)/i){
+      console.log("obi-wan");
+      elementsArray = Array.prototype.slice.call(context.querySelector(selector));
+      return elementsArray[0];
+  }else if(selector === /(\.[\s\S]*)/i){
+    console.log("kenobi");
+    elementsArray = Array.prototype.slice.call(context.querySelectorAll(selector));
+    return elementsArray;
+  }
 }
 
 // thanks Sal
 function mergeDefaults(obj, defaults, propList){
-    Object.assign(obj, defaults);
-    Object.assign(obj, propList);
+  Object.assign(obj, defaults);
+  Object.assign(obj, propList);
 }
 
 
@@ -28,26 +39,26 @@ function mergeDefaults(obj, defaults, propList){
 // This can be used two ways. Typically, it would be used to navigate between "pages" of the game,
 // but it could also be used to hide/reveal bits of information or interactions on the same page.
 function next(anchor, currentVisible){
-    var current = _p(currentVisible);
-    current.classList.add('hidden');
-    var destination = anchor.getAttribute("href").replace(/[^a-zA-Z 0-9]+/g,"");
-    _p(next).classList.remove('hidden');
-    e.preventDefault();
+  var current = _p(currentVisible);
+  current.classList.add('hidden');
+  var destination = anchor.getAttribute("href").replace(/[^a-zA-Z 0-9]+/g,"");
+  _p(next).classList.remove('hidden');
+  e.preventDefault();
 }
 
 // To output a string to an HTML container
 function printThing(info, wrapper){
-    wrapper.innerHTML(info);
+  wrapper.innerHTML(info);
 }
 
 // This will always output a <ul> with inner <li>s and insert them into the wrapper element
 function printInventory(plastic, wrapper){
-    var printItems;
-    for (var i = 0, length = plastic.items.length; i < length; ++i) {
-        printItems += "<li>" + items[i] + "</li>";
-    }
-    var printList = "<ul>" + printItems + "</ul";
-    wrapper.innerHTML(printList);
+  var printItems;
+  for (var i = 0, length = plastic.items.length; i < length; ++i) {
+    printItems += "<li>" + items[i] + "</li>";
+  }
+  var printList = "<ul>" + printItems + "</ul";
+  wrapper.innerHTML(printList);
 }
 
 
@@ -59,15 +70,15 @@ function printInventory(plastic, wrapper){
 
 // TODO: could be handled with an array of elements?
 function getInputVal(inputId){
-    return inputId.value;
+  return inputId.value;
 }
 
-function checkRadio(radioName){
-    for (var i = 0, length = radioName.length; i < length; i++) {
-        if (radioName[i].checked) {
-            return radioName[i].value;
-        }
+function checkRadio(radioArray){
+  for (var i = 0, length = radioArray.length; i < length; i++) {
+    if (radioArray[i].checked) {
+      return radioArray[i].value;
     }
+  }
 }
 
 
@@ -76,8 +87,8 @@ function checkRadio(radioName){
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
 function Character(plastic, propList){
-    var defaults = {name:"Character", currentQuest: "none"};
-    mergeDefaults(this, defaults, propList);
+  var defaults = {name:"Character", currentQuest: "none"};
+  mergeDefaults(this, defaults, propList);
 };
 
 
@@ -86,30 +97,30 @@ function Character(plastic, propList){
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
 function Inventory(propList){
-    var defaults = {name: "Default Inventory", min: 0, max: 100, updateSuccess: "Item Added", updateFail: "Inventory Full", removeSuccess: "Item Removed", removeFail: "Inventory Empty"};
-    mergeDefaults(this, defaults, propList);
+  var defaults = {name: "Default Inventory", min: 0, max: 100, updateSuccess: "Item Added", updateFail: "Inventory Full", removeSuccess: "Item Removed", removeFail: "Inventory Empty"};
+  mergeDefaults(this, defaults, propList);
 }
 
 Inventory.prototype.addItem = function(plastic, newItem){
-    if(plastic.itemList.length < plastic.max){
-        plastic.itemList.push(newItem);
-        return plastic.updateSuccess;
-    }else{
-        return plastic.updateFail;
-    }
+  if(plastic.itemList.length < plastic.max){
+    plastic.itemList.push(newItem);
+    return plastic.updateSuccess;
+  }else{
+    return plastic.updateFail;
+  }
 }
 
 Inventory.prototype.subtractItem = function(removeItem){
-    var shorterArray;
-    for(var i = 0, listLength = plastic.itemList.length; i <= listLength; i++){
-        if(plastic.itemList[i] === removeItem){
-            shorterArray = plastic.itemlist.splice(plastic.itemlist[i], 1);
-        }
+  var shorterArray;
+  for(var i = 0, listLength = plastic.itemList.length; i <= listLength; i++){
+    if(plastic.itemList[i] === removeItem){
+      shorterArray = plastic.itemlist.splice(plastic.itemlist[i], 1);
     }
-    if(shorterArray.length > plastic.min){
-        plastic.itemList = plastic.itemList.remove(removeItem);
-        return plastic.removeSuccess;
-    }else{
-        return plastic.removeFail;
-    }
+  }
+  if(shorterArray.length > plastic.min){
+    plastic.itemList = plastic.itemList.remove(removeItem);
+    return plastic.removeSuccess;
+  }else{
+    return plastic.removeFail;
+  }
 }
