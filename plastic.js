@@ -7,17 +7,35 @@ function Plastic(){
 
 }
 
+// Polyfill for .includes https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
+if (!String.prototype.includes) {
+  String.prototype.includes = function(search, start) {
+    'use strict';
+    if (typeof start !== 'number') {
+      start = 0;
+    }
+
+    if (start + search.length > this.length) {
+      return false;
+    } else {
+      return this.indexOf(search, start) !== -1;
+    }
+  };
+}
+
 // http://libux.co/useful-function-making-queryselectorall-like-jquery/
 // need to update. if the query is for an ID, use querySelector() and return element itself, if the query is for a class, use querySelectorAll() and always return an array, even if there's only one item in it.
 
 function _p(selector, context) {
   context = context || document;
   var elementsArray;
-  if(selector === /(#[\s\S]*)/i){
+  console.log("working");
+  if(selector.includes('#')){
       console.log("obi-wan");
       elementsArray = Array.prototype.slice.call(context.querySelector(selector));
+      console.log(elementsArray);
       return elementsArray[0];
-  }else if(selector === /(\.[\s\S]*)/i){
+  }else if(selector.includes('.')){
     console.log("kenobi");
     elementsArray = Array.prototype.slice.call(context.querySelectorAll(selector));
     return elementsArray;
