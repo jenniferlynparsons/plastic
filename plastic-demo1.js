@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
     state.chosenQuest = checkRadio(_p("#questpicker1 input"));
 
     // TODO: these don't work because _p returns an array
-    console.log(_p('.charname'));
     _p('.charname').forEach(function(element){
       printThing(plastic.chosenName, element);
     });
@@ -41,7 +40,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     state.items = new Items(plastic, {name: "Inventory", min: 0, max: 10, autorenew: false, itemList:plastic.itemList, addSuccess:"It added", addFail: "It didn't add", removeSuccess: "It removed", removeFail: "It didn't remove"});
 
-    plastic.printInventory(state.items.itemList, _p('#itemListWrapper'));
+    // TODO: fix this
+    // plastic.printInventory(state.items.itemList, _p('#itemListWrapper'));
+
+    next("#newChar","#start");
   }
 
   function step3(plastic){

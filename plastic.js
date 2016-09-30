@@ -29,14 +29,10 @@ if (!String.prototype.includes) {
 function _p(selector, context) {
   context = context || document;
   var elementsArray;
-  console.log("working");
   if(selector.includes('#')){
-      console.log("obi-wan");
-      elementsArray = Array.prototype.slice.call(context.querySelector(selector));
-      console.log(elementsArray);
-      return elementsArray[0];
+    elementsArray = Array.prototype.slice.call(context.querySelectorAll(selector));
+    return elementsArray[0];
   }else if(selector.includes('.')){
-    console.log("kenobi");
     elementsArray = Array.prototype.slice.call(context.querySelectorAll(selector));
     return elementsArray;
   }
@@ -59,14 +55,20 @@ function mergeDefaults(obj, defaults, propList){
 function next(anchor, currentVisible){
   var current = _p(currentVisible);
   current.classList.add('hidden');
-  var destination = anchor.getAttribute("href").replace(/[^a-zA-Z 0-9]+/g,"");
+  var destination = _p(anchor).getAttribute("href").replace(/[^a-zA-Z 0-9]+/g,"");
   _p(next).classList.remove('hidden');
   e.preventDefault();
 }
 
 // To output a string to an HTML container
 function printThing(info, wrapper){
-  wrapper.innerHTML(info);
+  if(wrapper.length > 1){
+    wrapper.forEach(function(element){
+      element.innerHTML = info;
+    });
+  }else{
+    wrapper.innerHTML = info;
+  }
 }
 
 // This will always output a <ul> with inner <li>s and insert them into the wrapper element
