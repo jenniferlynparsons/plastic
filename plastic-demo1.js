@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function getStarted (plastic) {
     // TODO: this goes into an inifinte loop
-    // plastic.character = new Character(plastic)
+    // SAVE ME JAVASCRIPT DAD
+    plastic.character = new Character(plastic)
 
     plastic.chosenName = getInputVal(_p('#newName'))
 

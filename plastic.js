@@ -4,6 +4,7 @@
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
 // TODO: blargh. i don't quite know why i need this right now but i do. once i understand it better, it will all be fixed.
+// SAVE ME JAVASCRIPT DAD
 function Plastic () {
 
 }
