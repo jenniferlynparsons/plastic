@@ -3,7 +3,7 @@
 // General plastic functions
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-// blargh. i don't quite know why i need this right now but i do. once i understand it better, it will all be fixed.
+// TODO: blargh. i don't quite know why i need this right now but i do. once i understand it better, it will all be fixed.
 function Plastic () {
 
 }
