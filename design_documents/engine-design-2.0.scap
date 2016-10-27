@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ScappleDocument Version="1.1" ID="58FB38C7-9466-4BC8-A1F1-811F55EFCE10">
+    <Notes>
+        <Note ID="8" FontSize="14.0" Position="2423.0,1254.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.501961</Border>
+                <Fill>0.0 0.501961 0.501961</Fill>
+            </Appearance>
+            <String>TOOLS</String>
+            <ConnectedNoteIDs>101, 108</ConnectedNoteIDs>
+        </Note>
+        <Note ID="9" FontSize="14.0" Position="1359.0,367.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>METERS</String>
+            <ConnectedNoteIDs>100, 107</ConnectedNoteIDs>
+        </Note>
+        <Note ID="10" FontSize="14.0" Position="1974.0,1108.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.501961</Border>
+                <Fill>0.0 0.501961 0.501961</Fill>
+            </Appearance>
+            <String>GEAR</String>
+            <ConnectedNoteIDs>101, 108</ConnectedNoteIDs>
+        </Note>
+        <Note ID="12" FontSize="14.0" Position="1396.0,982.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>ROLES</String>
+            <ConnectedNoteIDs>100, 107</ConnectedNoteIDs>
+        </Note>
+        <Note ID="13" FontSize="14.0" Position="2333.0,135.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.25098 0.501961</Border>
+                <Fill>0.0 0.25098 0.501961</Fill>
+            </Appearance>
+            <String>GAME STATE</String>
+            <ConnectedNoteIDs>104</ConnectedNoteIDs>
+        </Note>
+        <Note ID="18" FontSize="14.0" Position="3380.0,365.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.501961 0.501961 0.0</Border>
+                <Fill>0.501961 0.501961 0.0</Fill>
+            </Appearance>
+            <String>NPC INTERACTIONS</String>
+            <ConnectedNoteIDs>95, 109</ConnectedNoteIDs>
+        </Note>
+        <Note ID="19" FontSize="14.0" Position="3246.0,167.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.501961 0.501961 0.0</Border>
+                <Fill>0.501961 0.501961 0.0</Fill>
+            </Appearance>
+            <String>QUESTS</String>
+            <ConnectedNoteIDs>95, 109</ConnectedNoteIDs>
+        </Note>
+        <Note ID="28" FontSize="14.0" Position="2704.0,1135.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.501961</Border>
+                <Fill>0.0 0.501961 0.501961</Fill>
+            </Appearance>
+            <String>CONSUMABLES</String>
+            <ConnectedNoteIDs>101, 108</ConnectedNoteIDs>
+        </Note>
+        <Note ID="30" FontSize="14.0" Position="1294.0,661.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>CHARACTERISTICS</String>
+            <ConnectedNoteIDs>100, 107</ConnectedNoteIDs>
+        </Note>
+        <Note ID="31" FontSize="14.0" Position="1522.0,130.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>SKILLS</String>
+            <ConnectedNoteIDs>100, 107</ConnectedNoteIDs>
+        </Note>
+        <Note ID="37" FontSize="14.0" Position="2813.0,467.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> availability: true/false
+ cache: array
+ npcs: array</String>
+        </Note>
+        <Note ID="40" FontSize="14.0" Position="1839.0,516.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> exists
+ availability
+ value</String>
+        </Note>
+        <Note ID="46" FontSize="14.0" Position="2336.0,173.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> current status
+ viewed story (progress)
+ save state</String>
+        </Note>
+        <Note ID="48" FontSize="14.0" Position="1833.0,773.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.25098</Border>
+                <Fill>0.0 0.501961 0.25098</Fill>
+            </Appearance>
+            <String>INVENTORY EFFECTS MEDIATORS</String>
+            <ConnectedNoteIDs>100-101</ConnectedNoteIDs>
+        </Note>
+        <Note ID="59" FontSize="14.0" Position="2332.0,888.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> items: array
+ locked state: true/false
+ exchangeable: true/fale
+ equivalencies: array
+ value (money): int
+ statBuff: array {stat:int}</String>
+        </Note>
+        <Note ID="60" FontSize="14.0" Position="2823.0,789.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> viewItem()
+ useItem()
+ addItem()
+ removeItem()
+ createItem()
+ destroyItem()
+ itemExists()</String>
+        </Note>
+        <Note ID="93" FontSize="14.0" Position="1836.0,828.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> statExists(): true/false
+ statActive(): true/false
+ statValue(): int
+ modifyValue(): int</String>
+        </Note>
+        <Note ID="95" FontSize="14.0" Position="2811.0,426.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.25098 0.501961</Border>
+                <Fill>0.0 0.25098 0.501961</Fill>
+            </Appearance>
+            <String>ACTIVITIES</String>
+            <ConnectedNoteIDs>18-19, 102, 104-105</ConnectedNoteIDs>
+        </Note>
+        <Note ID="97" FontSize="14.0" Position="1934.0,269.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> Who is this character?</String>
+        </Note>
+        <Note ID="98" FontSize="14.0" Position="2110.0,1228.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String>What do they have?</String>
+        </Note>
+        <Note ID="99" FontSize="14.0" Position="2783.0,246.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String>What are they doing?</String>
+        </Note>
+        <Note ID="100" FontSize="14.0" Position="1841.0,479.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.25098 0.501961</Border>
+                <Fill>0.0 0.25098 0.501961</Fill>
+            </Appearance>
+            <String>CHARACTER STATS</String>
+            <ConnectedNoteIDs>9, 12, 30-31, 48, 104</ConnectedNoteIDs>
+        </Note>
+        <Note ID="101" FontSize="14.0" Position="2331.0,852.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.25098 0.501961</Border>
+                <Fill>0.0 0.25098 0.501961</Fill>
+            </Appearance>
+            <String>INVENTORIES</String>
+            <ConnectedNoteIDs>8, 10, 28, 48, 102, 104</ConnectedNoteIDs>
+        </Note>
+        <Note ID="102" FontSize="14.0" Position="2826.0,735.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.25098</Border>
+                <Fill>0.0 0.501961 0.25098</Fill>
+            </Appearance>
+            <String>INVENTORY QUANTITY MEDIATORS</String>
+            <ConnectedNoteIDs>95, 101</ConnectedNoteIDs>
+        </Note>
+        <Note ID="104" FontSize="14.0" Position="2338.0,320.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.25098</Border>
+                <Fill>0.0 0.501961 0.25098</Fill>
+            </Appearance>
+            <String>ACTIVITY AVAILABILITY MEDIATORS</String>
+            <ConnectedNoteIDs>13, 95, 100-101</ConnectedNoteIDs>
+        </Note>
+        <Note ID="105" FontSize="14.0" Position="3284.0,746.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.501961 0.501961 0.0</Border>
+                <Fill>0.501961 0.501961 0.0</Fill>
+            </Appearance>
+            <String>EXPLORATIONS</String>
+            <ConnectedNoteIDs>95, 109</ConnectedNoteIDs>
+        </Note>
+        <Note ID="106" FontSize="14.0" Position="2336.0,378.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> activityExists(): true/false
+ activityActive(): true/false</String>
+        </Note>
+        <Note ID="107" FontSize="14.0" Position="1536.0,498.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.25098</Border>
+                <Fill>0.0 0.501961 0.25098</Fill>
+            </Appearance>
+            <String>INTER-STATS 
+MEDIATORS</String>
+            <ConnectedNoteIDs>9, 12, 30-31</ConnectedNoteIDs>
+        </Note>
+        <Note ID="108" FontSize="14.0" Position="2244.0,1051.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.25098</Border>
+                <Fill>0.0 0.501961 0.25098</Fill>
+            </Appearance>
+            <String>INTER-INVENTORY MEDIATORS</String>
+            <ConnectedNoteIDs>8, 10, 28</ConnectedNoteIDs>
+        </Note>
+        <Note ID="109" FontSize="14.0" Position="3123.0,483.0" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.0 0.501961 0.25098</Border>
+                <Fill>0.0 0.501961 0.25098</Fill>
+            </Appearance>
+            <String>INTER-ACTIVITY MEDIATORS</String>
+            <ConnectedNoteIDs>18-19, 105</ConnectedNoteIDs>
+        </Note>
+    </Notes>
+    <BackgroundShapes></BackgroundShapes>
+    <NoteStyles>
+        <Style Name="Blue Bubble" ID="0DD951F4-FC46-4F3F-AEFE-6996AFC146B2" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.477193 0.557066 0.76433</BorderColor>
+            <FillColor>0.840969 0.866828 0.925903</FillColor>
+        </Style>
+        <Style Name="BLUE BUBBLE" ID="4F419574-E53D-4A9B-8D4D-3F367238290E" AffectFontStyle="Yes" AffectAlignment="Yes" AffectTextColor="Yes" AffectNoteBody="Yes" AffectSize="No" AffectFade="No" AffectSticky="Yes">
+            <FontSize>14.0</FontSize>
+            <Alignment>Center</Alignment>
+            <BorderThickness>5</BorderThickness>
+            <BorderColor>0.4 0.8 1.0</BorderColor>
+            <FillColor>0.4 0.8 1.0</FillColor>
+            <Size>200.0,150.0</Size>
+        </Style>
+        <Style Name="Brown Bubble" ID="B38408A6-3F7D-44A8-A056-06F6956C8691" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.290055 0.1523 0.182215</BorderColor>
+            <FillColor>0.940019 0.892907 0.779716</FillColor>
+        </Style>
+        <Style Name="Green Bubble" ID="F0737514-4FFE-4B04-8614-72B9793A954C" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.331867 0.609932 0.356197</BorderColor>
+            <FillColor>0.790123 0.882328 0.80198</FillColor>
+        </Style>
+        <Style Name="Pink Bubble" ID="A58F4BC8-DC51-47A8-BA4D-FD5B3C672BF8" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.747881 0.366532 0.542813</BorderColor>
+            <FillColor>0.918452 0.807302 0.863467</FillColor>
+        </Style>
+        <Style Name="Red Text" ID="3D3C2A7E-DCFB-497D-8A24-36F2BCF7FB49" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="Yes" AffectNoteBody="No" AffectFade="No">
+            <TextColor>1.0 0.0 0.0</TextColor>
+        </Style>
+        <Style Name="Title Text" ID="9E636EF1-6135-4051-BA2E-3CA37889C7F8" AffectFontStyle="Yes" AffectAlignment="Yes" AffectTextColor="No" AffectNoteBody="No" AffectFade="No">
+            <FontSize>28.0</FontSize>
+            <IsBold>Yes</IsBold>
+        </Style>
+        <Style Name="Yellow Bubble" ID="DFEED3F6-92BC-4829-9DA5-914CFFFF5972" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.756763 0.785592 0.373258</BorderColor>
+            <FillColor>0.906773 0.910625 0.634363</FillColor>
+        </Style>
+    </NoteStyles>
+    <UISettings>
+        <BackgroundColor>0.2 0.2 0.2</BackgroundColor>
+        <DefaultFont>Helvetica</DefaultFont>
+        <DefaultTextColor>1.0 1.0 1.0</DefaultTextColor>
+    </UISettings>
+    <PrintSettings PaperSize="611.999993,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+</ScappleDocument>
