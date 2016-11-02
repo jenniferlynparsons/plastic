@@ -98,7 +98,8 @@
                 <Border Weight="2"></Border>
             </Appearance>
             <String> availability: true/false
- cache: array
+ triggerType: string 
+ inventory: array
  npcs: array</String>
         </Note>
         <Note ID="40" FontSize="14.0" Position="1839.0,516.0" Width="200.0">
@@ -252,7 +253,7 @@
                 <TextColor>1.0 1.0 1.0</TextColor>
                 <Border Weight="2"></Border>
             </Appearance>
-            <String> activityExists(): true/false
+            <String> activityAvailability(): true/false
  activityActive(): true/false</String>
         </Note>
         <Note ID="107" FontSize="14.0" Position="1536.0,498.0" Width="200.0">
@@ -282,6 +283,23 @@ MEDIATORS</String>
             </Appearance>
             <String>INTER-ACTIVITY MEDIATORS</String>
             <ConnectedNoteIDs>18-19, 105</ConnectedNoteIDs>
+        </Note>
+        <Note ID="110" FontSize="14.0" Position="1532.250526,556.010804" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> blocksStat()</String>
+        </Note>
+        <Note ID="111" FontSize="14.0" Position="3122.812428,537.379807" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>1.0 1.0 1.0</TextColor>
+                <Border Weight="2"></Border>
+            </Appearance>
+            <String> activityExists(): true/false
+ activityActive(): true/false</String>
         </Note>
     </Notes>
     <BackgroundShapes></BackgroundShapes>

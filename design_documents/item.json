@@ -1,0 +1,153 @@
+/* SCENARIO:
+  A rogue named Goober who is equipped with leather armor encounters a padlock and uses their lockpicking skill and the lockpick in their inventory to pick open the padlock on a chest and retreive the gold inside.
+*/
+
+/* interaction trigger */
+{
+  "name": "padlock",
+  "interactionVal": 3 // equivalent to HP
+}
+
+{
+  "name": "door lock",
+  "interactionVal": 10 // equivalent to HP
+}
+
+/* interaction inventory */
+{
+  "name": "chest",
+  "interactionTrigger": "thing",
+  "items": ["gold"]
+}
+
+/* interaction item */
+{
+  "name": "gold",
+  "itemType": "consumables",
+  "equippable": false,
+  "equipped": false,
+  "tradeVal": 50,
+  "inventoryWeight": 0,
+  "roleLimit": false,
+  "rolesAllowed": "",
+  "purpose": {
+    "character damage": false,
+    "character heal": false,
+    "stat enhance": false,
+    "stat degrade": false,
+    "item create": false,
+    "item destory": false
+  },
+  "purposeVal": 0
+}
+
+/* item inventory */
+{
+  "name": "bag",
+  "interactionTrigger": "character",
+  "items": ["lockpick"]
+}
+
+/* inventory item */
+{
+  "name": "lockpick",
+  "itemType": "tool",
+  "equippable": false,
+  "equipped": false,
+  "tradeVal": 5,
+  "inventoryWeight": 1,
+  "roleLimit": "Rogue",
+  "purpose": {
+    "character damage": false,
+    "character heal": false,
+    "stat enhance": true,
+    "stat degrade": false,
+    "item create": true,
+    "item destory": true
+  },
+  "purposeVal": 2 // this is a basic lockpick
+}
+
+/* equipped inventory */
+{
+  "name": "equipped items",
+  "interactionTrigger": "character",
+  "items": ["leather"]
+}
+
+/* equipped item */
+{
+  "name": "leather",
+  "itemType": "gear",
+  "equippable": true,
+  "equipped": true,
+  "tradeVal": 50,
+  "inventoryWeight": 5,
+  "roleLimit": true,
+  "rolesAllowed": ["Rogue"],
+  "purpose": {
+    "character damage": false,
+    "character heal": false,
+    "stat enhance": true, // this only effects stats
+    "stat degrade": false,
+    "item create": false,
+    "item destory": false
+  },
+  "purposeVal": 5 // this is the amount of buff to stats
+}
+
+/* skill */
+{
+  "name": "basic lockpicking",
+  "purpose": {
+    "character damage": false,
+    "character heal": false,
+    "stat enhance": false,
+    "stat degrade": false,
+    "item create": true, // can lock locks
+    "item destory": true // can unlock locks
+  },
+  "skillLevel": 1
+}
+
+/* role */
+{
+  "name": "Rogue",
+  "skillsAllowed": [
+    "lockpicking",
+    "stealth"
+  ],
+  "statsLimits": {
+    "strength": 30,
+    "dexterity": 50,
+    "constitution": 30
+  },
+  "inventoryAllowed": [
+    "gear",
+    "tools",
+    "consumables"
+  ]
+}
+
+/* character */
+{
+  "name": "Goober",
+  "role": "Rogue",
+  "level": 1,
+  "stats": {
+    "strength":
+      {
+        "value": 20,
+        "locked": true
+      },
+    "dexterity":{
+      "value": 40,
+      "locked": true
+    },
+    "constitution": {
+      "value": 20,
+      "locked": false
+    },
+  },
+
+}
