@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>plastic sample game</title>
-  <link rel="stylesheet" href="/css/reset.css" media="screen" title="no title" charset="utf-8">
-  <link rel="stylesheet" href="/css/style.css" media="screen" title="no title">
+    <meta charset="utf-8">
+    <title>plastic sample game</title>
+    <link rel="stylesheet" href="/css/reset.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="/css/style.css" media="screen" title="no title">
 </head>
 <body>
-  <div id="start" class="box">
-    <p>WELCOME! Time to play a generic game.</p>
-    <p>Start by naming your character and choosing a game quest.</p>
-    <form class="" action="index.html" method="post">
-      <input type="text" name="name" id="newName" value="Enter Character's Name">
-      <label><input type="radio" name="quest" value="Quest one"> Quest one</label>
-      <label><input type="radio" name="quest" value="Quest two"> Quest two</label>
-      <label><input type="radio" name="quest" value="Quest three"> Quest three</label>
-    </form>
-    <a href="#step1" id="newChar" class="button nextStep">Create Character</a>
-  </div>
+    <div id="start" class="box">
+        <p>WELCOME! Time to play a generic game.</p>
+        <p>Start by naming your character and choosing a game quest.</p>
+        <form class="" action="index.html" method="post">
+            <input type="text" name="name" id="newName" value="Enter Character's Name">
+            <div id="questpicker1">
+                <label><input type="radio" name="quest" value="Quest one"> Quest one</label>
+                <label><input type="radio" name="quest" value="Quest two"> Quest two</label>
+                <label><input type="radio" name="quest" value="Quest three"> Quest three</label>
+            </div>
+        </form>
+        <a href="#step1" id="newChar" class="button nextStep">Create Character</a>
+    </div>
 
-  <div id="step1" class="box hidden">
-    <p>Hello, <span class="charName"></span>!</p>
-    <p>Time to start <span class="questname"></span>.</p>
-    <a href="#step2" class="button nextStep">Get Started</a>
-  </div>
+    <div id="step1" class="box hidden">
+        <p>Hello, <span class="charname"></span>!</p>
+        <p>Time to start <span class="questname"></span>.</p>
+        <a href="#step2" class="button nextStep">Get Started</a>
+    </div>
 
-  <div id="step2" class="box hidden">
-    <p>Okay, we need to get some quest items.</p>
-    <p>Right now we have:</p>
-    <div class="itemListWrapper">No Quest Items</div>
-    <br>
-    <form class="" action="index.html" method="post">
-      <label><input type="radio" name="newQuestItem" value="Quest item one"> Quest item one</label>
-      <label><input type="radio" name="newQuestItem" value="Quest item two"> Quest item two</label>
-      <label><input type="radio" name="newQuestItem" value="Quest item three"> Quest item three</label>
-    </form>
-    <a href="#step3" id="addQuestItem" class="button nextStep">Add a new quest item</a>
-  </div>
-  <div id="step3" class="box hidden">
-    <p>Step 3</p>
-    <p class="updateStatus"></p>
-    <div class="itemListWrapper"></div>
-  </div>
+    <div id="step2" class="box hidden">
+        <p>Okay, we need to get some quest items.</p>
+        <p>Right now we have:</p>
+        <div class="itemListWrapper">No Quest Items</div>
+        <br>
+        <form class="" action="index.html" method="post">
+            <label><input type="radio" name="newQuestItem" value="Quest item one"> Quest item one</label>
+            <label><input type="radio" name="newQuestItem" value="Quest item two"> Quest item two</label>
+            <label><input type="radio" name="newQuestItem" value="Quest item three"> Quest item three</label>
+        </form>
+        <a href="#step3" id="addQuestItem" class="button nextStep">Add a new quest item</a>
+    </div>
+    <div id="step3" class="box hidden">
+        <p>Step 3</p>
+        <p class="updateStatus"></p>
+        <div class="itemListWrapper"></div>
+    </div>
 
-  <script type="text/javascript" src="plastic.js"></script>
-  <script type="text/javascript" src="plastic-demo1.js"></script>
+    <script type="text/javascript" src="plastic.js"></script>
+    <script type="text/javascript" src="plastic-demo1.js"></script>
 
 </body>
 </html>
