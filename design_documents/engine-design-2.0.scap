@@ -62,7 +62,7 @@
                 <Fill>0.501961 0.501961 0.0</Fill>
             </Appearance>
             <String>QUESTS</String>
-            <ConnectedNoteIDs>95, 109</ConnectedNoteIDs>
+            <ConnectedNoteIDs>95, 109, 112, 117</ConnectedNoteIDs>
         </Note>
         <Note ID="28" FontSize="14.0" Position="2704.0,1135.0" Width="200.0">
             <Appearance>
@@ -245,7 +245,7 @@
                 <Fill>0.501961 0.501961 0.0</Fill>
             </Appearance>
             <String>EXPLORATIONS</String>
-            <ConnectedNoteIDs>95, 109</ConnectedNoteIDs>
+            <ConnectedNoteIDs>95, 109, 113-114, 116</ConnectedNoteIDs>
         </Note>
         <Note ID="106" FontSize="14.0" Position="2336.0,378.0" Width="200.0">
             <Appearance>
@@ -284,7 +284,7 @@ MEDIATORS</String>
             <String>INTER-ACTIVITY MEDIATORS</String>
             <ConnectedNoteIDs>18-19, 105</ConnectedNoteIDs>
         </Note>
-        <Note ID="110" FontSize="14.0" Position="1532.250526,556.010804" Width="200.0">
+        <Note ID="110" FontSize="14.0" Position="1532.0,556.0" Width="200.0">
             <Appearance>
                 <Alignment>Left</Alignment>
                 <TextColor>1.0 1.0 1.0</TextColor>
@@ -292,7 +292,7 @@ MEDIATORS</String>
             </Appearance>
             <String> blocksStat()</String>
         </Note>
-        <Note ID="111" FontSize="14.0" Position="3122.812428,537.379807" Width="200.0">
+        <Note ID="111" FontSize="14.0" Position="3123.0,537.0" Width="200.0">
             <Appearance>
                 <Alignment>Left</Alignment>
                 <TextColor>1.0 1.0 1.0</TextColor>
@@ -300,6 +300,51 @@ MEDIATORS</String>
             </Appearance>
             <String> activityExists(): true/false
  activityActive(): true/false</String>
+        </Note>
+        <Note ID="112" FontSize="14.0" Position="3484.330718,53.750558" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>MANIFEST</String>
+            <ConnectedNoteIDs>19</ConnectedNoteIDs>
+        </Note>
+        <Note ID="113" FontSize="14.0" Position="3548.324916,766.088718" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>TRIGGER</String>
+            <ConnectedNoteIDs>105</ConnectedNoteIDs>
+        </Note>
+        <Note ID="114" FontSize="14.0" Position="3286.388948,847.19449" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>INVENTORY</String>
+            <ConnectedNoteIDs>105</ConnectedNoteIDs>
+        </Note>
+        <Note ID="116" FontSize="14.0" Position="3540.124884,879.854711" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>TYPE</String>
+            <ConnectedNoteIDs>105</ConnectedNoteIDs>
+        </Note>
+        <Note ID="117" FontSize="14.0" Position="3554.283333,142.15133" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.25098 0.0 0.501961</Border>
+                <Fill>0.25098 0.0 0.501961</Fill>
+            </Appearance>
+            <String>TRIGGER</String>
+            <ConnectedNoteIDs>19</ConnectedNoteIDs>
         </Note>
     </Notes>
     <BackgroundShapes></BackgroundShapes>

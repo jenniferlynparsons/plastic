@@ -6,8 +6,9 @@ var itemPurposes = [
 
 // items sample
 // having this function fire when added to a cache will enable randomization of items in cache and also the ability to randomize the stats of the items.
-
-function makeItem(){
+function ItemMediator() {
+}
+ItemMediator.prototype.makeItem = function() {
   this.name = ""; // a string
   this.tradeValue = 5; // units of trade/money item is worth
   this.purpose = "character damage"; // character heal, stat enhance, stat degrade, item create, item destory
@@ -15,8 +16,9 @@ function makeItem(){
 }
 
 // gear inventory sample
-
-function Inventory(){
+function InventoryMediator(){
+}
+InventoryMediator.prototype.createInventory(){
   this.name = "Player Gear";
   this.minimum = 0;
   this.maximum = 10;

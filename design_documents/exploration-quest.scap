@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ScappleDocument Version="1.1" ID="8CCA4E6F-9AFE-4133-B24C-5E6F2B4BE9BF">
+    <Notes>
+        <Note ID="0" FontSize="14.0" Position="351.387682,143.574892" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>button click: quest activated</String>
+        </Note>
+        <Note ID="1" FontSize="14.0" Position="360.487451,233.22606" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>locked room quest</String>
+        </Note>
+        <Note ID="2" FontSize="14.0" Position="1159.436257,594.713346" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>chest</String>
+            <ConnectedNoteIDs>7</ConnectedNoteIDs>
+        </Note>
+        <Note ID="4" FontSize="14.0" Position="436.237522,591.502283" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>open padlock</String>
+            <ConnectedNoteIDs>6, 8, 13</ConnectedNoteIDs>
+        </Note>
+        <Note ID="5" FontSize="14.0" Position="437.541788,344.810283" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>open door lock</String>
+            <ConnectedNoteIDs>6, 8</ConnectedNoteIDs>
+            <PointsToNoteIDs>6</PointsToNoteIDs>
+        </Note>
+        <Note ID="6" FontSize="14.0" Position="437.479151,474.52039" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>search room</String>
+            <ConnectedNoteIDs>4-5</ConnectedNoteIDs>
+            <PointsToNoteIDs>4</PointsToNoteIDs>
+        </Note>
+        <Note ID="7" FontSize="14.0" Position="807.773203,591.884956" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>gold</String>
+            <ConnectedNoteIDs>2, 10</ConnectedNoteIDs>
+        </Note>
+        <Note ID="8" FontSize="14.0" Position="830.436257,406.990946" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>lockpick</String>
+            <ConnectedNoteIDs>4-5, 10</ConnectedNoteIDs>
+        </Note>
+        <Note ID="10" FontSize="14.0" Position="1163.84252,397.850526" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="5">0.4 0.8 1.0</Border>
+                <Fill>0.4 0.8 1.0</Fill>
+            </Appearance>
+            <String>bag</String>
+            <ConnectedNoteIDs>7-8</ConnectedNoteIDs>
+        </Note>
+        <Note ID="15" FontSize="15.0" Position="1169.170413,360.765882" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+            </Appearance>
+            <String>character’s inventory</String>
+        </Note>
+        <Note ID="17" FontSize="15.0" Position="1167.28277,556.837444" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+            </Appearance>
+            <String>quest inventory</String>
+        </Note>
+        <Note ID="19" FontSize="15.0" Position="830.436257,348.601005" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+            </Appearance>
+            <String>inventory item required 
+for interaction</String>
+        </Note>
+        <Note ID="20" FontSize="15.0" Position="799.706129,556.351483" Width="200.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+            </Appearance>
+            <String>inventory item</String>
+        </Note>
+    </Notes>
+    <BackgroundShapes>
+        <Shape ID="12" Sticky="No" Position="266.436257,247.502283" Width="1371.58153" Height="544.0">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+        </Shape>
+        <Shape ID="13" Sticky="No" Position="770.436257,549.502283" Width="639.0" Height="108.0">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <ConnectedNoteIDs>4</ConnectedNoteIDs>
+        </Shape>
+    </BackgroundShapes>
+    <NoteStyles>
+        <Style Name="Title Text" ID="E33C48BD-F4F0-47C2-82D0-74C721396445" AffectFontStyle="Yes" AffectAlignment="Yes" AffectTextColor="No" AffectNoteBody="No" AffectFade="No">
+            <FontSize>28.0</FontSize>
+            <IsBold>Yes</IsBold>
+        </Style>
+        <Style Name="Red Text" ID="133736AF-C0BD-45BB-AF42-638911658A33" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="Yes" AffectNoteBody="No" AffectFade="No">
+            <TextColor>1.0 0.0 0.0</TextColor>
+        </Style>
+        <Style Name="Brown Bubble" ID="24DA6EBB-6C8A-4944-8DD9-27820DBCE31D" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.290055 0.1523 0.182215</BorderColor>
+            <FillColor>0.940019 0.892907 0.779716</FillColor>
+        </Style>
+        <Style Name="Yellow Bubble" ID="9B8C410D-2B92-441C-87DA-DBC5AEC3D870" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.756763 0.785592 0.373258</BorderColor>
+            <FillColor>0.906773 0.910625 0.634363</FillColor>
+        </Style>
+        <Style Name="Green Bubble" ID="78CBF297-4D60-437F-94DB-0E00F88D2027" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.331867 0.609932 0.356197</BorderColor>
+            <FillColor>0.790123 0.882328 0.80198</FillColor>
+        </Style>
+        <Style Name="Blue Bubble" ID="23DA218C-3340-4FE3-9B90-8DC259949D9D" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.477193 0.557066 0.76433</BorderColor>
+            <FillColor>0.840969 0.866828 0.925903</FillColor>
+        </Style>
+        <Style Name="Pink Bubble" ID="E4A3AD49-3897-4553-BAA2-0DCFB8BEB974" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.747881 0.366532 0.542813</BorderColor>
+            <FillColor>0.918452 0.807302 0.863467</FillColor>
+        </Style>
+    </NoteStyles>
+    <UISettings>
+        <BackgroundColor>0.999737 0.986332 0.931298</BackgroundColor>
+        <DefaultFont>Helvetica</DefaultFont>
+        <DefaultTextColor>0.0 0.0 0.0</DefaultTextColor>
+    </UISettings>
+    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+</ScappleDocument>
