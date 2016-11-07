@@ -71,6 +71,7 @@
     console.log(data);
 
     var game = new GameState(data.game);
+    var quest = new Quest(data.game.quest);
     var player = new Character(data.game.player);
     var playerInventory = new Inventory(data.game.player.inventory);
 
@@ -95,9 +96,6 @@
     }
     var quest = printQuest();
     $(".questname").empty().append(quest);
-
-
-
 
     function printInventory (items) {
       var printItems = "";

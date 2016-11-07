@@ -24,10 +24,12 @@ function init(datasrc) {
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
 function GameState(data){
-  
+
 }
 
+function Quest(data){
 
+}
 
 function Character(data){
   this.name = data.name;
@@ -46,7 +48,10 @@ Inventory.prototype.getInventory = function() {
   return this.items;
 }
 
-function InventoryMediator(){}
+function InventoryMediator(){
+
+}
+
 InventoryMediator.prototype.add = function(){
 
 }
