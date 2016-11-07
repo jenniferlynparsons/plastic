@@ -1,0 +1,41 @@
+{
+  "game":{
+    "player":{
+      "name": "Harper",
+      "role": "Rogue",
+      "level": 1,
+      "inventory":{
+        "name": "Bag",
+        "items":[
+          {"gold": 10}
+        ]
+      }
+    },
+    "npc1":{
+      "name": "Leaf",
+      "role": "Shopkeeper",
+      "level": 1
+    },
+    "quest":{
+      "name": "Buy a lockpick",
+      "questType": "purchase",
+      "state": "active",
+      "inventory":{
+        "name": "Shop",
+        "items":[
+          {"lockpick": 5}
+        ]
+      }
+    },
+    "items": {
+      "gold": {
+        "value": 1,
+        "type": "consumable"
+      },
+      "lockpick":{
+        "value": 1,
+        "type": "tool"
+      }
+    }
+  }
+}

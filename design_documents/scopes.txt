@@ -1,0 +1,70 @@
+Phase one
+- a basic library of functions for controlling gameplay and character creation/tracking
+- creation of demo games
+At this phase, the author would implement the library into the game themselves, requiring front-end coding skills.
+
+0.1.0 alpha
+- enough functionality for a limited, minimal 5 minute game.
+- basic Character with:
+  name
+  role
+  level
+  inventory
+- basic item with:
+  value
+  type
+- basic inventory with:
+  
+
+- trading items between characters
+
+- basic plastic code
+models
+mediators
+views
+
+-character
+name
+  get
+role
+  get
+level
+  get
+equipment inventory
+  name
+  items
+  --
+  add
+  get
+  remove
+
+- quest
+name
+  get
+type
+  get
+state
+  get
+  set
+quest inventory
+  name
+  items
+  --
+  get
+  remove
+
+- items
+quantity
+  get
+value
+  get
+type
+  get
+
+
+0.2.0 alpha
+- character
+role
+skills
+
+- items

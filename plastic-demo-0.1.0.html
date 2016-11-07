@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>plastic sample game</title>
+  <link rel="stylesheet" href="/css/reset.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/css/style.css" media="screen" title="no title">
+</head>
+<body>
+  <div id="start" class="box">
+    <p>Hello, <span class="charname"></span>!</p>
+    <p>You are a <span class="charrole"></span>.</p>
+    <p>Time to <span class="questname"></span>.</p>
+    <a href="#step2" class="button nextStep">Get Started</a>
+  </div>
+
+  <div id="step1" class="box ">
+    <p>What do you have in your <span class="charinventory"></span>?</p>
+    <a class="button inventory">See Contents</a>
+    <ul class="charinventorylist"></ul>
+    <p>Is it time to go shopping?</p>
+    <a href="#step2" class="button nextStep">Yes</a>
+    <a href="#step1" class="button prevStep">No</a>
+  </div>
+
+  <div id="step2" class="box ">
+    <p>Okay, we need to get some quest items.</p>
+    <p>Look! There's a shop over there!</p>
+    <a href="#step3" class="button nextStep">Let's go!</a>
+  </div>
+
+  <div id="step3" class="box ">
+    <p>There's a shopkeeper in here. Let's make friends.</p>
+    <a href="step4" class="button nextStep">What's your name?</a>
+  </div>
+
+  <div id="step4" class="box ">
+    <p>"I'm <span class="npc1name"></span>. Would you like to buy something?"</p>
+    <a href="step5" class="button nextStep">Yes, please. What do you have?</a>
+  </div>
+
+  <div id="step5" class="box ">
+    <p>"I have these items. Just let me know what you'd like."</p>
+    <ul class="storeinventorylist"></ul>
+    <input type="text"><a class="button addInventory">lockpicks, please</a>
+  </div>
+
+  <div id="storefailure" class="box ">
+    <p>"I'm sorry, I don't have that many."</p>
+    <ul class="storeinventorylist"></ul>
+    <input type="text"><a class="button addInventory">lockpicks, please</a>
+  </div>
+
+  <div id="charfailure" class="box ">
+    <p>"I'm sorry, you don't have enough money for that many."</p>
+    <ul class="storeinventorylist"></ul>
+    <input type="text"><a class="button addInventory">lockpicks, please</a>
+  </div>
+
+  <div id="success" class="box ">
+    <p>"Thank you for your patronage. Please come again!"</p>
+    <p>Congrats! You now have:</p>
+    <ul class="charinventorylist"></ul>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="plastic.js"></script>
+  <script type="text/javascript">
+  init('plastic-dev.json');
+  $( document ).ready(function() {
+    console.log(data);
+
+    var game = new GameState(data.game);
+    var player = new Character(data.game.player);
+    var playerInventory = new Inventory(data.game.player.inventory);
+
+
+    function printPlayerName(){
+      return player.name;
+    }
+    var playerName = printPlayerName();
+    $(".charname").empty().append(playerName);
+
+
+    function printPlayerRole(){
+      return player.role;
+    }
+    var playerRole = printPlayerRole();
+    $(".charrole").empty().append(playerRole);
+
+
+    function printQuest(){
+      console.log("quest " + game.quest)
+      return game.quest;
+    }
+    var quest = printQuest();
+    $(".questname").empty().append(quest);
+
+
+
+
+    function printInventory (items) {
+      var printItems = "";
+      for (var i = 0, length = items.length; i < length; ++i) {
+        printItems += '<li>' + items[i] + '</li>'
+      }
+      return printItems;
+    }
+    var playerItemsArray = Array.prototype.slice.call(playerInventory.items);
+    playerItemsList = printInventory(playerItemsArray);
+    $(".charinventorylist").empty().append(playerItemsList);
+
+  });
+  </script>
+
+</body>
+</html>
