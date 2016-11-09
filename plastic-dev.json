@@ -14,7 +14,11 @@
     "npc1":{
       "name": "Leaf",
       "role": "Shopkeeper",
-      "level": 1
+      "level": 1,
+      "inventory":{
+        "name": "Bag",
+        "items":[]
+      }
     },
     "quest":{
       "name": "Buy a lockpick",

@@ -6,18 +6,19 @@ function startGame(){
 
   var game = new GameState(data.game);
   var quest = new Quest(data.game.quest);
+  var questInventory = new Inventory(data.game.quest.inventory);
   var player = new Character(data.game.player);
+  var playerInventory = new Inventory(data.game.player.inventory);
   var npc = new Character(data.game.npc1);
-
+  var npcInventory = new Inventory(data.game.npc1.inventory);
 
   quest.getQuest(quest);
-  quest.getInventory(quest.inventory.items);
+  questInventory.getInventory(questInventory.items);
   player.getCharacter(player);
-  player.getInventory(player.inventory.items);
+  playerInventory.getInventory(playerInventory.items);
   npc.getCharacter(npc);
-  npc.getInventory(npc.inventory.items);
+  npcInventory.getInventory(npcInventory.items);
 
 }
-$( document ).ready(function() {
-  startGame();
-});
+
+ready(startGame());
