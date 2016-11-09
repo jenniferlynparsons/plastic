@@ -4,8 +4,7 @@ Phase one
 At this phase, the author would implement the library into the game themselves, requiring front-end coding skills.
 
 0.1.0 alpha
-- enough functionality for a limited, minimal game where you can purchase items from a store, talk to a character, and complete a quest.
-- use jquery for dom interactions
+- enough functionality for a limited, minimal game where you can purchase items from a store, talk to a character, and complete a quest in console.
 
 - character
   name

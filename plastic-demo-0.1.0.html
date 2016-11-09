@@ -65,51 +65,7 @@
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="plastic.js"></script>
-  <script type="text/javascript">
-  init('plastic-dev.json');
-  $( document ).ready(function() {
-    console.log(data);
-
-    var game = new GameState(data.game);
-    var quest = new Quest(data.game.quest);
-    var player = new Character(data.game.player);
-    var playerInventory = new Inventory(data.game.player.inventory);
-
-
-    function printPlayerName(){
-      return player.name;
-    }
-    var playerName = printPlayerName();
-    $(".charname").empty().append(playerName);
-
-
-    function printPlayerRole(){
-      return player.role;
-    }
-    var playerRole = printPlayerRole();
-    $(".charrole").empty().append(playerRole);
-
-
-    function printQuest(){
-      console.log("quest " + game.quest)
-      return game.quest;
-    }
-    var quest = printQuest();
-    $(".questname").empty().append(quest);
-
-    function printInventory (items) {
-      var printItems = "";
-      for (var i = 0, length = items.length; i < length; ++i) {
-        printItems += '<li>' + items[i] + '</li>'
-      }
-      return printItems;
-    }
-    var playerItemsArray = Array.prototype.slice.call(playerInventory.items);
-    playerItemsList = printInventory(playerItemsArray);
-    $(".charinventorylist").empty().append(playerItemsList);
-
-  });
-  </script>
+  <script type="text/javascript" src="plastic-demo.js"></script>
 
 </body>
 </html>
