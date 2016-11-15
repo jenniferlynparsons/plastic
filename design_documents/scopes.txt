@@ -62,3 +62,5 @@ stats effects
 
 note for later:
 store inventory could have the same core items but variable contents at the fringes, all vendors have the same items with some turned on and off, or could be entirely randomly generated. orrrrr be a reward at the end of a quest and have a set of particular items.
+
+also, i haven't even considered how "companion" characters would work. because my instinct is to want to make something where a character can have a companion animal. :)
