@@ -38,9 +38,11 @@ function GameState(data){
 
 function Quest(data){
   this.name = data.name;
+  if (inventory){
+    this.inventory = new Inventory()
+  }
 }
 Quest.prototype.getQuest = function(){
-  console.log("quest " + this.name);
   return this.name;
 }
 
@@ -51,7 +53,6 @@ function Character(data){
   this.inventory = data.inventory;
 }
 Character.prototype.getCharacter = function(){
-  console.log("character:" + this.name + " role:" + this.role + " level:" + this.level);
   return this.name;
 }
 Character.prototype.printCharacterName = function(){
@@ -62,7 +63,6 @@ Character.prototype.printCharacterRole = function(){
 }
 
 function Inventory(data) {
-  this.name = data.name;
   this.items = data.items;
 }
 Inventory.prototype.getInventory = function() {
@@ -71,7 +71,6 @@ Inventory.prototype.getInventory = function() {
   for (var i = 0, length = this.items.length; i < length; ++i) {
     allItems += ' ' + itemsArray[i] + ' '
   }
-  console.log("inventory " + allItems);
   return allItems;
 }
 
@@ -84,4 +83,10 @@ InventoryMediator.prototype.add = function(){
 }
 InventoryMediator.prototype.remove = function(){
 
+}
+
+function InventoryItem(name, val, qty) {
+  this.name = name;
+  this.qty = qty;
+  this.value = value;
 }

@@ -7,7 +7,9 @@
       "inventory":{
         "name": "Bag",
         "items":[
-          {"gold": 10}
+          {"name": "gold",
+            "qty": 10
+          }
         ]
       }
     },
@@ -27,7 +29,9 @@
       "inventory":{
         "name": "Shop",
         "items":[
-          {"lockpick": 5}
+          {"name": "lockpick",
+            "qty": 5
+          }
         ]
       }
     },
