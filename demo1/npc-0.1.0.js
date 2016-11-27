@@ -4,6 +4,9 @@ var npc = new Character({
   "level": 1,
 });
 
-npc.addInventory(new Inventory([
-  new InventoryItem("lockpick", 1, 5);
-]));
+npc.inventoryItem(
+  new InventoryItem("lockpick", 10)
+);
+
+// console.log(npc);
+// console.log(npc.getInventory());

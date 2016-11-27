@@ -1,15 +1,10 @@
-init('plastic-dev.json');
+// init('plastic-dev.json');
 
 function startGame(){
-
-  console.log(data);
-
-  quest.getQuest();
-  questInventory.getInventory();
-  player.getCharacter();
-  playerInventory.getInventory();
-  npc.getCharacter();
-  npcInventory.getInventory();
+  console.log(ItemDatabase);
+  console.log(player);
+  console.log(npc);
+  console.log(player.getInventory());
 
 }
 
