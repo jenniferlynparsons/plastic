@@ -54,6 +54,7 @@ var ItemDatabase = {};
 // Quest creator
 function Quest(data){
   // @todo should the name, type, etc. for each function throw an error if it doesn't exist?
+  // use try catch, length will check for strings, or hasownproperty (doesn't need try catch)
   if(data.name.length && data.questType.length && data.state.length){
     this.name = data.name;
     this.type = data.questType;
@@ -78,9 +79,10 @@ Quest.prototype.getQuest = function(){
 
 // sets the Quest state/availability
 Quest.prototype.changeState = function(){
-  if(this.state == "open"){
+  // @todo check preconditions
+  if(this.state == "open"){ //this.isAvailable()
     this.state = "active";
-  }else if (this.state == "active") {
+  }else if (this.state == "active") { //make function this.isComplete()
     this.state = "closed";
   }else{
     throw new Error("Quest is closed");
@@ -106,13 +108,10 @@ function Character(data){
   this.role = data.role;
   this.level = data.level;
   if (data.inventory){
-    console.log("this");
-    this.inventory = data.inventory;
+    this.inventory = new Inventory(data.inventory);
   }else{
-    console.log("that");
     this.inventory = new Inventory([]);
   }
-  console.log("inventorychar: " + this.inventory);
 }
 
 // returns the Character name string
@@ -125,10 +124,9 @@ Character.prototype.getCharacterRole = function(){
   return this.role;
 }
 
-Character.prototype.inventoryItem = function(data){
-  console.log("inventoryItem: " + this.inventory);
-  // doesn't currently push the data to the inventory
-  this.inventory.push(data);
+// adds an inventory item to this Character's inventory
+Character.prototype.addInventoryItem = function(data){
+  this.inventory.addItem(data);
 }
 
 // adds an Inventory to the Character if one does not already exist
@@ -145,16 +143,9 @@ Character.prototype.getInventory = function(){
   return this.inventory.getInventory();
 }
 
-Character.prototype.tradeInventory = function(trader, givenItem, tradee, receivedItem){
-  // if the given item is the same value as the gotten item, then move from one inventory to the other
-    if(trader.inventory.findItem(givenItem.name) == true && tradee.inventory.findItem(receivedItem.name) == true){
-        if((givenItem.value * givenItem.qty) == (receivedItem.value * receivedItem.qty)){
-          trader.inventory.removeItem(givenItem);
-          trader.inventory.addItem(receivedItem);
-          tradee.inventory.removeItem(givenItem);
-          tradee.inventory.addItem(receivedItem);
-        }
-    }
+// abstraction layer for InventoryMediator
+Character.prototype.tradeInventory = function(tradee, givenItem, receivedItem){
+  inventoryMediator(this, tradee, givenItem, receivedItem);
 }
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -163,19 +154,17 @@ Character.prototype.tradeInventory = function(trader, givenItem, tradee, receive
 // Inventory creator
 function Inventory(data) {
   this.items = data;
-  console.log("inventory: " + this.items[0]);
-
 }
 
 // returns the Inventory array
 Inventory.prototype.getInventory = function() {
   //@todo
   // var itemsArray = Array.prototype.slice.call(this.items);
-  var allItems;
-  for (var i = 0, length = this.items.length; i < length; ++i) {
-    allItems += ' ' + this.items[i] + ' '
-  }
-  return allItems;
+  // var allItems;
+  // for (var i = 0, length = this.items.length; i < length; ++i) {
+  //   allItems += ' ' + this.items[i] + ' '
+  // }
+  return this.inventory;
 }
 
 // returns true if Item is in the Inventory
@@ -186,25 +175,46 @@ Inventory.prototype.findItem = function(name){
   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 }
 
-// @todo is this InventoryMediator stuff still required?
+Inventory.prototype.addItem = function(item){
+  this.items.push(item);
+}
 
-// function InventoryMediator(){
-//
-// }
-// InventoryMediator.prototype.add = function(){
-//
-// }
-// InventoryMediator.prototype.remove = function(){
-//
-// }
+
+function inventoryMediator(trader, tradee, given, received){
+  var addItem = function(item, qty){
+    NewInventoryItem(item, qty);
+  }
+  var removeItem = function(item){
+    DestroyInventoryItem(item, qty);
+  }
+  // if the given item is the same value as the gotten item, then move from one inventory to the other
+  if(trader.inventory.findItem(given.name) == true && tradee.inventory.findItem(received.name) == true){
+      if(given.qty == received.qty){
+        trader.inventory.removeItem(given, given.qty);
+        trader.inventory.addItem(received, received.qty);
+        tradee.inventory.removeItem(received, received.qty);
+        tradee.inventory.addItem(given, given.qty);
+      }
+  }
+}
+
 
 // adds an Item to the Inventory
-function InventoryItem(name, qty) {
+function NewInventoryItem(name, qty) {
   if(ItemDatabase[name] != ""){
     this.name = name;
     this.qty = qty;
   }else{
     throw new Error("This item does not exist and cannot be added.");
+  }
+}
+
+// adds an Item to the Inventory
+function DestoryInventoryItem(name, qty) {
+  if(ItemDatabase[name] != ""){
+    this.name.pop();
+  }else{
+    throw new Error("This item does not exist and cannot be destroyed.");
   }
 }
 

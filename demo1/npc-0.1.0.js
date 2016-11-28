@@ -5,7 +5,7 @@ var npc = new Character({
 });
 
 npc.inventoryItem(
-  new InventoryItem("lockpick", 10)
+  new NewInventoryItem("lockpick", 10)
 );
 
 // console.log(npc);

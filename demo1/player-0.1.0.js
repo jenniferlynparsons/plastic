@@ -5,7 +5,7 @@ var player = new Character({
 });
 
 player.inventoryItem(
-  new InventoryItem("gold", 10)
+  new NewInventoryItem("gold", 10)
 );
 
 // console.log(player);
