@@ -30,12 +30,24 @@ function loadJSON(callback, datasrc) {
 // local JSON file loader call
 var data;
 function init(datasrc) {
- loadJSON(function(response) {
-  // Parse JSON string into object
+  loadJSON(function(response) {
+    // Parse JSON string into object
     data = JSON.parse(response);
- }, datasrc);
+  }, datasrc);
 }
 
+function isAString(data){
+  try{
+    var namelength=data;
+    if (!data.hasOwnProperty("length") || data.length == 0){
+      // @todo NEW: i want this to pass in the name of the thing that's missing info
+      throw new Error(data + " has some information missing or malformed")
+    }
+  }
+  catch(e){
+    console.log(e.message)
+  }
+}
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // GameState
@@ -55,13 +67,14 @@ var ItemDatabase = {};
 function Quest(data){
   // @todo should the name, type, etc. for each function throw an error if it doesn't exist?
   // use try catch, length will check for strings, or hasownproperty (doesn't need try catch)
-  if(data.name.length && data.questType.length && data.state.length){
-    this.name = data.name;
-    this.type = data.questType;
-    this.state = data.state;
-  }else{
-    throw new Error("There is some data missing");
-  }
+  // @todo NEW this looks awful. and wrong.
+  isAString(data.name);
+  isAString(data.questType);
+  isAString(data.state);
+  this.name = data.name;
+  this.type = data.questType;
+  this.state = data.state;
+
   if (data.precondition){
     this.precondition = data.precondition;
   }else{
@@ -74,7 +87,11 @@ function Quest(data){
 
 // returns the requested Quest name string
 Quest.prototype.getQuest = function(){
-  return this.name;
+  if(this.name){
+    return this.name;
+  }else{
+    throw new Error("Something's wrong with the quest name");
+  }
 }
 
 // sets the Quest state/availability
@@ -95,7 +112,11 @@ Quest.prototype.isAvailable = function(){
 }
 
 Quest.prototype.getState = function(){
-  return this.state;
+  if(this.state){
+    return this.state;
+  }else{
+    throw new Error("Something's wrong with the state")
+  }
 }
 
 
@@ -116,17 +137,25 @@ function Character(data){
 
 // returns the Character name string
 Character.prototype.getCharacter = function(){
-  return this.name;
+  if(this.name){
+    return this.name;
+  }else{
+    throw new Error("Something's wrong with the character name")
+  }
 }
 
 // returns the Character role string
 Character.prototype.getCharacterRole = function(){
-  return this.role;
+  if(this.role){
+    return this.role;
+  }else{
+    throw new Error("Something's wrong with the character role")
+  }
 }
 
 // adds an inventory item to this Character's inventory
-Character.prototype.addInventoryItem = function(data){
-  this.inventory.addItem(data);
+Character.prototype.addInventoryItem = function(name,qty){
+  this.inventory.addItem(name,qty);
 }
 
 // adds an Inventory to the Character if one does not already exist
@@ -159,12 +188,12 @@ function Inventory(data) {
 // returns the Inventory array
 Inventory.prototype.getInventory = function() {
   //@todo
-  // var itemsArray = Array.prototype.slice.call(this.items);
-  // var allItems;
-  // for (var i = 0, length = this.items.length; i < length; ++i) {
-  //   allItems += ' ' + this.items[i] + ' '
-  // }
-  return this.inventory;
+  var itemsArray = this.items;
+  var allItems;
+  for (var i = 0, length = this.items.length; i < length; ++i) {
+    allItems += ' ' + this.items[i] + ' '
+  }
+  return allItems;
 }
 
 // returns true if Item is in the Inventory
@@ -175,7 +204,8 @@ Inventory.prototype.findItem = function(name){
   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 }
 
-Inventory.prototype.addItem = function(item){
+Inventory.prototype.addItem = function(name,qty){
+
   this.items.push(item);
 }
 
@@ -189,38 +219,51 @@ function inventoryMediator(trader, tradee, given, received){
   }
   // if the given item is the same value as the gotten item, then move from one inventory to the other
   if(trader.inventory.findItem(given.name) == true && tradee.inventory.findItem(received.name) == true){
-      if(given.qty == received.qty){
-        trader.inventory.removeItem(given, given.qty);
-        trader.inventory.addItem(received, received.qty);
-        tradee.inventory.removeItem(received, received.qty);
-        tradee.inventory.addItem(given, given.qty);
-      }
+    if(given.qty == received.qty){
+      trader.inventory.removeItem(given, given.qty);
+      trader.inventory.addItem(received, received.qty);
+      tradee.inventory.removeItem(received, received.qty);
+      tradee.inventory.addItem(given, given.qty);
+    }
   }
 }
 
+function InventoryItem(name, val, qty) {
+  this.name = name;
+  this.qty = qty;
+  this.value = val;
+}
+// returns the value of the InventoryItem from the ItemDatabase
+InventoryItem.prototype.getValue = function() {
+  if(ItemDatabase[this.name].value){
+    return ItemDatabase[this.name].value;
+  }else{
+    throw new Error("Something's wrong with the InventoryItem value");
+  }
+}
+
+InventoryItem.prototype.getTotalValue = function() {
+  if(ItemDatabase[this.name].value && this.qty){
+    return ItemDatabase[this.name].value * this.qty;
+  }
+}
 
 // adds an Item to the Inventory
 function NewInventoryItem(name, qty) {
   if(ItemDatabase[name] != ""){
-    this.name = name;
-    this.qty = qty;
+    new InventoryItem(ItemDatabase[name].name, ItemDatabase[name].value, qty)
   }else{
     throw new Error("This item does not exist and cannot be added.");
   }
 }
 
-// adds an Item to the Inventory
-function DestoryInventoryItem(name, qty) {
+// removes an Item from the Inventory
+function DestroyInventoryItem(name, qty) {
   if(ItemDatabase[name] != ""){
     this.name.pop();
   }else{
     throw new Error("This item does not exist and cannot be destroyed.");
   }
-}
-
-// returns the value of the InventoryItem from the ItemDatabase
-InventoryItem.prototype.getValue = function() {
-  return ItemDatabase[this.name].value * this.qty;
 }
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -247,3 +290,10 @@ function Item(name, val) {
 // function InteractionMediator(sender, receiver, quantity){
 //
 // }
+
+
+// There are items which exist free-floating in the items database. they can be added and deleted. they have various properties, but no quantities.
+
+// There are inventory items which are items from the database, but here there is a quantity.
+
+// There are inventories which house a number of inventory items.
