@@ -1,145 +1,249 @@
-/* eslint-disable no-unused-vars */
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// General plastic functions
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Helpers
 
-// TODO: blargh. i don't quite know why i need this right now but i do. once i understand it better, it will all be fixed.
-// SAVE ME JAVASCRIPT DAD
-function Plastic () {
 
-}
-
-// Polyfill for .includes https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
-if (!String.prototype.includes) {
-  String.prototype.includes = function (search, start) {
-    'use strict'
-    if (typeof start !== 'number') {
-      start = 0
-    }
-
-    if (start + search.length > this.length) {
-      return false
-    } else {
-      return this.indexOf(search, start) !== -1
-    }
-  }
-}
-
-// http://libux.co/useful-function-making-queryselectorall-like-jquery/
-// need to update. if the query is for an ID, use querySelector() and return element itself, if the query is for a class, use querySelectorAll() and always return an array, even if there's only one item in it.
-
-function _p (selector, context) {
-  context = context || document
-  var elementsArray
-  if (selector.includes('#')) {
-    elementsArray = Array.prototype.slice.call(context.querySelectorAll(selector))
-    return elementsArray[0]
-  } else if (selector.includes('.')) {
-    elementsArray = Array.prototype.slice.call(context.querySelectorAll(selector))
-    return elementsArray
-  }
-}
-
-// thanks Sal
-function mergeDefaults (obj, defaults, propList) {
-  Object.assign(obj, defaults)
-  Object.assign(obj, propList)
-}
-
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// UI functions
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-
-// On click of element, the element with ID matching href is shown, the current visible element is hidden.
-// This can be used two ways. Typically, it would be used to navigate between 'pages' of the game,
-// but it could also be used to hide/reveal bits of information or interactions on the same page.
-function next (anchor, currentVisible) {
-  var current = _p(currentVisible)
-  current.classList.add('hidden')
-  var destination = _p(anchor).getAttribute('href').replace(/[^a-zA-Z 0-9]+/g, '')
-  _p(next).classList.remove('hidden')
-  e.preventDefault()
-}
-
-// To output a string to an HTML container
-function printThing (info, wrapper) {
-  if (wrapper.length > 1) {
-    wrapper.forEach(function (element) {
-      element.innerHTML = info
-    })
+// http://youmightnotneedjquery.com/
+// simple Document ready function
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
   } else {
-    wrapper.innerHTML = info
+    document.addEventListener('DOMContentLoaded', fn);
   }
 }
 
-// This will always output a <ul> with inner <li>s and insert them into the wrapper element
-function printInventory (plastic, wrapper) {
-  var printItems
-  for (var i = 0, length = plastic.items.length; i < length; ++i) {
-    printItems += '<li>' + plastic.items[i] + '</li>'
-  }
-  var printList = '<ul>' + printItems + '</ul>'
-  wrapper.innerHTML(printList)
-}
-
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// form element functions
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-
-// TODO: the form elements should be processed on click of submit
-
-// TODO: could be handled with an array of elements?
-function getInputVal (inputId) {
-  return inputId.value
-}
-
-function checkRadio (radioArray) {
-  for (var i = 0, length = radioArray.length; i < length; i++) {
-    if (radioArray[i].checked) {
-      return radioArray[i].value
+// local JSON file loading function
+// https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
+function loadJSON(callback, datasrc) {
+  var xobj = new XMLHttpRequest();
+  xobj.overrideMimeType("application/json");
+  xobj.open('GET', datasrc, false); // Replace 'my_data' with the path to your file, change false to true for asynchronous loading
+  xobj.onreadystatechange = function () {
+    if (xobj.readyState == 4 && xobj.status == "200") {
+      // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+      callback(xobj.responseText);
     }
+  };
+  xobj.send(null);
+}
+
+// local JSON file loader call
+var data;
+function init(datasrc) {
+ loadJSON(function(response) {
+  // Parse JSON string into object
+    data = JSON.parse(response);
+ }, datasrc);
+}
+
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// GameState
+
+// GameState creator
+function GameState(data){
+
+}
+
+// holds the list of game items
+var ItemDatabase = {};
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Quest
+
+// Quest creator
+function Quest(data){
+  // @todo should the name, type, etc. for each function throw an error if it doesn't exist?
+  // use try catch, length will check for strings, or hasownproperty (doesn't need try catch)
+  if(data.name.length && data.questType.length && data.state.length){
+    this.name = data.name;
+    this.type = data.questType;
+    this.state = data.state;
+  }else{
+    throw new Error("There is some data missing");
+  }
+  if (data.precondition){
+    this.precondition = data.precondition;
+  }else{
+    this.precondition = function(){return true;}
+  }
+  // if (data.inventory){
+  //   this.inventory = new Inventory();
+  // }
+}
+
+// returns the requested Quest name string
+Quest.prototype.getQuest = function(){
+  return this.name;
+}
+
+// sets the Quest state/availability
+Quest.prototype.changeState = function(){
+  // @todo check preconditions
+  if(this.state == "open"){ //this.isAvailable()
+    this.state = "active";
+  }else if (this.state == "active") { //make function this.isComplete()
+    this.state = "closed";
+  }else{
+    throw new Error("Quest is closed");
   }
 }
 
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// Character functions
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-
-function Character (plastic, propList) {
-  var defaults = {name: 'Character', currentQuest: 'none'}
-  mergeDefaults(this, defaults, propList)
+// returns true if the Quest is available
+Quest.prototype.isAvailable = function(){
+  return this.state == "open" && this.precondition();
 }
 
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// inventory functions
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-
-function Inventory (propList) {
-  var defaults = {name: 'Default Inventory', min: 0, max: 100, updateSuccess: 'Item Added', updateFail: 'Inventory Full', removeSuccess: 'Item Removed', removeFail: 'Inventory Empty'}
-  mergeDefaults(this, defaults, propList)
+Quest.prototype.getState = function(){
+  return this.state;
 }
 
-Inventory.prototype.addItem = function (plastic, newItem) {
-  if (plastic.itemList.length < plastic.max) {
-    plastic.itemList.push(newItem)
-    return plastic.updateSuccess
-  } else {
-    return plastic.updateFail
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Character
+
+// Character creator
+function Character(data){
+  this.name = data.name;
+  this.role = data.role;
+  this.level = data.level;
+  if (data.inventory){
+    this.inventory = new Inventory(data.inventory);
+  }else{
+    this.inventory = new Inventory([]);
   }
 }
 
-Inventory.prototype.subtractItem = function (plastic, removeItem) {
-  var shorterArray
-  for (var i = 0, listLength = plastic.itemList.length; i <= listLength; i++) {
-    if (plastic.itemList[i] === removeItem) {
-      shorterArray = plastic.itemlist.splice(plastic.itemlist[i], 1)
-    }
+// returns the Character name string
+Character.prototype.getCharacter = function(){
+  return this.name;
+}
+
+// returns the Character role string
+Character.prototype.getCharacterRole = function(){
+  return this.role;
+}
+
+// adds an inventory item to this Character's inventory
+Character.prototype.addInventoryItem = function(data){
+  this.inventory.addItem(data);
+}
+
+// adds an Inventory to the Character if one does not already exist
+// Character.prototype.addInventory = function(data){
+//   if (!this.inventory){
+//     this.inventory = data;
+//   }else{
+//     throw new Error("Inventory already exists");
+//   }
+// }
+
+// returns the Character Inventory array
+Character.prototype.getInventory = function(){
+  return this.inventory.getInventory();
+}
+
+// abstraction layer for InventoryMediator
+Character.prototype.tradeInventory = function(tradee, givenItem, receivedItem){
+  inventoryMediator(this, tradee, givenItem, receivedItem);
+}
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Inventory
+
+// Inventory creator
+function Inventory(data) {
+  this.items = data;
+}
+
+// returns the Inventory array
+Inventory.prototype.getInventory = function() {
+  //@todo
+  // var itemsArray = Array.prototype.slice.call(this.items);
+  // var allItems;
+  // for (var i = 0, length = this.items.length; i < length; ++i) {
+  //   allItems += ' ' + this.items[i] + ' '
+  // }
+  return this.inventory;
+}
+
+// returns true if Item is in the Inventory
+Inventory.prototype.findItem = function(name){
+  return this.items.find(function(inventoryItem) {
+    return inventoryItem.name == name;
+  });
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+}
+
+Inventory.prototype.addItem = function(item){
+  this.items.push(item);
+}
+
+
+function inventoryMediator(trader, tradee, given, received){
+  var addItem = function(item, qty){
+    NewInventoryItem(item, qty);
   }
-  if (shorterArray.length > plastic.min) {
-    plastic.itemList = plastic.itemList.remove(removeItem)
-    return plastic.removeSuccess
-  } else {
-    return plastic.removeFail
+  var removeItem = function(item){
+    DestroyInventoryItem(item, qty);
+  }
+  // if the given item is the same value as the gotten item, then move from one inventory to the other
+  if(trader.inventory.findItem(given.name) == true && tradee.inventory.findItem(received.name) == true){
+      if(given.qty == received.qty){
+        trader.inventory.removeItem(given, given.qty);
+        trader.inventory.addItem(received, received.qty);
+        tradee.inventory.removeItem(received, received.qty);
+        tradee.inventory.addItem(given, given.qty);
+      }
   }
 }
-/* eslint-enable no-unused-vars */
+
+
+// adds an Item to the Inventory
+function NewInventoryItem(name, qty) {
+  if(ItemDatabase[name] != ""){
+    this.name = name;
+    this.qty = qty;
+  }else{
+    throw new Error("This item does not exist and cannot be added.");
+  }
+}
+
+// adds an Item to the Inventory
+function DestoryInventoryItem(name, qty) {
+  if(ItemDatabase[name] != ""){
+    this.name.pop();
+  }else{
+    throw new Error("This item does not exist and cannot be destroyed.");
+  }
+}
+
+// returns the value of the InventoryItem from the ItemDatabase
+InventoryItem.prototype.getValue = function() {
+  return ItemDatabase[this.name].value * this.qty;
+}
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Item
+
+// Item creator
+function Item(name, val) {
+  this.name = name;
+  this.value = val;
+  // adds this item to the ItemDatabase
+  ItemDatabase[this.name] = this;
+}
+
+// Item.loadJson = function(filename) {
+//   // var arr = // load json
+//   // arr.forEach(function(item) {
+//   //   new Item(item.name, item.value);
+//   // })
+// }
+
+
+
+//
+// function InteractionMediator(sender, receiver, quantity){
+//
+// }
