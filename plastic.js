@@ -158,8 +158,9 @@ Character.prototype.getCharacterRole = function(){
 // which looks like it's trying to read NewInventoryItem as a string plus an empty object.
 // when the script finishes running as set up in plastic-demo-0.1.0.js i get this in the console: undefined [object Object]
 
-Character.prototype.addInventoryItem = function(data){
-  this.inventory.addItem(data);
+Character.prototype.addInventoryItem = function(name, qty){
+  // @todo this should also check if the item is already in the inventory and just add to the quantity if it is
+  this.inventory.addItem(name, qty);
 }
 
 // adds an Inventory to the Character if one does not already exist
@@ -191,12 +192,18 @@ function Inventory(data) {
 
 // returns the Inventory array
 Inventory.prototype.getInventory = function() {
-  //@todo
+  //@todo 
   var itemsArray = this.items;
-  var allItems;
+  var allItems = "";
   for (var i = 0, length = this.items.length; i < length; ++i) {
-    allItems += ' ' + this.items[i] + ' '
+    allItems += this.items[i] + ' '
   }
+  // returning this instead of allItems shows this in console:
+  // 0: InventoryItem
+  //   name: Item
+  //     name: "gold"
+  //     value: 1
+
   return allItems;
 }
 
@@ -209,8 +216,8 @@ Inventory.prototype.findItem = function(name){
 }
 
 // adds the item to the inventory array
-Inventory.prototype.addItem = function(item){
-  this.items.push(item);
+Inventory.prototype.addItem = function(name, qty){
+  this.items.push(new InventoryItem(name,qty));
 }
 
 
@@ -232,11 +239,15 @@ function inventoryMediator(trader, tradee, given, received){
   }
 }
 
-function InventoryItem(name, val, qty) {
-  this.name = name;
-  this.qty = qty;
-  this.value = val;
+function InventoryItem(name, qty) {
+  if(ItemDatabase[name] != ""){
+    this.name = ItemDatabase[name];
+    this.qty = qty;
+  }else{
+    throw new Error("This item does not exist and cannot be added.");
+  }
 }
+
 // returns the value of the InventoryItem from the ItemDatabase
 InventoryItem.prototype.getValue = function() {
   if(ItemDatabase[this.name].value){
@@ -249,15 +260,6 @@ InventoryItem.prototype.getValue = function() {
 InventoryItem.prototype.getTotalValue = function() {
   if(ItemDatabase[this.name].value && this.qty){
     return ItemDatabase[this.name].value * this.qty;
-  }
-}
-
-// adds an Item to the Inventory
-function NewInventoryItem(name, qty) {
-  if(ItemDatabase[name] != ""){
-    new InventoryItem(ItemDatabase[name].name, ItemDatabase[name].value, qty)
-  }else{
-    throw new Error("This item does not exist and cannot be added.");
   }
 }
 
