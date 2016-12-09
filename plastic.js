@@ -154,8 +154,12 @@ Character.prototype.getCharacterRole = function(){
 }
 
 // adds an inventory item to this Character's inventory
-Character.prototype.addInventoryItem = function(name,qty){
-  this.inventory.addItem(name,qty);
+// HI CECELIA! when i have a breakpoint here, in the console file window it says: data = NewInventoryItem {}
+// which looks like it's trying to read NewInventoryItem as a string plus an empty object.
+// when the script finishes running as set up in plastic-demo-0.1.0.js i get this in the console: undefined [object Object]
+
+Character.prototype.addInventoryItem = function(data){
+  this.inventory.addItem(data);
 }
 
 // adds an Inventory to the Character if one does not already exist
@@ -204,8 +208,8 @@ Inventory.prototype.findItem = function(name){
   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 }
 
-Inventory.prototype.addItem = function(name,qty){
-
+// adds the item to the inventory array
+Inventory.prototype.addItem = function(item){
   this.items.push(item);
 }
 

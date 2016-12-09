@@ -4,8 +4,8 @@ var player = new Character({
   "level": 1
 });
 
-player.inventoryItem(
-  new NewInventoryItem("gold", 10);
+player.addInventoryItem(
+  new NewInventoryItem("gold", 10)
 );
 
 // console.log(player);
