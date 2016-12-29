@@ -192,7 +192,7 @@ function Inventory(data) {
 
 // returns the Inventory array
 Inventory.prototype.getInventory = function() {
-  //@todo 
+  //@todo
   var itemsArray = this.items;
   var allItems = "";
   for (var i = 0, length = this.items.length; i < length; ++i) {

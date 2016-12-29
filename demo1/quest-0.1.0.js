@@ -15,10 +15,3 @@ var quest = new Quest({
     //return typeof player.getInventory().findItem("lockpick") !== "undefined";
   }
 });
-
-console.log(quest.getState());
-quest.changeState();
-console.log(quest.getState());
-quest.isAvailable();
-
-console.log(quest);
