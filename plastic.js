@@ -36,28 +36,25 @@ function init(datasrc) {
   }, datasrc);
 }
 
-function isAString(data){
-  try{
-    var namelength=data;
-    if (!data.hasOwnProperty("length") || data.length == 0){
-      // @todo NEW: i want this to pass in the name of the thing that's missing info
-      throw new Error(data + " has some information missing or malformed")
-    }
-  }
-  catch(e){
-    console.log(e.message)
+// checks if the property of length exists (string or array) for a basic check on data validity
+function propertyExists(data, name){
+  if (!data.hasOwnProperty(name) ||!data[name].hasOwnProperty("length") || data[name].length == 0){
+    throw new Error(name + " has some information missing or malformed")
+  }else {
+    return true;
   }
 }
+
+// alternate simple data check
+function gotData(data) { if (data !== undefined && data) return true; else console.log('There is no data.') }
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // GameState
 
 // GameState creator
-function GameState(data){
+function GameState(data){};
 
-}
-
-// holds the list of game items
+// ItemDatabase holds the list of game items
 var ItemDatabase = {};
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -65,57 +62,70 @@ var ItemDatabase = {};
 
 // Quest creator
 function Quest(data){
-  // @todo should the name, type, etc. for each function throw an error if it doesn't exist?
-  // use try catch, length will check for strings, or hasownproperty (doesn't need try catch)
-  // @todo NEW this looks awful. and wrong.
-  isAString(data.name);
-  isAString(data.questType);
-  isAString(data.state);
-  this.name = data.name;
-  this.type = data.questType;
-  this.state = data.state;
-
+  if(propertyExists(data, "name") && propertyExists(data, "state") ){
+    this.name = data.name;
+    this.state = data.state;
+  }
+  if(data.questType){
+    this.type = data.questType;
+  }
   if (data.precondition){
     this.precondition = data.precondition;
   }else{
     this.precondition = function(){return true;}
   }
-  // if (data.inventory){
-  //   this.inventory = new Inventory();
-  // }
-}
-
-// returns the requested Quest name string
-Quest.prototype.getQuest = function(){
-  if(this.name){
-    return this.name;
+  if (data.postcondition){
+    this.postcondition = data.postcondition;
   }else{
-    throw new Error("Something's wrong with the quest name");
+    this.postcondition = function(){return false;}
+  }
+  if (data.inventory){
+    this.inventory = new Inventory(data.inventory);
+  }else{
+    this.inventory = new Inventory([]);
   }
 }
 
-// sets the Quest state/availability
+// returns the Quest name string
+Quest.prototype.getQuestName = function(){
+  return this.name;
+}
+
+// returns the Quest type string
+Quest.prototype.getQuestType = function(){
+  return this.type;
+}
+
+// updates the Quest state and availability
 Quest.prototype.changeState = function(){
-  // @todo check preconditions
-  if(this.state == "open"){ //this.isAvailable()
+  if(this.state == "open" && this.precondition()){
     this.state = "active";
-  }else if (this.state == "active") { //make function this.isComplete()
+  }else if (this.state == "active" && this.postcondition()) {
     this.state = "closed";
-  }else{
-    throw new Error("Quest is closed");
   }
 }
 
-// returns true if the Quest is available
+// returns true if the Quest is available to start otherwise returns false
 Quest.prototype.isAvailable = function(){
   return this.state == "open" && this.precondition();
 }
 
+// returns true if the Quest is active otherwise returns false
+Quest.prototype.isActive = function(){
+  return this.state == "active";
+}
+
+// returns true if the Quest is complete otherwise returns false
+Quest.prototype.isComplete = function(){
+  return this.state == "closed" && this.postcondition();
+}
+
+// returns the current Quest state string
 Quest.prototype.getState = function(){
   if(this.state){
     return this.state;
   }else{
-    throw new Error("Something's wrong with the state")
+    throw new Error("Something's wrong with the " + this.name + " quest's state")
   }
 }
 
@@ -125,9 +135,15 @@ Quest.prototype.getState = function(){
 
 // Character creator
 function Character(data){
-  this.name = data.name;
-  this.role = data.role;
-  this.level = data.level;
+  if(propertyExists(data, "name")){
+    this.name = data.name;
+  }
+  if(data.role){
+    this.role = data.role;
+  }
+  if(data.level){
+    this.level = data.level;
+  }
   if (data.inventory){
     this.inventory = new Inventory(data.inventory);
   }else{
@@ -136,32 +152,29 @@ function Character(data){
 }
 
 // returns the Character name string
-Character.prototype.getCharacter = function(){
-  if(this.name){
-    return this.name;
-  }else{
-    throw new Error("Something's wrong with the character name")
-  }
+Character.prototype.getCharName = function(){
+  return this.name;
 }
 
 // returns the Character role string
-Character.prototype.getCharacterRole = function(){
+Character.prototype.getCharRole = function(){
   if(this.role){
     return this.role;
   }else{
-    throw new Error("Something's wrong with the character role")
+    throw new Error("Something's wrong with " + this.name + "'s role")
   }
 }
 
-// adds an inventory item to this Character's inventory
-// HI CECELIA! when i have a breakpoint here, in the console file window it says: data = NewInventoryItem {}
-// which looks like it's trying to read NewInventoryItem as a string plus an empty object.
-// when the script finishes running as set up in plastic-demo-0.1.0.js i get this in the console: undefined [object Object]
-
-Character.prototype.addInventoryItem = function(name, qty){
-  // @todo this should also check if the item is already in the inventory and just add to the quantity if it is
-  this.inventory.addItem(name, qty);
+// returns the Character level string
+Character.prototype.getCharLevel = function(){
+  if(this.level){
+    return this.level;
+  }else{
+    throw new Error("Something's wrong with " + this.name + "'s level")
+  }
 }
+
+// @todo this will be required when character is allowed more than one inventory. character inventory will need to be refactored as an array of inventories.
 
 // adds an Inventory to the Character if one does not already exist
 // Character.prototype.addInventory = function(data){
@@ -172,15 +185,6 @@ Character.prototype.addInventoryItem = function(name, qty){
 //   }
 // }
 
-// returns the Character Inventory array
-Character.prototype.getInventory = function(){
-  return this.inventory.getInventory();
-}
-
-// abstraction layer for InventoryMediator
-Character.prototype.tradeInventory = function(tradee, givenItem, receivedItem){
-  inventoryMediator(this, tradee, givenItem, receivedItem);
-}
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // Inventory
@@ -192,74 +196,111 @@ function Inventory(data) {
 
 // returns the Inventory array
 Inventory.prototype.getInventory = function() {
-  //@todo
-  var itemsArray = this.items;
-  var allItems = "";
-  for (var i = 0, length = this.items.length; i < length; ++i) {
-    allItems += this.items[i] + ' '
-  }
-  // returning this instead of allItems shows this in console:
-  // 0: InventoryItem
-  //   name: Item
-  //     name: "gold"
-  //     value: 1
-
-  return allItems;
+  return this.items;
 }
 
 // returns true if Item is in the Inventory
-Inventory.prototype.findItem = function(name){
-  return this.items.find(function(inventoryItem) {
-    return inventoryItem.name == name;
+Inventory.prototype.inInventory = function(queryItem){
+  var count = 0;
+  this.items.forEach(function(inventoryItem) {
+    if(inventoryItem.item.name == queryItem){
+      count = 1;
+    }
   });
-  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+  if(count === 1){
+    return true;
+  }else{
+    return false;
+  }
 }
 
 // adds the item to the inventory array
 Inventory.prototype.addItem = function(name, qty){
-  this.items.push(new InventoryItem(name,qty));
+  if(this.inInventory(name)){
+    this.items.forEach(function(inventoryItem) {
+      if(inventoryItem.item.name == name){
+        if(qty != "" && qty != undefined){
+          inventoryItem.qty = inventoryItem.qty + qty;
+        }else{
+          throw new Error("This item requires a quantity.");
+        }
+      }
+    });
+  }else{
+    this.items.push(new InventoryItem(name,qty));
+  }
 }
 
-
-function inventoryMediator(trader, tradee, given, received){
-  var addItem = function(item, qty){
-    NewInventoryItem(item, qty);
-  }
-  var removeItem = function(item){
-    DestroyInventoryItem(item, qty);
-  }
-  // if the given item is the same value as the gotten item, then move from one inventory to the other
-  if(trader.inventory.findItem(given.name) == true && tradee.inventory.findItem(received.name) == true){
-    if(given.qty == received.qty){
-      trader.inventory.removeItem(given, given.qty);
-      trader.inventory.addItem(received, received.qty);
-      tradee.inventory.removeItem(received, received.qty);
-      tradee.inventory.addItem(given, given.qty);
+// adds the item to the inventory array
+Inventory.prototype.removeItem = function(name, qty){
+  if(this.inInventory(name)){
+    var remove = false;
+    this.items.forEach(function(inventoryItem) {
+      if(inventoryItem.item.name == name){
+        if(qty != "" && qty != undefined && (inventoryItem.qty - qty) > 0){
+          inventoryItem.qty = inventoryItem.qty - qty;
+        }else if(qty != "" && qty != undefined && (inventoryItem.qty - qty) == 0){
+          remove = true;
+        }else{
+          if(qty == "" || qty == undefined){
+            throw new Error("This item requires a valid quantity.");
+          }else if ((inventoryItem.qty - qty) < 0) {
+            throw new Error("There is not enough of this item.");
+          }
+        }
+      }
+    });
+    if(remove == true){
+      var i = this.items.indexOf(InventoryItem.name == name);
+      console.log(i);
+      if(i != -1) {
+        this.items.splice(i, 1);
+      }
     }
   }
 }
 
+// returns the basic value of the InventoryItem from the ItemDatabase
+Inventory.prototype.getItemValue = function(name) {
+  if(this.inInventory(name)){
+    var itemValue = 0;
+    this.items.forEach(function(inventoryItem) {
+      if(inventoryItem.item.name == name){
+        itemValue = ItemDatabase[name].value;
+      }
+    });
+    return itemValue;
+  }else{
+    throw new Error("Something's wrong with the Item value.");
+  }
+}
+
+// returns the total value of the InventoryItem in the Inventory
+Inventory.prototype.getTotalItemValue = function(name) {
+  if(this.inInventory(name)){
+    var itemTotalValue = 0;
+    this.items.forEach(function(inventoryItem) {
+      if(inventoryItem.item.name == name){
+        itemTotalValue = ItemDatabase[name].value * inventoryItem.qty;
+      }
+    });
+    return itemTotalValue;
+  }else{
+    throw new Error("Something's wrong with the Item total value.");
+  }
+}
+
+// creates a new Inventory Item
 function InventoryItem(name, qty) {
-  if(ItemDatabase[name] != ""){
-    this.name = ItemDatabase[name];
+  if(ItemDatabase[name] != "" && ItemDatabase[name] != undefined){
+    this.item = ItemDatabase[name];
+  }else{
+    throw new Error("This item does not exist in the Item Database and cannot be added.");
+  }
+  if(qty != "" && qty != undefined){
     this.qty = qty;
   }else{
-    throw new Error("This item does not exist and cannot be added.");
-  }
-}
-
-// returns the value of the InventoryItem from the ItemDatabase
-InventoryItem.prototype.getValue = function() {
-  if(ItemDatabase[this.name].value){
-    return ItemDatabase[this.name].value;
-  }else{
-    throw new Error("Something's wrong with the InventoryItem value");
-  }
-}
-
-InventoryItem.prototype.getTotalValue = function() {
-  if(ItemDatabase[this.name].value && this.qty){
-    return ItemDatabase[this.name].value * this.qty;
+    throw new Error("This item requires a quantity.");
   }
 }
 
@@ -272,14 +313,33 @@ function DestroyInventoryItem(name, qty) {
   }
 }
 
+function inventoryMediator(trader, tradee, given, received){
+  var addItem = function(item, qty){
+    NewInventoryItem(item, qty);
+  }
+  var removeItem = function(item){
+    DestroyInventoryItem(item, qty);
+  }
+  // if the given item is the same value as the gotten item, then move from one inventory to the other
+  if(trader.inventory.inInventory(given.name) == true && tradee.inventory.inInventory(received.name) == true){
+    if(given.qty == received.qty){
+      trader.inventory.removeItem(given, given.qty);
+      trader.inventory.addItem(received, received.qty);
+      tradee.inventory.removeItem(received, received.qty);
+      tradee.inventory.addItem(given, given.qty);
+    }
+  }
+}
+
+
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // Item
 
-// Item creator
+// Item creator adds this item to the ItemDatabase
+// @todo should eventually be able to have multiple databases so the arrays stay effecient?
 function Item(name, val) {
   this.name = name;
   this.value = val;
-  // adds this item to the ItemDatabase
   ItemDatabase[this.name] = this;
 }
 
@@ -289,17 +349,3 @@ function Item(name, val) {
 //   //   new Item(item.name, item.value);
 //   // })
 // }
-
-
-
-//
-// function InteractionMediator(sender, receiver, quantity){
-//
-// }
-
-
-// There are items which exist free-floating in the items database. they can be added and deleted. they have various properties, but no quantities.
-
-// There are inventory items which are items from the database, but here there is a quantity.
-
-// There are inventories which house a number of inventory items.

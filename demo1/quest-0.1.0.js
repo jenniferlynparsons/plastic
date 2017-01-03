@@ -6,12 +6,12 @@ var quest = new Quest({
     return true;
   },
   "postcondition": function(){
-    if(typeof player.getInventory().findItem("lockpick") === "undefined"){
+    if(typeof player.inventory.findItem("lockpick") === "undefined"){
       return false;
     }else{
       return true;
     }
-    // nasty one liner
+    // nasty one liner option
     //return typeof player.getInventory().findItem("lockpick") !== "undefined";
   }
 });

@@ -1,21 +1,29 @@
 // init('plastic-dev.json');
 
 function startGame(){
+  // try{
+  //   new Quest({});
+  // }catch(e){
+  //   console.log(e);
+  //   console.log("We know what we're doing and we don't care. :P");
+  // }
   console.log("ItemDatabase:");
   console.log(ItemDatabase);
-  console.log("Quest:");
-  console.log(quest);
-  console.log("Quest State:");
-  console.log(quest.getState());
-  console.log("Is Quest available?");
-  console.log(quest.isAvailable());
-  console.log("player:");
-  console.log(player);
-  console.log("npc:");
-  console.log(npc);
   console.log("player inventory:");
-  console.log(player.getInventory());
-
+  console.log(player.inventory.getInventory());
+  console.log("player inventory item");
+  console.log(player.inventory.inInventory("gold"));
+  console.log("adding an item");
+  player.inventory.addItem("gold",1);
+  console.log(player.inventory.getInventory());
+  console.log("gold value:");
+  console.log(player.inventory.getItemValue("gold"));
+  console.log("total gold value:");
+  console.log(player.inventory.getTotalItemValue("gold"));
+  player.inventory.removeItem("gold",11);
+  console.log("total gold value:");
+  console.log(player.inventory.getTotalItemValue("gold"));
+  console.log();
 }
 
-ready(startGame());
+ready(startGame);
