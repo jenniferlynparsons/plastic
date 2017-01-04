@@ -174,7 +174,7 @@ Character.prototype.getCharLevel = function(){
   }
 }
 
-// @todo this will be required when character is allowed more than one inventory. character inventory will need to be refactored as an array of inventories.
+// TODO this will be required when character is allowed more than one inventory. character inventory will need to be refactored as an array of inventories.
 
 // adds an Inventory to the Character if one does not already exist
 // Character.prototype.addInventory = function(data){
@@ -231,16 +231,21 @@ Inventory.prototype.addItem = function(name, qty){
   }
 }
 
+// TODO this likely needs a fancier refactoring, but it works so yay!
 // adds the item to the inventory array
 Inventory.prototype.removeItem = function(name, qty){
   if(this.inInventory(name)){
     var remove = false;
-    this.items.forEach(function(inventoryItem) {
+    var itemToRemove;
+    for(var i=0, length=this.items.length; i < length; i++){
+      var inventoryItem = this.items[i];
       if(inventoryItem.item.name == name){
+        console.log(inventoryItem.item.name);
         if(qty != "" && qty != undefined && (inventoryItem.qty - qty) > 0){
           inventoryItem.qty = inventoryItem.qty - qty;
         }else if(qty != "" && qty != undefined && (inventoryItem.qty - qty) == 0){
           remove = true;
+          itemToRemove = inventoryItem;
         }else{
           if(qty == "" || qty == undefined){
             throw new Error("This item requires a valid quantity.");
@@ -249,12 +254,13 @@ Inventory.prototype.removeItem = function(name, qty){
           }
         }
       }
-    });
-    if(remove == true){
-      var i = this.items.indexOf(InventoryItem.name == name);
-      console.log(i);
-      if(i != -1) {
-        this.items.splice(i, 1);
+    };
+    if(remove == true && itemToRemove.item.name == name){
+      var index = this.items.indexOf(itemToRemove);
+      console.log(index);
+      if(index != -1) {
+        this.items.splice(index, 1);
+        console.log(this.items);
       }
     }
   }
@@ -286,7 +292,24 @@ Inventory.prototype.getTotalItemValue = function(name) {
     });
     return itemTotalValue;
   }else{
-    throw new Error("Something's wrong with the Item total value.");
+    // TODO in subsequent versions, this probably shouldn't halt everything but should trigger a different response. (Sorry, you don't have enough gold!) maybe a function like the precondition/postcondition for quests.
+    throw new Error("Something's wrong with the Item total value or this item may not exist in the inventory.");
+  }
+}
+
+// returns the total quantity of the InventoryItem in the Inventory
+Inventory.prototype.getTotalItemQty = function(name) {
+  if(this.inInventory(name)){
+    var itemTotalQty = 0;
+    this.items.forEach(function(inventoryItem) {
+      if(inventoryItem.item.name == name){
+        itemTotalValue = inventoryItem.qty;
+      }
+    });
+    return itemTotalQty;
+  }else{
+    // TODO in subsequent versions, this probably shouldn't halt everything but should trigger a different response. (Sorry, you don't have enough gold!) maybe a function like the precondition/postcondition for quests.
+    throw new Error("Something's wrong with the Item total value or this item may not exist in the inventory.");
   }
 }
 
@@ -304,30 +327,25 @@ function InventoryItem(name, qty) {
   }
 }
 
-// removes an Item from the Inventory
-function DestroyInventoryItem(name, qty) {
-  if(ItemDatabase[name] != ""){
-    this.name.pop();
-  }else{
-    throw new Error("This item does not exist and cannot be destroyed.");
-  }
-}
-
-function inventoryMediator(trader, tradee, given, received){
-  var addItem = function(item, qty){
-    NewInventoryItem(item, qty);
-  }
-  var removeItem = function(item){
-    DestroyInventoryItem(item, qty);
-  }
-  // if the given item is the same value as the gotten item, then move from one inventory to the other
-  if(trader.inventory.inInventory(given.name) == true && tradee.inventory.inInventory(received.name) == true){
-    if(given.qty == received.qty){
-      trader.inventory.removeItem(given, given.qty);
-      trader.inventory.addItem(received, received.qty);
-      tradee.inventory.removeItem(received, received.qty);
-      tradee.inventory.addItem(given, given.qty);
-    }
+// TODO make this work!
+function inventoryMediator(actor1, item1, qty1, actor2, item2, qty2){
+  // // if the given item is the same value as the gotten item, then move from one inventory to the other
+  if(actor1.inventory.inInventory(item1) && actor2.inventory.inInventory(item2)){
+    // TODO need a "this is an even trade" check. maybe a function that returns true/false?
+    // if(item1.getItemValue(item1) * (item1.getTotalItemQty(item1) - qty1) == item2.getItemValue(item2) * (item2.getTotalItemQty(item2) - qty2)){
+      // give item1 to actor2
+      actor2.inventory.addItem(item1,qty1);
+      // give item2 to actor1
+      actor1.inventory.addItem(item2,qty1);
+      // remove item1 from actor1
+      actor1.inventory.removeItem(item1,qty1);
+      // remove item2 from actor2
+      actor2.inventory.removeItem(item2,qty2);
+      console.log(actor1.inventory);
+      console.log(actor2.inventory);
+    // }else{
+    //   console.log("a trade cannot occur");
+    // }
   }
 }
 
@@ -336,7 +354,7 @@ function inventoryMediator(trader, tradee, given, received){
 // Item
 
 // Item creator adds this item to the ItemDatabase
-// @todo should eventually be able to have multiple databases so the arrays stay effecient?
+// TODO should eventually be able to have multiple databases so the arrays stay effecient?
 function Item(name, val) {
   this.name = name;
   this.value = val;

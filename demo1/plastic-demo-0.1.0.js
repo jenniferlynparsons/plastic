@@ -20,10 +20,11 @@ function startGame(){
   console.log(player.inventory.getItemValue("gold"));
   console.log("total gold value:");
   console.log(player.inventory.getTotalItemValue("gold"));
-  player.inventory.removeItem("gold",11);
-  console.log("total gold value:");
-  console.log(player.inventory.getTotalItemValue("gold"));
+  // player.inventory.removeItem("gold",11);
+  // console.log("total gold value:");
+  // console.log(player.inventory.getTotalItemValue("gold"));
   console.log();
+  inventoryMediator(player,"gold", 5, npc, "lockpick", 1);
 }
 
 ready(startGame);
