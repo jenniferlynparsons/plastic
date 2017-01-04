@@ -302,10 +302,16 @@ Inventory.prototype.getTotalItemQty = function(name) {
   if(this.inInventory(name)){
     var itemTotalQty = 0;
     this.items.forEach(function(inventoryItem) {
+      // TODO this is always failing even when an inventory has the requested item
       if(inventoryItem.item.name == name){
         itemTotalValue = inventoryItem.qty;
+      }else{
+        console.log("nope");
+        console.log(inventoryItem.item.name);
+        console.log(name);
       }
     });
+    console.log(itemTotalQty);
     return itemTotalQty;
   }else{
     // TODO in subsequent versions, this probably shouldn't halt everything but should trigger a different response. (Sorry, you don't have enough gold!) maybe a function like the precondition/postcondition for quests.
@@ -331,8 +337,15 @@ function InventoryItem(name, qty) {
 function inventoryMediator(actor1, item1, qty1, actor2, item2, qty2){
   // // if the given item is the same value as the gotten item, then move from one inventory to the other
   if(actor1.inventory.inInventory(item1) && actor2.inventory.inInventory(item2)){
-    // TODO need a "this is an even trade" check. maybe a function that returns true/false?
-    // if(item1.getItemValue(item1) * (item1.getTotalItemQty(item1) - qty1) == item2.getItemValue(item2) * (item2.getTotalItemQty(item2) - qty2)){
+
+    // TODO this is getting back 0
+    var remainingqty1 = actor1.inventory.getTotalItemQty(item1) - qty1;
+    var remainingqty2 = actor2.inventory.getTotalItemQty(item2) - qty2;
+
+    var tradevalue1 = actor1.inventory.getItemValue(item1) * qty1;
+    var tradevalue2 = actor2.inventory.getItemValue(item2) * qty2;
+
+    if (remainingqty1  >= 0 && remainingqty2  >= 0 && tradevalue1 == tradevalue2){
       // give item1 to actor2
       actor2.inventory.addItem(item1,qty1);
       // give item2 to actor1
@@ -343,9 +356,9 @@ function inventoryMediator(actor1, item1, qty1, actor2, item2, qty2){
       actor2.inventory.removeItem(item2,qty2);
       console.log(actor1.inventory);
       console.log(actor2.inventory);
-    // }else{
-    //   console.log("a trade cannot occur");
-    // }
+    }else{
+      console.log("a trade cannot occur");
+    }
   }
 }
 
