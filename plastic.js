@@ -39,7 +39,7 @@ function init(datasrc) {
 // checks if the property of length exists (string or array) for a basic check on data validity
 function propertyExists(data, name){
   if (!data.hasOwnProperty(name) ||!data[name].hasOwnProperty("length") || data[name].length == 0){
-    throw new Error(name + " has some information missing or malformed")
+    throw new Error(name + " has some information missing or malformed");
   }else {
     return true;
   }
@@ -77,7 +77,7 @@ function Quest(data){
   if (data.postcondition){
     this.postcondition = data.postcondition;
   }else{
-    this.postcondition = function(){return false;}
+    this.postcondition = function(){return true;}
   }
   if (data.inventory){
     this.inventory = new Inventory(data.inventory);
@@ -98,9 +98,9 @@ Quest.prototype.getQuestType = function(){
 
 // updates the Quest state and availability
 Quest.prototype.changeState = function(){
-  if(this.state == "open" && this.precondition()){
+  if(this.isAvailable()){
     this.state = "active";
-  }else if (this.state == "active" && this.postcondition()) {
+  }else if (this.isCompleteable()) {
     this.state = "closed";
   }
 }
@@ -116,8 +116,13 @@ Quest.prototype.isActive = function(){
 }
 
 // returns true if the Quest is complete otherwise returns false
+Quest.prototype.isCompleteable = function(){
+  return this.state == "active" && this.postcondition();
+}
+
+// returns true if the Quest is complete otherwise returns false
 Quest.prototype.isComplete = function(){
-  return this.state == "closed" && this.postcondition();
+  return this.state == "closed";
 }
 
 // returns the current Quest state string
@@ -151,29 +156,6 @@ function Character(data){
   }
 }
 
-// returns the Character name string
-Character.prototype.getCharName = function(){
-  return this.name;
-}
-
-// returns the Character role string
-Character.prototype.getCharRole = function(){
-  if(this.role){
-    return this.role;
-  }else{
-    throw new Error("Something's wrong with " + this.name + "'s role")
-  }
-}
-
-// returns the Character level string
-Character.prototype.getCharLevel = function(){
-  if(this.level){
-    return this.level;
-  }else{
-    throw new Error("Something's wrong with " + this.name + "'s level")
-  }
-}
-
 // TODO this will be required when character is allowed more than one inventory. character inventory will need to be refactored as an array of inventories.
 
 // adds an Inventory to the Character if one does not already exist
@@ -191,6 +173,7 @@ Character.prototype.getCharLevel = function(){
 
 // Inventory creator
 function Inventory(data) {
+  //  TODO check that data is array and not string or something else
   this.items = data;
 }
 
@@ -200,18 +183,21 @@ Inventory.prototype.getInventory = function() {
 }
 
 // returns true if Item is in the Inventory
-Inventory.prototype.inInventory = function(queryItem){
-  var count = 0;
+Inventory.prototype.inInventory = function(queryItemName){
+  var found = false;
   this.items.forEach(function(inventoryItem) {
-    if(inventoryItem.item.name == queryItem){
-      count = 1;
+    if(inventoryItem.item.name == queryItemName){
+      found = true;
     }
   });
-  if(count === 1){
-    return true;
-  }else{
-    return false;
-  }
+  return found;
+}
+
+// TODO created getItemByName and use it below
+
+function getItemByName(){
+  feed a name and returns an object or it doesnt
+  returns a truthy value
 }
 
 // adds the item to the inventory array
@@ -266,6 +252,7 @@ Inventory.prototype.removeItem = function(name, qty){
   }
 }
 
+// TODO move this to inventory item prototype
 // returns the basic value of the InventoryItem from the ItemDatabase
 Inventory.prototype.getItemValue = function(name) {
   if(this.inInventory(name)){
@@ -281,6 +268,7 @@ Inventory.prototype.getItemValue = function(name) {
   }
 }
 
+// TODO move this to inventory item prototype
 // returns the total value of the InventoryItem in the Inventory
 Inventory.prototype.getTotalItemValue = function(name) {
   if(this.inInventory(name)){
@@ -297,6 +285,7 @@ Inventory.prototype.getTotalItemValue = function(name) {
   }
 }
 
+// TODO move this to inventory item prototype
 // returns the total quantity of the InventoryItem in the Inventory
 Inventory.prototype.getTotalItemQty = function(name) {
   if(this.inInventory(name)){
@@ -304,7 +293,7 @@ Inventory.prototype.getTotalItemQty = function(name) {
     this.items.forEach(function(inventoryItem) {
       // TODO this is always failing even when an inventory has the requested item
       if(inventoryItem.item.name == name){
-        itemTotalValue = inventoryItem.qty;
+        itemTotalQty = inventoryItem.qty;
       }else{
         console.log("nope");
         console.log(inventoryItem.item.name);
@@ -362,6 +351,16 @@ function inventoryMediator(actor1, item1, qty1, actor2, item2, qty2){
   }
 }
 
+var InventoryMediator = {};
+InventoryMediator.transferItem = function(sender, receiver, itemName, quantity) {
+
+}
+InventoryMediator.performTrade = function(actor1, itemName1, quantity1, actor2, itemName2, quantity2) {
+
+}
+InventoryMediator.getTradeDifference = function(actor1, itemName1, quantity1, actor2, itemName2, quantity2) {
+
+}
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // Item

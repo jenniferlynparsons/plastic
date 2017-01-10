@@ -21,7 +21,7 @@ function startGame(){
   console.log("total gold value:");
   console.log(player.inventory.getTotalItemValue("gold"));
   console.log();
-  inventoryMediator(player,"gold", 1, npc, "lockpick", 5);
+  InventoryMediator.performTrade(player,"gold", 1, npc, "lockpick", 5);
 }
 
 ready(startGame);
