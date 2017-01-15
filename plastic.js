@@ -6,7 +6,7 @@
 // #### ready
 // This is a simple Document ready function to test if the DOM is fully loaded.
 // It fires the function passed as a parameter if the DOM is ready, otherwise, it adds an event listener that will fire once the DOM finishes loading.
-// SOURCE: http://youmightnotneedjquery.com/
+// original source: http://youmightnotneedjquery.com/
 function ready(fn) {
   if (document.readyState != 'loading'){
     fn();
@@ -18,24 +18,24 @@ function ready(fn) {
 // #### loadJSON
 // This is a local JSON file loading function for testing purposes
 // https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
+// Change 'false' to 'true' in open call for asynchronous loading
 function loadJSON(callback, datasrc) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
-  xobj.open('GET', datasrc, false); // Replace 'my_data' with the path to your file, change false to true for asynchronous loading
+  xobj.open('GET', datasrc, false);
   xobj.onreadystatechange = function () {
     if (xobj.readyState == 4 && xobj.status == "200") {
-      // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+      /* Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode */
       callback(xobj.responseText);
     }
   };
   xobj.send(null);
 }
 
-// This is the local JSON file loader call
+// This is the local JSON file loader call where we parse JSON string into object
 var data;
 function init(datasrc) {
   loadJSON(function(response) {
-    // Parse JSON string into object
     data = JSON.parse(response);
   }, datasrc);
 }
