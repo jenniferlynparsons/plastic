@@ -18,9 +18,9 @@ function startGame(){
   player.inventory.removeItem("silver",10);
   console.log(player.inventory.getInventory());
   console.log("gold value:");
-  console.log(player.inventory.getItemValue("gold"));
+  console.log(player.inventory.getItemByName("gold").getItemValue());
   console.log("player's total gold value:");
-  console.log(player.inventory.getTotalItemValue("gold"));
+  console.log(player.inventory.getItemByName("gold").getTotalItemValue());
   console.log("trade difference");
   console.log(InventoryMediator.getTradeDifference(player,"gold", 5, npc, "lockpick", 5));
   console.log("performing trade");

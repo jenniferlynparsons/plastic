@@ -158,7 +158,8 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
   }<span class="hljs-keyword">else</span>{
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'There is no data.'</span>);
-  }</pre></div></div>
+  }
+}</pre></div></div>
             
         </li>
         
@@ -561,9 +562,7 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
       }
     }
   }
-}
-
-<span class="hljs-comment">/* TODO move this to inventory item prototype */</span></pre></div></div>
+}</pre></div></div>
             
         </li>
         
@@ -573,74 +572,6 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
-              </div>
-              <h4 id="getitemvalue">getItemValue</h4>
-<p>returns the value of the item from the ItemDatabase</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Inventory.prototype.getItemValue = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) </span>{
-  <span class="hljs-keyword">var</span> item = <span class="hljs-keyword">this</span>.getItemByName(name);
-  <span class="hljs-keyword">if</span>(item){
-    <span class="hljs-keyword">return</span> ItemDatabase[name].value;
-  }
-}
-
-<span class="hljs-comment">/* TODO move this to inventory item prototype
-TODO confusion here on how to get to it via InventoryItem because all items are ItemInventory and name is sibling of quantity, not parent. */</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-28">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
-              </div>
-              <h4 id="gettotalitemvalue">getTotalItemValue</h4>
-<p>returns the total value of the item in the Inventory</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Inventory.prototype.getTotalItemValue = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) </span>{
-  <span class="hljs-keyword">var</span> item = <span class="hljs-keyword">this</span>.getItemByName(name);
-  <span class="hljs-keyword">if</span>(item){
-    <span class="hljs-keyword">return</span> ItemDatabase[name].value * item.qty;
-  }
-}
-
-<span class="hljs-comment">/* TODO move this to inventory item prototype */</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-29">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
-              </div>
-              <h4 id="gettotalitemqty">getTotalItemQty</h4>
-<p>returns the total quantity of the InventoryItem in the Inventory</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Inventory.prototype.getTotalItemQty = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) </span>{
-  <span class="hljs-keyword">var</span> item = <span class="hljs-keyword">this</span>.getItemByName(name);
-  <span class="hljs-keyword">if</span>(item){
-    <span class="hljs-keyword">return</span> item.qty;
-  }
-}</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-30">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <h4 id="inventoryitem">InventoryItem</h4>
 <p>creates a new Inventory Item</p>
@@ -658,6 +589,60 @@ TODO confusion here on how to get to it via InventoryItem because all items are 
   }<span class="hljs-keyword">else</span>{
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"This item requires a quantity."</span>);
   }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <h4 id="getitemvalue">getItemValue</h4>
+<p>returns the value of the item</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>InventoryItem.prototype.getItemValue = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.item.value;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <h4 id="gettotalitemvalue">getTotalItemValue</h4>
+<p>returns the total value of the item in the Inventory</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>InventoryItem.prototype.getTotalItemValue = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.item.value * <span class="hljs-keyword">this</span>.qty;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <h4 id="gettotalitemqty">getTotalItemQty</h4>
+<p>returns the total quantity of the item in the Inventory</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>InventoryItem.prototype.getTotalItemQty = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.qty;
 }</pre></div></div>
             
         </li>
@@ -731,8 +716,8 @@ TODO confusion here on how to get to it via InventoryItem because all items are 
             </div>
             
             <div class="content"><div class='highlight'><pre>InventoryMediator.getTradeDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">actor1, itemName1, quantity1, actor2, itemName2, quantity2</span>) </span>{
-  <span class="hljs-keyword">var</span> tradevalue1 = actor1.inventory.getItemValue(itemName1) * quantity1;
-  <span class="hljs-keyword">var</span> tradevalue2 = actor2.inventory.getItemValue(itemName2) * quantity2;
+  <span class="hljs-keyword">var</span> tradevalue1 = actor1.inventory.getItemByName(itemName1).getItemValue() * quantity1;
+  <span class="hljs-keyword">var</span> tradevalue2 = actor2.inventory.getItemByName(itemName2).getItemValue() * quantity2;
   <span class="hljs-keyword">return</span> tradevalue1 - tradevalue2;
 }</pre></div></div>
             

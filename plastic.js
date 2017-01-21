@@ -58,7 +58,7 @@ function gotData(data) {
   }else{
     console.log('There is no data.');
   }
-
+}
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## General Game Data
 
@@ -240,38 +240,6 @@ Inventory.prototype.removeItem = function(name, qty){
   }
 }
 
-/* TODO move this to inventory item prototype */
-// #### getItemValue
-// returns the value of the item from the ItemDatabase
-Inventory.prototype.getItemValue = function(name) {
-  var item = this.getItemByName(name);
-  if(item){
-    return ItemDatabase[name].value;
-  }
-}
-
-/* TODO move this to inventory item prototype
-TODO confusion here on how to get to it via InventoryItem because all items are ItemInventory and name is sibling of quantity, not parent. */
-
-// #### getTotalItemValue
-// returns the total value of the item in the Inventory
-Inventory.prototype.getTotalItemValue = function(name) {
-  var item = this.getItemByName(name);
-  if(item){
-    return ItemDatabase[name].value * item.qty;
-  }
-}
-
-/* TODO move this to inventory item prototype */
-// #### getTotalItemQty
-// returns the total quantity of the InventoryItem in the Inventory
-Inventory.prototype.getTotalItemQty = function(name) {
-  var item = this.getItemByName(name);
-  if(item){
-    return item.qty;
-  }
-}
-
 // #### InventoryItem
 // creates a new Inventory Item
 function InventoryItem(name, qty) {
@@ -285,6 +253,24 @@ function InventoryItem(name, qty) {
   }else{
     throw new Error("This item requires a quantity.");
   }
+}
+
+// #### getItemValue
+// returns the value of the item
+InventoryItem.prototype.getItemValue = function() {
+  return this.item.value;
+}
+
+// #### getTotalItemValue
+// returns the total value of the item in the Inventory
+InventoryItem.prototype.getTotalItemValue = function() {
+    return this.item.value * this.qty;
+}
+
+// #### getTotalItemQty
+// returns the total quantity of the item in the Inventory
+InventoryItem.prototype.getTotalItemQty = function() {
+    return this.qty;
 }
 
 // ## InventoryMediator
@@ -310,8 +296,8 @@ InventoryMediator.performTrade = function(actor1, itemName1, quantity1, actor2, 
 // #### InventoryMediator.getTradeDifference
 // Gets the difference (postive/negative value or 0) left if items are traded between two
 InventoryMediator.getTradeDifference = function(actor1, itemName1, quantity1, actor2, itemName2, quantity2) {
-  var tradevalue1 = actor1.inventory.getItemValue(itemName1) * quantity1;
-  var tradevalue2 = actor2.inventory.getItemValue(itemName2) * quantity2;
+  var tradevalue1 = actor1.inventory.getItemByName(itemName1).getItemValue() * quantity1;
+  var tradevalue2 = actor2.inventory.getItemByName(itemName2).getItemValue() * quantity2;
   return tradevalue1 - tradevalue2;
 }
 
