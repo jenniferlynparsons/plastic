@@ -35,6 +35,12 @@ function startGame(){
   console.log(player.inventory.getInventory());
   console.log("npc inventory:");
   console.log(npc.inventory.getInventory());
+  destroyItem("gold");
+  player.inventory.deleteItem("silver");
+  console.log("player inventory:");
+  console.log(player.inventory.getInventory());
+   console.log("ItemDatabase:");
+  console.log(ItemDatabase);
 }
 
 ready(startGame);

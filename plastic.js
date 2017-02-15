@@ -52,13 +52,8 @@ function propertyExists(data, name){
 
 // #### gotData
 // This is an alternate simple data check
-function gotData(data) {
-  if(data !== undefined && data){
-    return true;
-  }else{
-    console.log('There is no data.');
-  }
-}
+function gotData(data) { if (data !== undefined && data) return true; else throw new Error("There is no data.") }
+
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## General Game Data
 
@@ -222,14 +217,12 @@ Inventory.prototype.addItem = function(name, qty){
 
 // #### removeItem
 // subtracts the requested quantity of the item from the inventory array, if the remaining quantity is equal to zero, it removes the item entirely. If the remaining quantity is less than zero, it returns a negeative number.
+/* TODO should removeItem be different than updateItem? is it heavy handed to have it removed instead of setting it to 0? */
 Inventory.prototype.removeItem = function(name, qty){
   var itemToRemove = this.getItemByName(name);
   if(itemToRemove){
-    if(qty != "" && qty != undefined && (itemToRemove.qty - qty) > 0){
+    if(qty != "" && qty != undefined && (itemToRemove.qty - qty) >= 0){
       itemToRemove.qty = itemToRemove.qty - qty;
-    }else if(qty != "" && qty != undefined && (itemToRemove.qty - qty) == 0){
-      var index = this.items.indexOf(itemToRemove);
-      this.items.splice(index, 1);
     }else{
       if(qty == "" || qty == undefined){
         throw new Error("This item requires a valid quantity.");
@@ -238,6 +231,12 @@ Inventory.prototype.removeItem = function(name, qty){
       }
     }
   }
+}
+
+Inventory.prototype.deleteItem = function(name){
+  var itemToDelete = this.getItemByName(name);
+  var index = this.items.indexOf(itemToDelete);
+  this.items.splice(index, 1);
 }
 
 // #### InventoryItem
@@ -311,6 +310,15 @@ function Item(name, val) {
   this.name = name;
   this.value = val;
   ItemDatabase[this.name] = this;
+}
+
+/* TODO should also remove the item from any inventory */
+function destroyItem(name){
+  delete ItemDatabase[name];
+  /*
+    for each inventory (requires an array of all inventories)
+      inventory[i].deleteItem(name)
+  */
 }
 
 /*
