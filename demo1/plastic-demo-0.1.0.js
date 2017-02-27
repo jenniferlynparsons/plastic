@@ -41,6 +41,7 @@ function startGame(){
   console.log(player.inventory.getInventory());
    console.log("ItemDatabase:");
   console.log(ItemDatabase);
+  console.log(Inventory.allInventories);
 }
 
 ready(startGame);

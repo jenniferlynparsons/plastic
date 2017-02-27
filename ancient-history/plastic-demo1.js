@@ -1,3 +1,13 @@
+/*
+Item.loadJson = function(filename) {
+  var arr = // load json
+  arr.forEach(function(item) {
+    new Item(item.name, item.value);
+  })
+}
+*/
+
+
 /* global Plastic, Inventory, _p, getInputVal, checkRadio, printThing, next, chosenThing */
 document.addEventListener('DOMContentLoaded', function () {
   var plastic = new Plastic({})

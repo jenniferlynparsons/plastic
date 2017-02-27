@@ -179,6 +179,7 @@ function Inventory(data) {
   /* TODO check that data is array and not string or something else */
   /* TODO keep track of each inventory in array */
   this.items = data;
+  Inventory.allInventories.push(this.items);
 }
 
 // Inventory.allInventories = [];
@@ -306,12 +307,3 @@ function destroyItem(name){
       inventory[i].deleteItem(name)
   */
 }
-
-/*
-Item.loadJson = function(filename) {
-  var arr = // load json
-  arr.forEach(function(item) {
-    new Item(item.name, item.value);
-  })
-}
-*/
