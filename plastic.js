@@ -180,9 +180,12 @@ function Character(data){
 // #### Inventory
 // Inventory creator function accepts a data object.
 function Inventory(data) {
-  /*  TODO check that data is array and not string or something else */
+  /* TODO check that data is array and not string or something else */
+  /* TODO keep track of each inventory in array */
   this.items = data;
 }
+
+// Inventory.allInventories = [];
 
 // #### getInventory
 // returns the Inventory array
@@ -192,12 +195,11 @@ Inventory.prototype.getInventory = function() {
 
 // #### getItemByName
 // returns the Item (truthy) if Item is in the Inventory
+// all items in the inventory must be uniquely named
 Inventory.prototype.getItemByName = function(queryItemName){
-  for(var i=0, length=this.items.length; i < length; i++){
-    if(this.items[i].item.name == queryItemName){
-      return this.items[i];
-    }
-  }
+  return this.items.find(function(item){
+    return item.item.name === queryItemName;
+  });
 }
 
 // #### addItem
