@@ -132,11 +132,7 @@ Quest.prototype.isComplete = function(){
 // #### getState
 // returns the current Quest state string
 Quest.prototype.getState = function(){
-  if(this.state){
-    return this.state;
-  }else{
-    throw new Error("Something's wrong with the " + this.name + " quest's state")
-  }
+  return this.state;
 }
 
 
@@ -206,12 +202,8 @@ Inventory.prototype.getItemByName = function(queryItemName){
 // adds the item to the inventory array
 Inventory.prototype.addItem = function(name, qty){
   var newItem = this.getItemByName(name);
-  if(newItem){
-    if(qty != "" && qty != undefined){
-      newItem.qty = newItem.qty + qty;
-    }else{
-      throw new Error("This item requires a quantity.");
-    }
+  if(newItem && qty != "" && qty != undefined){
+    newItem.qty = newItem.qty + qty;
   }else{
     this.items.push(new InventoryItem(name,qty));
   }
@@ -225,12 +217,8 @@ Inventory.prototype.removeItem = function(name, qty){
   if(itemToRemove){
     if(qty != "" && qty != undefined && (itemToRemove.qty - qty) >= 0){
       itemToRemove.qty = itemToRemove.qty - qty;
-    }else{
-      if(qty == "" || qty == undefined){
-        throw new Error("This item requires a valid quantity.");
-      }else if ((itemToRemove.qty - qty) < 0) {
-        return itemToRemove.qty - qty;
-      }
+    }else if((itemToRemove.qty - qty) < 0) {
+      return itemToRemove.qty - qty;
     }
   }
 }
@@ -246,13 +234,9 @@ Inventory.prototype.deleteItem = function(name){
 function InventoryItem(name, qty) {
   if(ItemDatabase[name] != "" && ItemDatabase[name] != undefined){
     this.item = ItemDatabase[name];
-  }else{
-    throw new Error("This item does not exist in the Item Database and cannot be added.");
   }
   if(qty != "" && qty != undefined){
     this.qty = qty;
-  }else{
-    throw new Error("This item requires a quantity.");
   }
 }
 
