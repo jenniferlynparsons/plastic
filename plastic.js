@@ -1,9 +1,12 @@
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// Helpers
 
 
-// http://youmightnotneedjquery.com/
-// simple Document ready function
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ## Helpers
+
+// #### ready
+// This is a simple Document ready function to test if the DOM is fully loaded.
+// It fires the function passed as a parameter if the DOM is ready, otherwise, it adds an event listener that will fire once the DOM finishes loading.
+// original source: http://youmightnotneedjquery.com/
 function ready(fn) {
   if (document.readyState != 'loading'){
     fn();
@@ -12,122 +15,79 @@ function ready(fn) {
   }
 }
 
-// local JSON file loading function
+// #### loadJSON
+// This is a local JSON file loading function for testing purposes
 // https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
+// Change 'false' to 'true' in open call for asynchronous loading
 function loadJSON(callback, datasrc) {
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
-  xobj.open('GET', datasrc, false); // Replace 'my_data' with the path to your file, change false to true for asynchronous loading
+  xobj.open('GET', datasrc, false);
   xobj.onreadystatechange = function () {
     if (xobj.readyState == 4 && xobj.status == "200") {
-      // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+      /* Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode */
       callback(xobj.responseText);
     }
   };
   xobj.send(null);
 }
 
-// local JSON file loader call
+// This is the local JSON file loader call where we parse JSON string into object
 var data;
 function init(datasrc) {
   loadJSON(function(response) {
-    // Parse JSON string into object
     data = JSON.parse(response);
   }, datasrc);
 }
 
-function isAString(data){
-  try{
-    var namelength=data;
-    if (!data.hasOwnProperty("length") || data.length == 0){
-      // @todo NEW: i want this to pass in the name of the thing that's missing info
-      throw new Error(data + " has some information missing or malformed")
-    }
-  }
-  catch(e){
-    console.log(e.message)
+// #### propertyExists
+// This checks if the property of length exists (string or array) for a basic check on data validity
+function propertyExists(data, name){
+  if (!data.hasOwnProperty(name) ||!data[name].hasOwnProperty("length") || data[name].length == 0){
+    throw new Error(name + " has some information missing or malformed");
+  }else {
+    return true;
   }
 }
 
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// GameState
+// #### gotData
+// This is an alternate simple data check
+function gotData(data) { if (data !== undefined && data) return true; else throw new Error("There is no data.") }
 
-// GameState creator
-function GameState(data){
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ## General Game Data
 
-}
+// #### GameState
+// The GameState creator currently is an empty object that accepts a data object parameter.
+function GameState(data){};
 
-// holds the list of game items
+// #### ItemDatabase
+// The ItemDatabase is an empty object that holds the list of game item objects.
 var ItemDatabase = {};
 
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// Quest
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ## Quest
 
-// Quest creator
+// #### Quest
+// The Quest creator function accepts a data object.
 function Quest(data){
-  // @todo should the name, type, etc. for each function throw an error if it doesn't exist?
-  // use try catch, length will check for strings, or hasownproperty (doesn't need try catch)
-  // @todo NEW this looks awful. and wrong.
-  isAString(data.name);
-  isAString(data.questType);
-  isAString(data.state);
-  this.name = data.name;
-  this.type = data.questType;
-  this.state = data.state;
-
+  if(propertyExists(data, "name") && propertyExists(data, "state") ){
+    this.name = data.name;
+    this.state = data.state;
+  }
+  if(data.questType){
+    this.type = data.questType;
+  }
   if (data.precondition){
     this.precondition = data.precondition;
   }else{
     this.precondition = function(){return true;}
   }
-  // if (data.inventory){
-  //   this.inventory = new Inventory();
-  // }
-}
-
-// returns the requested Quest name string
-Quest.prototype.getQuest = function(){
-  if(this.name){
-    return this.name;
+  if (data.postcondition){
+    this.postcondition = data.postcondition;
   }else{
-    throw new Error("Something's wrong with the quest name");
+    this.postcondition = function(){return true;}
   }
-}
-
-// sets the Quest state/availability
-Quest.prototype.changeState = function(){
-  // @todo check preconditions
-  if(this.state == "open"){ //this.isAvailable()
-    this.state = "active";
-  }else if (this.state == "active") { //make function this.isComplete()
-    this.state = "closed";
-  }else{
-    throw new Error("Quest is closed");
-  }
-}
-
-// returns true if the Quest is available
-Quest.prototype.isAvailable = function(){
-  return this.state == "open" && this.precondition();
-}
-
-Quest.prototype.getState = function(){
-  if(this.state){
-    return this.state;
-  }else{
-    throw new Error("Something's wrong with the state")
-  }
-}
-
-
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// Character
-
-// Character creator
-function Character(data){
-  this.name = data.name;
-  this.role = data.role;
-  this.level = data.level;
   if (data.inventory){
     this.inventory = new Inventory(data.inventory);
   }else{
@@ -135,171 +95,215 @@ function Character(data){
   }
 }
 
-// returns the Character name string
-Character.prototype.getCharacter = function(){
-  if(this.name){
-    return this.name;
-  }else{
-    throw new Error("Something's wrong with the character name")
+ // #### changeState
+// Updates the Quest state and availability
+Quest.prototype.changeState = function(){
+  if(this.isAvailable()){
+    this.state = "active";
+  }else if (this.isCompleteable()) {
+    this.state = "closed";
   }
 }
 
-// returns the Character role string
-Character.prototype.getCharacterRole = function(){
-  if(this.role){
-    return this.role;
+// #### isAvailable
+// Returns true if the Quest is available to start otherwise returns false.
+Quest.prototype.isAvailable = function(){
+  return this.state == "open" && this.precondition();
+}
+
+// #### isActive
+// returns true if the Quest is active otherwise returns false
+Quest.prototype.isActive = function(){
+  return this.state == "active";
+}
+
+// #### isCompleteable
+// returns true if the Quest is complete otherwise returns false
+Quest.prototype.isCompleteable = function(){
+  return this.state == "active" && this.postcondition();
+}
+
+// #### isComplete
+// returns true if the Quest is complete otherwise returns false
+Quest.prototype.isComplete = function(){
+  return this.state == "closed";
+}
+
+// #### getState
+// returns the current Quest state string
+Quest.prototype.getState = function(){
+  return this.state;
+}
+
+
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ## Character
+
+// #### Character
+// The Character creator function accepts a data object.
+function Character(data){
+  if(propertyExists(data, "name")){
+    this.name = data.name;
+  }
+  if(data.role){
+    this.role = data.role;
+  }
+  if(data.level){
+    this.level = data.level;
+  }
+  if (data.inventory){
+    this.inventory = new Inventory(data.inventory);
   }else{
-    throw new Error("Something's wrong with the character role")
+    this.inventory = new Inventory([]);
   }
 }
 
-// adds an inventory item to this Character's inventory
-// HI CECELIA! when i have a breakpoint here, in the console file window it says: data = NewInventoryItem {}
-// which looks like it's trying to read NewInventoryItem as a string plus an empty object.
-// when the script finishes running as set up in plastic-demo-0.1.0.js i get this in the console: undefined [object Object]
+/* TODO this will be required when character is allowed more than one inventory. character inventory will need to be refactored as an array of inventories. */
 
-Character.prototype.addInventoryItem = function(name, qty){
-  // @todo this should also check if the item is already in the inventory and just add to the quantity if it is
-  this.inventory.addItem(name, qty);
-}
+/* adds an Inventory to the Character if one does not already exist
+ Character.prototype.addInventory = function(data){
+   if (!this.inventory){
+     this.inventory = data;
+  }else{
+     throw new Error("Inventory already exists");
+   }
+ }*/
 
-// adds an Inventory to the Character if one does not already exist
-// Character.prototype.addInventory = function(data){
-//   if (!this.inventory){
-//     this.inventory = data;
-//   }else{
-//     throw new Error("Inventory already exists");
-//   }
-// }
 
-// returns the Character Inventory array
-Character.prototype.getInventory = function(){
-  return this.inventory.getInventory();
-}
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ## Inventory
 
-// abstraction layer for InventoryMediator
-Character.prototype.tradeInventory = function(tradee, givenItem, receivedItem){
-  inventoryMediator(this, tradee, givenItem, receivedItem);
-}
-
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// Inventory
-
-// Inventory creator
+// #### Inventory
+// Inventory creator function accepts a data object.
 function Inventory(data) {
+  /* TODO check that data is array and not string or something else */
+  /* TODO keep track of each inventory in array */
   this.items = data;
+  Inventory.allInventories.push(this.items);
 }
 
+// Inventory.allInventories = [];
+
+// #### getInventory
 // returns the Inventory array
 Inventory.prototype.getInventory = function() {
-  //@todo
-  var itemsArray = this.items;
-  var allItems = "";
-  for (var i = 0, length = this.items.length; i < length; ++i) {
-    allItems += this.items[i] + ' '
-  }
-  // returning this instead of allItems shows this in console:
-  // 0: InventoryItem
-  //   name: Item
-  //     name: "gold"
-  //     value: 1
-
-  return allItems;
+  return this.items;
 }
 
-// returns true if Item is in the Inventory
-Inventory.prototype.findItem = function(name){
-  return this.items.find(function(inventoryItem) {
-    return inventoryItem.name == name;
+// #### getItemByName
+// returns the Item (truthy) if Item is in the Inventory
+// all items in the inventory must be uniquely named
+Inventory.prototype.getItemByName = function(queryItemName){
+  return this.items.find(function(item){
+    return item.item.name === queryItemName;
   });
-  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 }
 
+// #### addItem
 // adds the item to the inventory array
 Inventory.prototype.addItem = function(name, qty){
-  this.items.push(new InventoryItem(name,qty));
+  var newItem = this.getItemByName(name);
+  if(newItem && qty != "" && qty != undefined){
+    newItem.qty = newItem.qty + qty;
+  }else{
+    this.items.push(new InventoryItem(name,qty));
+  }
 }
 
-
-function inventoryMediator(trader, tradee, given, received){
-  var addItem = function(item, qty){
-    NewInventoryItem(item, qty);
-  }
-  var removeItem = function(item){
-    DestroyInventoryItem(item, qty);
-  }
-  // if the given item is the same value as the gotten item, then move from one inventory to the other
-  if(trader.inventory.findItem(given.name) == true && tradee.inventory.findItem(received.name) == true){
-    if(given.qty == received.qty){
-      trader.inventory.removeItem(given, given.qty);
-      trader.inventory.addItem(received, received.qty);
-      tradee.inventory.removeItem(received, received.qty);
-      tradee.inventory.addItem(given, given.qty);
+// #### removeItem
+// subtracts the requested quantity of the item from the inventory array, if the remaining quantity is equal to zero, it removes the item entirely. If the remaining quantity is less than zero, it returns a negeative number.
+/* TODO should removeItem be different than updateItem? is it heavy handed to have it removed instead of setting it to 0? */
+Inventory.prototype.removeItem = function(name, qty){
+  var itemToRemove = this.getItemByName(name);
+  if(itemToRemove){
+    if(qty != "" && qty != undefined && (itemToRemove.qty - qty) >= 0){
+      itemToRemove.qty = itemToRemove.qty - qty;
+    }else if((itemToRemove.qty - qty) < 0) {
+      return itemToRemove.qty - qty;
     }
   }
 }
 
+Inventory.prototype.deleteItem = function(name){
+  var itemToDelete = this.getItemByName(name);
+  var index = this.items.indexOf(itemToDelete);
+  this.items.splice(index, 1);
+}
+
+// #### InventoryItem
+// creates a new Inventory Item
 function InventoryItem(name, qty) {
-  if(ItemDatabase[name] != ""){
-    this.name = ItemDatabase[name];
+  if(ItemDatabase[name] != "" && ItemDatabase[name] != undefined){
+    this.item = ItemDatabase[name];
+  }
+  if(qty != "" && qty != undefined){
     this.qty = qty;
-  }else{
-    throw new Error("This item does not exist and cannot be added.");
   }
 }
 
-// returns the value of the InventoryItem from the ItemDatabase
-InventoryItem.prototype.getValue = function() {
-  if(ItemDatabase[this.name].value){
-    return ItemDatabase[this.name].value;
-  }else{
-    throw new Error("Something's wrong with the InventoryItem value");
-  }
+// #### getItemValue
+// returns the value of the item
+InventoryItem.prototype.getItemValue = function() {
+  return this.item.value;
 }
 
-InventoryItem.prototype.getTotalValue = function() {
-  if(ItemDatabase[this.name].value && this.qty){
-    return ItemDatabase[this.name].value * this.qty;
-  }
+// #### getTotalItemValue
+// returns the total value of the item in the Inventory
+InventoryItem.prototype.getTotalItemValue = function() {
+    return this.item.value * this.qty;
 }
 
-// removes an Item from the Inventory
-function DestroyInventoryItem(name, qty) {
-  if(ItemDatabase[name] != ""){
-    this.name.pop();
-  }else{
-    throw new Error("This item does not exist and cannot be destroyed.");
-  }
+// #### getTotalItemQty
+// returns the total quantity of the item in the Inventory
+InventoryItem.prototype.getTotalItemQty = function() {
+    return this.qty;
 }
 
-// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-// Item
+// ## InventoryMediator
+// This is a set of functions that can mediate trades and transfers between inventories.
+var InventoryMediator = {};
 
-// Item creator
+// #### InventoryMediator.transferItem
+// Transfers an item from the sender to the receiver
+InventoryMediator.transferItem = function(sender, receiver, itemName, quantity) {
+  sender.inventory.removeItem(itemName,quantity);
+  receiver.inventory.addItem(itemName,quantity);
+}
+
+// #### InventoryMediator.performTrade
+// Trades two items between two actors
+InventoryMediator.performTrade = function(actor1, itemName1, quantity1, actor2, itemName2, quantity2) {
+  actor1.inventory.addItem(itemName2,quantity2);
+  actor2.inventory.addItem(itemName1,quantity1);
+  actor1.inventory.removeItem(itemName1,quantity1);
+  actor2.inventory.removeItem(itemName2,quantity2);
+}
+
+// #### InventoryMediator.getTradeDifference
+// Gets the difference (postive/negative value or 0) left if items are traded between two
+InventoryMediator.getTradeDifference = function(actor1, itemName1, quantity1, actor2, itemName2, quantity2) {
+  var tradevalue1 = actor1.inventory.getItemByName(itemName1).getItemValue() * quantity1;
+  var tradevalue2 = actor2.inventory.getItemByName(itemName2).getItemValue() * quantity2;
+  return tradevalue1 - tradevalue2;
+}
+
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ## Item
+
+/* TODO should eventually be able to have multiple databases so the arrays stay effecient? */
+// #### Item creator
+// Item creator adds a new item to the ItemDatabase
 function Item(name, val) {
   this.name = name;
   this.value = val;
-  // adds this item to the ItemDatabase
   ItemDatabase[this.name] = this;
 }
 
-// Item.loadJson = function(filename) {
-//   // var arr = // load json
-//   // arr.forEach(function(item) {
-//   //   new Item(item.name, item.value);
-//   // })
-// }
-
-
-
-//
-// function InteractionMediator(sender, receiver, quantity){
-//
-// }
-
-
-// There are items which exist free-floating in the items database. they can be added and deleted. they have various properties, but no quantities.
-
-// There are inventory items which are items from the database, but here there is a quantity.
-
-// There are inventories which house a number of inventory items.
+/* TODO should also remove the item from any inventory */
+function destroyItem(name){
+  delete ItemDatabase[name];
+  /*
+    for each inventory (requires an array of all inventories)
+      inventory[i].deleteItem(name)
+  */
+}

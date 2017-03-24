@@ -3,7 +3,7 @@
 // General plastic functions
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-// TODO: blargh. i don't quite know why i need this right now but i do. once i understand it better, it will all be fixed.
+// todo: blargh. i don't quite know why i need this right now but i do. once i understand it better, it will all be fixed.
 // SAVE ME JAVASCRIPT DAD
 function Plastic () {
 
@@ -86,9 +86,9 @@ function printInventory (plastic, wrapper) {
 // form element functions
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-// TODO: the form elements should be processed on click of submit
+// todo: the form elements should be processed on click of submit
 
-// TODO: could be handled with an array of elements?
+// todo: could be handled with an array of elements?
 function getInputVal (inputId) {
   return inputId.value
 }

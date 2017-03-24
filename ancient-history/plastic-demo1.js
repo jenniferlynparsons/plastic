@@ -1,3 +1,13 @@
+/*
+Item.loadJson = function(filename) {
+  var arr = // load json
+  arr.forEach(function(item) {
+    new Item(item.name, item.value);
+  })
+}
+*/
+
+
 /* global Plastic, Inventory, _p, getInputVal, checkRadio, printThing, next, chosenThing */
 document.addEventListener('DOMContentLoaded', function () {
   var plastic = new Plastic({})
@@ -15,16 +25,16 @@ document.addEventListener('DOMContentLoaded', function () {
   Items.prototype = Object.create(Inventory.prototype)
 
   function getStarted (plastic) {
-    // TODO: this goes into an inifinte loop
+    // todo: this goes into an inifinte loop
     // SAVE ME JAVASCRIPT DAD
     plastic.character = new Character(plastic)
 
     plastic.chosenName = getInputVal(_p('#newName'))
 
-    // TODO: this doesn't work because _p returns an array
+    // todo: this doesn't work because _p returns an array
     state.chosenQuest = checkRadio(_p('#questpicker1 input'))
 
-    // TODO: these don't work because _p returns an array
+    // todo: these don't work because _p returns an array
     _p('.charname').forEach(function (element) {
       printThing(plastic.chosenName, element)
     })
@@ -37,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     state.items = new Items(plastic, {name: 'Inventory', min: 0, max: 10, autorenew: false, itemList: plastic.itemList, addSuccess: 'It added', addFail: 'It didn\t add', removeSuccess: 'It removed', removeFail: 'It didn\'t remove'})
 
-    // TODO: fix this
+    // todo: fix this
     // plastic.printInventory(state.items.itemList, _p('#itemListWrapper'))
 
     next('#newChar', '#start')
