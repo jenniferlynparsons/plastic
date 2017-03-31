@@ -14,7 +14,19 @@ The purpose of plastic is to provide a simple, flexible engine for handling char
 The language of the functions will be kept as agnostic as possible so as to accommodate any type of game the author imagines, from RPGs with battle mechanics to non-violent games that benefit from a similar mechanic but vastly different purpose.
 
 ## Current Status
-ACTIVE DEVELOPMENT: OMG do not even try to use this right now. 
+ACTIVE DEVELOPMENT: [STAGE 1](https://github.com/jenniferlynparsons/plastic/tree/STAGE1) is the current stable build.
+
+### Currently, the library provides functions that allow a developer to:
+- create basic items
+- create basic inventories
+- create basic characters
+- create basic quests
+- update quest status
+- do basic inventory item trades between characters
+- various other helper functions
+
+For more complete details, [please see the documentation](https://jenniferlynparsons.github.io/plastic/).
+
 
 ## Planned features
 
