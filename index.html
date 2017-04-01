@@ -10,32 +10,32 @@
 <body>
   <div id="container">
     <div id="background"></div>
-    
+
     <ul class="sections">
-        
+
           <li id="title">
               <div class="annotation">
                   <h1>plastic.js</h1>
               </div>
           </li>
-        
-        
-        
+
+
+
         <li id="section-1">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+
             </div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-2">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
@@ -43,13 +43,13 @@
 <h2 id="helpers">Helpers</h2>
 
             </div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-3">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
@@ -59,7 +59,7 @@ It fires the function passed as a parameter if the DOM is ready, otherwise, it a
 original source: <a href="http://youmightnotneedjquery.com/">http://youmightnotneedjquery.com/</a></p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ready</span>(<span class="hljs-params">fn</span>) </span>{
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">document</span>.readyState != <span class="hljs-string">'loading'</span>){
     fn();
@@ -67,13 +67,13 @@ original source: <a href="http://youmightnotneedjquery.com/">http://youmightnotn
     <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">'DOMContentLoaded'</span>, fn);
   }
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-4">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
@@ -83,7 +83,7 @@ original source: <a href="http://youmightnotneedjquery.com/">http://youmightnotn
 Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadJSON</span>(<span class="hljs-params">callback, datasrc</span>) </span>{
   <span class="hljs-keyword">var</span> xobj = <span class="hljs-keyword">new</span> XMLHttpRequest();
   xobj.overrideMimeType(<span class="hljs-string">"application/json"</span>);
@@ -96,33 +96,33 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
   };
   xobj.send(<span class="hljs-literal">null</span>);
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-5">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>This is the local JSON file loader call where we parse JSON string into object</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> data;
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params">datasrc</span>) </span>{
   loadJSON(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response</span>) </span>{
     data = <span class="hljs-built_in">JSON</span>.parse(response);
   }, datasrc);
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-6">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
@@ -130,7 +130,7 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>This checks if the property of length exists (string or array) for a basic check on data validity</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">propertyExists</span>(<span class="hljs-params">data, name</span>)</span>{
   <span class="hljs-keyword">if</span> (!data.hasOwnProperty(name) ||!data[name].hasOwnProperty(<span class="hljs-string">"length"</span>) || data[name].length == <span class="hljs-number">0</span>){
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(name + <span class="hljs-string">" has some information missing or malformed"</span>);
@@ -138,13 +138,13 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
   }
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-7">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
@@ -152,21 +152,15 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>This is an alternate simple data check</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gotData</span>(<span class="hljs-params">data</span>) </span>{
-  <span class="hljs-keyword">if</span>(data !== <span class="hljs-literal">undefined</span> &amp;&amp; data){
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-  }<span class="hljs-keyword">else</span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'There is no data.'</span>);
-  }
-}</pre></div></div>
-            
+
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gotData</span>(<span class="hljs-params">data</span>) </span>{ <span class="hljs-keyword">if</span> (data !== <span class="hljs-literal">undefined</span> &amp;&amp; data) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">else</span> <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"There is no data."</span>) }</pre></div></div>
+
         </li>
-        
-        
+
+
         <li id="section-8">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
@@ -174,13 +168,13 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <h2 id="general-game-data">General Game Data</h2>
 
             </div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-9">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
@@ -188,15 +182,15 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>The GameState creator currently is an empty object that accepts a data object parameter.</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">GameState</span>(<span class="hljs-params">data</span>)</span>{};</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-10">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
@@ -204,15 +198,15 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>The ItemDatabase is an empty object that holds the list of game item objects.</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> ItemDatabase = {};</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-11">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
@@ -220,13 +214,13 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <h2 id="quest">Quest</h2>
 
             </div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-12">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
@@ -234,14 +228,14 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>The Quest creator function accepts a data object.</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Quest</span>(<span class="hljs-params">data</span>)</span>{
   <span class="hljs-keyword">if</span>(propertyExists(data, <span class="hljs-string">"name"</span>) &amp;&amp; propertyExists(data, <span class="hljs-string">"state"</span>) ){
     <span class="hljs-keyword">this</span>.name = data.name;
     <span class="hljs-keyword">this</span>.state = data.state;
   }
   <span class="hljs-keyword">if</span>(data.questType){
-    <span class="hljs-keyword">this</span>.type = data.questType;
+    <span class="hljs-keyword">this</span>.questType = data.questType;
   }
   <span class="hljs-keyword">if</span> (data.precondition){
     <span class="hljs-keyword">this</span>.precondition = data.precondition;
@@ -259,13 +253,13 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
     <span class="hljs-keyword">this</span>.inventory = <span class="hljs-keyword">new</span> Inventory([]);
   }
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-13">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
@@ -273,7 +267,7 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>Updates the Quest state and availability</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Quest.prototype.changeState = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.isAvailable()){
     <span class="hljs-keyword">this</span>.state = <span class="hljs-string">"active"</span>;
@@ -281,13 +275,13 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
     <span class="hljs-keyword">this</span>.state = <span class="hljs-string">"closed"</span>;
   }
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-14">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
@@ -295,17 +289,17 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>Returns true if the Quest is available to start otherwise returns false.</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Quest.prototype.isAvailable = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state == <span class="hljs-string">"open"</span> &amp;&amp; <span class="hljs-keyword">this</span>.precondition();
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-15">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
@@ -313,17 +307,17 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>returns true if the Quest is active otherwise returns false</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Quest.prototype.isActive = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state == <span class="hljs-string">"active"</span>;
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-16">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
@@ -331,17 +325,17 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>returns true if the Quest is complete otherwise returns false</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Quest.prototype.isCompleteable = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state == <span class="hljs-string">"active"</span> &amp;&amp; <span class="hljs-keyword">this</span>.postcondition();
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-17">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
@@ -349,17 +343,17 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>returns true if the Quest is complete otherwise returns false</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Quest.prototype.isComplete = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state == <span class="hljs-string">"closed"</span>;
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-18">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
@@ -367,21 +361,17 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>returns the current Quest state string</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Quest.prototype.getState = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.state){
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state;
-  }<span class="hljs-keyword">else</span>{
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Something's wrong with the "</span> + <span class="hljs-keyword">this</span>.name + <span class="hljs-string">" quest's state"</span>)
-  }
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state;
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-19">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
@@ -389,13 +379,13 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <h2 id="character">Character</h2>
 
             </div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-20">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
@@ -403,7 +393,7 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>The Character creator function accepts a data object.</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Character</span>(<span class="hljs-params">data</span>)</span>{
   <span class="hljs-keyword">if</span>(propertyExists(data, <span class="hljs-string">"name"</span>)){
     <span class="hljs-keyword">this</span>.name = data.name;
@@ -431,13 +421,13 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
      throw new Error("Inventory already exists");
    }
  }*/</span></pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-21">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
@@ -445,13 +435,13 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <h2 id="inventory">Inventory</h2>
 
             </div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-22">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
@@ -459,18 +449,22 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>Inventory creator function accepts a data object.</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Inventory</span>(<span class="hljs-params">data</span>) </span>{
-  <span class="hljs-comment">/*  TODO check that data is array and not string or something else */</span>
+  <span class="hljs-comment">/* TODO check that data is array and not string or something else */</span>
+  <span class="hljs-comment">/* TODO keep track of each inventory in array */</span>
   <span class="hljs-keyword">this</span>.items = data;
-}</pre></div></div>
-            
+  Inventory.allInventories.push(<span class="hljs-keyword">this</span>.items);
+}
+
+Inventory.allInventories = [];</pre></div></div>
+
         </li>
-        
-        
+
+
         <li id="section-23">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
@@ -478,39 +472,38 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>returns the Inventory array</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Inventory.prototype.getInventory = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.items;
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-24">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <h4 id="getitembyname">getItemByName</h4>
-<p>returns the Item (truthy) if Item is in the Inventory</p>
+<p>returns the Item (truthy) if Item is in the Inventory
+all items in the inventory must be uniquely named</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Inventory.prototype.getItemByName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">queryItemName</span>)</span>{
-  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>, length=<span class="hljs-keyword">this</span>.items.length; i &lt; length; i++){
-    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.items[i].item.name == queryItemName){
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.items[i];
-    }
-  }
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.items.find(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>)</span>{
+    <span class="hljs-keyword">return</span> item.item.name === queryItemName;
+  });
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-25">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
@@ -518,26 +511,22 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>adds the item to the inventory array</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>Inventory.prototype.addItem = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name, qty</span>)</span>{
   <span class="hljs-keyword">var</span> newItem = <span class="hljs-keyword">this</span>.getItemByName(name);
-  <span class="hljs-keyword">if</span>(newItem){
-    <span class="hljs-keyword">if</span>(qty != <span class="hljs-string">""</span> &amp;&amp; qty != <span class="hljs-literal">undefined</span>){
-      newItem.qty = newItem.qty + qty;
-    }<span class="hljs-keyword">else</span>{
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"This item requires a quantity."</span>);
-    }
+  <span class="hljs-keyword">if</span>(newItem &amp;&amp; qty != <span class="hljs-string">""</span> &amp;&amp; qty != <span class="hljs-literal">undefined</span>){
+    newItem.qty = newItem.qty + qty;
   }<span class="hljs-keyword">else</span>{
     <span class="hljs-keyword">this</span>.items.push(<span class="hljs-keyword">new</span> InventoryItem(name,qty));
   }
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-26">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
@@ -545,31 +534,31 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>subtracts the requested quantity of the item from the inventory array, if the remaining quantity is equal to zero, it removes the item entirely. If the remaining quantity is less than zero, it returns a negeative number.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Inventory.prototype.removeItem = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name, qty</span>)</span>{
+
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/* TODO should removeItem be different than updateItem? is it heavy handed to have it removed instead of setting it to 0? */</span>
+Inventory.prototype.removeItem = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name, qty</span>)</span>{
   <span class="hljs-keyword">var</span> itemToRemove = <span class="hljs-keyword">this</span>.getItemByName(name);
   <span class="hljs-keyword">if</span>(itemToRemove){
-    <span class="hljs-keyword">if</span>(qty != <span class="hljs-string">""</span> &amp;&amp; qty != <span class="hljs-literal">undefined</span> &amp;&amp; (itemToRemove.qty - qty) &gt; <span class="hljs-number">0</span>){
+    <span class="hljs-keyword">if</span>(qty != <span class="hljs-string">""</span> &amp;&amp; qty != <span class="hljs-literal">undefined</span> &amp;&amp; (itemToRemove.qty - qty) &gt;= <span class="hljs-number">0</span>){
       itemToRemove.qty = itemToRemove.qty - qty;
-    }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(qty != <span class="hljs-string">""</span> &amp;&amp; qty != <span class="hljs-literal">undefined</span> &amp;&amp; (itemToRemove.qty - qty) == <span class="hljs-number">0</span>){
-      <span class="hljs-keyword">var</span> index = <span class="hljs-keyword">this</span>.items.indexOf(itemToRemove);
-      <span class="hljs-keyword">this</span>.items.splice(index, <span class="hljs-number">1</span>);
-    }<span class="hljs-keyword">else</span>{
-      <span class="hljs-keyword">if</span>(qty == <span class="hljs-string">""</span> || qty == <span class="hljs-literal">undefined</span>){
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"This item requires a valid quantity."</span>);
-      }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((itemToRemove.qty - qty) &lt; <span class="hljs-number">0</span>) {
-        <span class="hljs-keyword">return</span> itemToRemove.qty - qty;
-      }
+    }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((itemToRemove.qty - qty) &lt; <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> itemToRemove.qty - qty;
     }
   }
+}
+
+Inventory.prototype.deleteItem = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)</span>{
+  <span class="hljs-keyword">var</span> itemToDelete = <span class="hljs-keyword">this</span>.getItemByName(name);
+  <span class="hljs-keyword">var</span> index = <span class="hljs-keyword">this</span>.items.indexOf(itemToDelete);
+  <span class="hljs-keyword">this</span>.items.splice(index, <span class="hljs-number">1</span>);
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-27">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
@@ -577,26 +566,22 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>creates a new Inventory Item</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">InventoryItem</span>(<span class="hljs-params">name, qty</span>) </span>{
   <span class="hljs-keyword">if</span>(ItemDatabase[name] != <span class="hljs-string">""</span> &amp;&amp; ItemDatabase[name] != <span class="hljs-literal">undefined</span>){
     <span class="hljs-keyword">this</span>.item = ItemDatabase[name];
-  }<span class="hljs-keyword">else</span>{
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"This item does not exist in the Item Database and cannot be added."</span>);
-  }
-  <span class="hljs-keyword">if</span>(qty != <span class="hljs-string">""</span> &amp;&amp; qty != <span class="hljs-literal">undefined</span>){
-    <span class="hljs-keyword">this</span>.qty = qty;
-  }<span class="hljs-keyword">else</span>{
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"This item requires a quantity."</span>);
+    <span class="hljs-keyword">if</span>(qty != <span class="hljs-string">""</span> &amp;&amp; qty != <span class="hljs-literal">undefined</span>){
+      <span class="hljs-keyword">this</span>.qty = qty;
+    }
   }
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-28">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
@@ -604,17 +589,17 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>returns the value of the item</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>InventoryItem.prototype.getItemValue = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.item.value;
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-29">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
@@ -622,17 +607,17 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>returns the total value of the item in the Inventory</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>InventoryItem.prototype.getTotalItemValue = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.item.value * <span class="hljs-keyword">this</span>.qty;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.item.value * <span class="hljs-keyword">this</span>.qty;
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-30">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
@@ -640,17 +625,17 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>returns the total quantity of the item in the Inventory</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>InventoryItem.prototype.getTotalItemQty = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.qty;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.qty;
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-31">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
@@ -658,15 +643,15 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>This is a set of functions that can mediate trades and transfers between inventories.</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> InventoryMediator = {};</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-32">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
@@ -674,18 +659,18 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>Transfers an item from the sender to the receiver</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>InventoryMediator.transferItem = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">sender, receiver, itemName, quantity</span>) </span>{
   sender.inventory.removeItem(itemName,quantity);
   receiver.inventory.addItem(itemName,quantity);
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-33">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
@@ -693,20 +678,20 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>Trades two items between two actors</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>InventoryMediator.performTrade = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">actor1, itemName1, quantity1, actor2, itemName2, quantity2</span>) </span>{
   actor1.inventory.addItem(itemName2,quantity2);
   actor2.inventory.addItem(itemName1,quantity1);
   actor1.inventory.removeItem(itemName1,quantity1);
   actor2.inventory.removeItem(itemName2,quantity2);
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-34">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
@@ -714,19 +699,19 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>Gets the difference (postive/negative value or 0) left if items are traded between two</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>InventoryMediator.getTradeDifference = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">actor1, itemName1, quantity1, actor2, itemName2, quantity2</span>) </span>{
   <span class="hljs-keyword">var</span> tradevalue1 = actor1.inventory.getItemByName(itemName1).getItemValue() * quantity1;
   <span class="hljs-keyword">var</span> tradevalue2 = actor2.inventory.getItemByName(itemName2).getItemValue() * quantity2;
   <span class="hljs-keyword">return</span> tradevalue1 - tradevalue2;
 }</pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-35">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
@@ -734,16 +719,16 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <h2 id="item">Item</h2>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-comment">/* TODO should eventually be able to have multiple databases so the arrays stay effecient? */</span></pre></div></div>
-            
+
         </li>
-        
-        
+
+
         <li id="section-36">
             <div class="annotation">
-              
+
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
@@ -751,24 +736,29 @@ Change ‘false’ to ‘true’ in open call for asynchronous loading</p>
 <p>Item creator adds a new item to the ItemDatabase</p>
 
             </div>
-            
+
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Item</span>(<span class="hljs-params">name, val</span>) </span>{
   <span class="hljs-keyword">this</span>.name = name;
   <span class="hljs-keyword">this</span>.value = val;
   ItemDatabase[<span class="hljs-keyword">this</span>.name] = <span class="hljs-keyword">this</span>;
 }
 
-<span class="hljs-comment">/*
-Item.loadJson = function(filename) {
-  var arr = // load json
-  arr.forEach(function(item) {
-    new Item(item.name, item.value);
-  })
-}
-*/</span></pre></div></div>
-            
+<span class="hljs-comment">/* TODO should also remove the item from any inventory */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">destroyItem</span>(<span class="hljs-params">name</span>)</span>{
+  <span class="hljs-keyword">delete</span> ItemDatabase[name];
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>, length=Inventory.allInventories.length; i&lt;=length;i++){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"yo"</span>);
+    <span class="hljs-built_in">console</span>.log(Inventory.allInventories[i]);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>, length=Inventory.allInventories[i].length; i&lt;=length;i++){
+      inventory = Inventory.allInventories[i];
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"inventory[i]"</span>);
+      <span class="hljs-built_in">console</span>.log(inventory[i]);
+    }
+  }
+}</pre></div></div>
+
         </li>
-        
+
     </ul>
   </div>
 </body>
