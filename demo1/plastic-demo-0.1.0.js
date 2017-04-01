@@ -38,9 +38,9 @@ function startGame(){
   destroyItem("gold");
   player.inventory.deleteItem("silver");
   console.log("player inventory:");
-  console.log(player.inventory.getInventory());
-   console.log("ItemDatabase:");
-  console.log(ItemDatabase);
+  console.log(JSON.stringify(player.inventory.getInventory()));
+  console.log("ItemDatabase:");
+  console.log(JSON.stringify(ItemDatabase));
   console.log(Inventory.allInventories);
 }
 

@@ -76,7 +76,7 @@ function Quest(data){
     this.state = data.state;
   }
   if(data.questType){
-    this.type = data.questType;
+    this.questType = data.questType;
   }
   if (data.precondition){
     this.precondition = data.precondition;
@@ -95,7 +95,7 @@ function Quest(data){
   }
 }
 
- // #### changeState
+// #### changeState
 // Updates the Quest state and availability
 Quest.prototype.changeState = function(){
   if(this.isAvailable()){
@@ -161,13 +161,13 @@ function Character(data){
 /* TODO this will be required when character is allowed more than one inventory. character inventory will need to be refactored as an array of inventories. */
 
 /* adds an Inventory to the Character if one does not already exist
- Character.prototype.addInventory = function(data){
-   if (!this.inventory){
-     this.inventory = data;
-  }else{
-     throw new Error("Inventory already exists");
-   }
- }*/
+Character.prototype.addInventory = function(data){
+if (!this.inventory){
+this.inventory = data;
+}else{
+throw new Error("Inventory already exists");
+}
+}*/
 
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -182,7 +182,7 @@ function Inventory(data) {
   Inventory.allInventories.push(this.items);
 }
 
-// Inventory.allInventories = [];
+Inventory.allInventories = [];
 
 // #### getInventory
 // returns the Inventory array
@@ -235,9 +235,9 @@ Inventory.prototype.deleteItem = function(name){
 function InventoryItem(name, qty) {
   if(ItemDatabase[name] != "" && ItemDatabase[name] != undefined){
     this.item = ItemDatabase[name];
-  }
-  if(qty != "" && qty != undefined){
-    this.qty = qty;
+    if(qty != "" && qty != undefined){
+      this.qty = qty;
+    }
   }
 }
 
@@ -250,13 +250,13 @@ InventoryItem.prototype.getItemValue = function() {
 // #### getTotalItemValue
 // returns the total value of the item in the Inventory
 InventoryItem.prototype.getTotalItemValue = function() {
-    return this.item.value * this.qty;
+  return this.item.value * this.qty;
 }
 
 // #### getTotalItemQty
 // returns the total quantity of the item in the Inventory
 InventoryItem.prototype.getTotalItemQty = function() {
-    return this.qty;
+  return this.qty;
 }
 
 // ## InventoryMediator
@@ -302,8 +302,13 @@ function Item(name, val) {
 /* TODO should also remove the item from any inventory */
 function destroyItem(name){
   delete ItemDatabase[name];
-  /*
-    for each inventory (requires an array of all inventories)
-      inventory[i].deleteItem(name)
-  */
+  for(var i=0, length=Inventory.allInventories.length; i<=length;i++){
+    console.log("yo");
+    console.log(Inventory.allInventories[i]);
+    for(var i=0, length=Inventory.allInventories[i].length; i<=length;i++){
+      inventory = Inventory.allInventories[i];
+      console.log("inventory[i]");
+      console.log(inventory[i]);
+    }
+  }
 }
