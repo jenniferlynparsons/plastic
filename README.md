@@ -74,6 +74,11 @@ gear
 - enhance or degrade
 can be used to prevent or invite interaction from environment or other characters
 
+consumables
+- take or give
+- custom purpose
+can be used for acquiring, purging, creating, destroying other items
+
 skills
 - active/inactive
 - limit slots for use
