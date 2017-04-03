@@ -46,15 +46,26 @@ describe("Quest", function() {
     expect(quest.state).toEqual("active");
   });
 
-  it("should close the quest state", function() {
+  it("should close the quest state if postcondition is true", function() {
     quest.state = "active";
     quest.postcondition = function(){return true};
     quest.changeState();
     expect(quest.state).toEqual("closed");
   });
 
-  it("should report if the quest is available", function() {
+  it("should not close the quest state if postcondition is false", function() {
+    quest.state = "active";
+    quest.changeState();
+    expect(quest.state).toEqual("active");
+  });
+
+  it("should report if the quest is available if precondition is true", function() {
     expect(quest.isAvailable()).toBeTruthy();
+  });
+
+  it("should report if the quest is unavailable if precondition is false", function() {
+    quest.precondition = function(){return false};
+    expect(quest.isAvailable()).toBeFalsy();
   });
 
   it("should report if the quest is active", function() {

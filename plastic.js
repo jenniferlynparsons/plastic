@@ -1,5 +1,3 @@
-
-
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## Helpers
 
@@ -16,7 +14,7 @@ function ready(fn) {
 }
 
 // #### loadJSON
-// This is a local JSON file loading function for testing purposes
+// This is a local JSON file loading function for testing purposes such as loading an entire GameState
 // https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
 // Change 'false' to 'true' in open call for asynchronous loading
 function loadJSON(callback, datasrc) {
@@ -58,8 +56,8 @@ function gotData(data) { if (data !== undefined && data) return true; else throw
 // ## General Game Data
 
 // #### GameState
-// The GameState creator currently is an empty object that accepts a data object parameter.
-function GameState(data){};
+// The GameState creator currently is an empty function that accepts a data object parameter.
+// function GameState(data){};
 
 // #### ItemDatabase
 // The ItemDatabase is an empty object that holds the list of game item objects.
@@ -179,6 +177,7 @@ function Inventory(data) {
   /* TODO check that data is array and not string or something else */
   /* TODO keep track of each inventory in array */
   this.items = data;
+  console.log(data);
   Inventory.allInventories.push(this.items);
 }
 
@@ -290,7 +289,6 @@ InventoryMediator.getTradeDifference = function(actor1, itemName1, quantity1, ac
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## Item
 
-/* TODO should eventually be able to have multiple databases so the arrays stay effecient? */
 // #### Item creator
 // Item creator adds a new item to the ItemDatabase
 function Item(name, val) {
@@ -300,15 +298,16 @@ function Item(name, val) {
 }
 
 /* TODO should also remove the item from any inventory */
+// #### Item destroyer
+// destroyItem deletes an item from the ItemDatabase as well as removing it from all inventories
 function destroyItem(name){
   delete ItemDatabase[name];
-  for(var i=0, length=Inventory.allInventories.length; i<=length;i++){
-    console.log("yo");
+  for(var i=0, length=Inventory.allInventories.length; i<=length; i++){
     console.log(Inventory.allInventories[i]);
-    for(var i=0, length=Inventory.allInventories[i].length; i<=length;i++){
-      inventory = Inventory.allInventories[i];
-      console.log("inventory[i]");
-      console.log(inventory[i]);
+    for(var j=0, length=Inventory.allInventories[j].length; j<=length; j++){
+      inventory = Inventory.allInventories[j];
+      console.log("inventory[j]");
+      console.log(inventory[j]);
     }
   }
 }
