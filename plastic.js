@@ -177,8 +177,7 @@ function Inventory(data) {
   /* TODO check that data is array and not string or something else */
   /* TODO keep track of each inventory in array */
   this.items = data;
-  console.log(data);
-  Inventory.allInventories.push(this.items);
+  Inventory.allInventories.push(this);
 }
 
 Inventory.allInventories = [];
@@ -300,14 +299,17 @@ function Item(name, val) {
 /* TODO should also remove the item from any inventory */
 // #### Item destroyer
 // destroyItem deletes an item from the ItemDatabase as well as removing it from all inventories
+/* TODO use map and add IDs to allInventories for better performance */
 function destroyItem(name){
   delete ItemDatabase[name];
-  for(var i=0, length=Inventory.allInventories.length; i<=length; i++){
-    console.log(Inventory.allInventories[i]);
-    for(var j=0, length=Inventory.allInventories[j].length; j<=length; j++){
-      inventory = Inventory.allInventories[j];
-      console.log("inventory[j]");
-      console.log(inventory[j]);
-    }
+  for(var i=0, length=Inventory.allInventories.length; i<length; i++){
+    // console.log(Inventory.allInventories[i]);
+    Inventory.allInventories[i].deleteItem(name);
+
+    // for(var j=0, length=Inventory.allInventories[j].length; j<=length; j++){
+    //   inventory = Inventory.allInventories[j];
+    //   // console.log("inventory[j]");
+    //   // console.log(inventory[j]);
+    // }
   }
 }
