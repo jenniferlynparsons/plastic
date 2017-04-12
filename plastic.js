@@ -154,7 +154,68 @@ function Character(data){
   }else{
     this.inventory = new Inventory([]);
   }
+  if (data.stats) {
+    this.stats = data.stats;
+  }
 }
+// TODO a small function to check if a stat exists
+
+// check if the stat doesn't exist then add it to the stats object
+Character.prototype.addStat = function(stat, attr, val) {
+  if(!this.stats[stat]){
+    var attrObj = {};
+    attrObj[attr] = val;
+    this.stats[stat] = attrObj;
+  }else{
+    throw new Error("This stat already exists");
+  }
+}
+
+// find the stat and return it if it exists
+Character.prototype.getStat = function(stat) {
+  if (this.stats[stat] != "" && this.stats[stat] != undefined) {
+    return this.stats[stat];
+  }
+}
+
+Character.prototype.updateStat = function(stat, attr, newVal) {
+  // if the stat exists add or subtract the val
+  // if it's a string or integer it needs to be handled differently
+  if (this.stats[stat] != "" && this.stats[stat] != undefined) {
+    if(typeof this.stats[stat][attr] == "string"){
+      this.replaceStat(stat, attr, newVal);
+    }else if (typeof this.stats[stat][attr] == "number") {
+      // if new number is higher than old,
+      this.modifyStat(stat, attr, newVal);
+    }
+  }
+}
+
+Character.prototype.replaceStat = function(stat, attr, newVal) {
+  // if the stat exists add or subtract the val
+  console.log("replaceStat");
+  console.log(this.stats[stat][attr]);
+  this.stats[stat][attr] = newVal;
+}
+
+
+Character.prototype.modifyStat = function(stat, attr, newVal) {
+  // if the stat exists add or subtract the val
+  console.log("modifyStat");
+  console.log(this.stats[stat][attr]);
+  this.stats[stat][attr] = newVal;
+}
+
+Character.prototype.deleteStat = function(stat) {
+  if (this.stats[stat] != "" && this.stats[stat] != undefined) {
+      delete this.stats[stat];
+  }
+}
+
+Character.prototype.getAllStats = function() {
+  return this.stats;
+}
+
 
 /* TODO this will be required when character is allowed more than one inventory. character inventory will need to be refactored as an array of inventories. */
 
