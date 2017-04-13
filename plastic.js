@@ -51,8 +51,22 @@ function propertyExists(data, name) {
 
 // #### gotData
 // This is an alternate simple data check
-function gotData(data) { if (data !== undefined && data) return true;
-    else throw new Error("There is no data.") }
+function gotData(data) {
+    if (data !== undefined && data) return true;
+    else throw new Error("There is no data.")
+}
+
+// #### Simple helpers
+// These are basic bits and pieces that are useful throughout the library and games
+var add = function(x, y) { return x + y; }
+
+var subtract = function(x, y) { return x + y; }
+
+var multiply = function(x, y) { return x * y; }
+
+var divide = function(x, y) { return x / y; }
+
+var modulus = function(x, y) { return x % y; }
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## General Game Data
@@ -180,32 +194,31 @@ Character.prototype.getStat = function(stat) {
     }
 }
 
-Character.prototype.updateStat = function(stat, attr, newVal, mod) {
+Character.prototype.updateStat = function(stat, attr, val, mod) {
     // if the stat exists add or subtract the val
     // if it's a string or integer it needs to be handled differently
     if (this.stats[stat] != "" && this.stats[stat] != undefined) {
         if (typeof this.stats[stat][attr] == "string") {
-            this.replaceStat(stat, attr, newVal);
+            this.replaceStat(stat, attr, val);
         } else if (typeof this.stats[stat][attr] == "number") {
-            // if new number is higher than old,
-            this.modifyStat(stat, attr, newVal);
+            this.modifyStat(stat, attr, val, mod);
         }
     }
 }
 
-Character.prototype.replaceStat = function(stat, attr, newVal) {
+Character.prototype.replaceStat = function(stat, attr, val) {
     // if the stat exists add or subtract the val
-    console.log("replaceStat");
-    console.log(this.stats[stat][attr]);
-    this.stats[stat][attr] = newVal;
+    this.stats[stat][attr] = val;
 }
 
-
-Character.prototype.modifyStat = function(stat, attr, newVal) {
+Character.prototype.modifyStat = function(stat, attr, val, mod) {
     // if the stat exists add or subtract the val
-    console.log("modifyStat");
-    console.log(this.stats[stat][attr]);
-    this.stats[stat][attr] = newVal;
+    var originalStat = this.stats[stat][attr];
+    console.log("modify stat");
+    console.log(originalStat);
+    this.stats[stat][attr] = mod(originalStat, val);
+
+    console.log(originalStat);
 }
 
 Character.prototype.deleteStat = function(stat) {
