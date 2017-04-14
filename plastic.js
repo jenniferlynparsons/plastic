@@ -58,15 +58,21 @@ function gotData(data) {
 
 // #### Simple helpers
 // These are basic bits and pieces that are useful throughout the library and games
-var add = function(x, y) { return x + y; }
 
-var subtract = function(x, y) { return x + y; }
+function mathy(operator, x, y) {
+    if (operator == "add") {
+        return x + y;
+    } else if (operator == "subtract") {
+        return x - y;
+    } else if (operator == "multiply") {
+        return x * y;
+    } else if (operator == "divide") {
+        return x / y;
+    } else if (operator == "modulus") {
+        return x % y;
+    }
+}
 
-var multiply = function(x, y) { return x * y; }
-
-var divide = function(x, y) { return x / y; }
-
-var modulus = function(x, y) { return x % y; }
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## General Game Data
@@ -216,8 +222,7 @@ Character.prototype.modifyStat = function(stat, attr, val, mod) {
     var originalStat = this.stats[stat][attr];
     console.log("modify stat");
     console.log(originalStat);
-    this.stats[stat][attr] = mod(originalStat, val);
-
+    this.stats[stat][attr] = mathy(mod, originalStat, val);
     console.log(originalStat);
 }
 
