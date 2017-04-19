@@ -73,7 +73,6 @@ function mathy(operator, x, y) {
     }
 }
 
-
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## General Game Data
 
@@ -223,7 +222,7 @@ Character.prototype.modifyStat = function(stat, attr, val, mod) {
     console.log("modify stat");
     console.log(originalStat);
     this.stats[stat][attr] = mathy(mod, originalStat, val);
-    console.log(originalStat);
+    console.log(this.stats[stat][attr]);
 }
 
 Character.prototype.deleteStat = function(stat) {
