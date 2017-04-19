@@ -382,14 +382,12 @@ function Item(name, val) {
 /* TODO use map and add IDs to allInventories for better performance */
 function destroyItem(name) {
     delete ItemDatabase[name];
-    for (var i = 0, length = Inventory.allInventories.length; i < length; i++) {
-        // console.log(Inventory.allInventories[i]);
-        Inventory.allInventories[i].deleteItem(name);
 
-        // for(var j=0, length=Inventory.allInventories[j].length; j<=length; j++){
-        //   inventory = Inventory.allInventories[j];
-        //   // console.log("inventory[j]");
-        //   // console.log(inventory[j]);
-        // }
+    // do it with a for loop
+    for (var i = 0, length = Inventory.allInventories.length; i < length; i++) {
+        Inventory.allInventories[i].deleteItem(name);
     }
+
+    // do it with map
+    Inventory.allInventories.map(deleteItem(name));
 }

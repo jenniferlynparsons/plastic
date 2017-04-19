@@ -31,39 +31,39 @@ function startGame() {
     // console.log(npc.inventory.getInventory());
     // console.log("transfering item");
     // InventoryMediator.transferItem(npc, player, "lockpick", 5);
-    // console.log("player inventory:");
-    // console.log(JSON.stringify(player.inventory.getInventory()));
-    // console.log("ItemDatabase:");
-    // console.log(JSON.stringify(ItemDatabase));
-    // console.log("allInventories:");
-    // console.log(JSON.stringify(Inventory.allInventories));
-    // console.log("npc inventory:");
-    // console.log(npc.inventory.getInventory());
-    // destroyItem("gold");
-    // player.inventory.deleteItem("silver");
-    // console.log("after player inventory:");
-    // console.log(JSON.stringify(player.inventory.getInventory()));
-    // console.log("after ItemDatabase:");
-    // console.log(JSON.stringify(ItemDatabase));
-    // console.log("after allInventories:");
-    // console.log(JSON.stringify(Inventory.allInventories));
+    console.log("player inventory:");
+    console.log(JSON.stringify(player.inventory.getInventory()));
+    console.log("ItemDatabase:");
+    console.log(JSON.stringify(ItemDatabase));
+    console.log("allInventories:");
+    console.log(JSON.stringify(Inventory.allInventories));
+    console.log("npc inventory:");
+    console.log(npc.inventory.getInventory());
+    destroyItem("gold");
+    player.inventory.deleteItem("silver");
+    console.log("after player inventory:");
+    console.log(JSON.stringify(player.inventory.getInventory()));
+    console.log("after ItemDatabase:");
+    console.log(JSON.stringify(ItemDatabase));
+    console.log("after allInventories:");
+    console.log(JSON.stringify(Inventory.allInventories));
 
-    console.log(JSON.stringify(player.stats));
-    player.addStat("luck", "value", 5);
-    console.log("luck stat:");
-    console.log(player.getStat("luck"));
+    // console.log(JSON.stringify(player.stats));
+    // player.addStat("luck", "value", 5);
+    // console.log("luck stat:");
+    // console.log(player.getStat("luck"));
 
-    player.addStat("lockpicking", "status", "on");
-    console.log("lockpicking stat:");
-    console.log(player.getStat("lockpicking"));
+    // player.addStat("lockpicking", "status", "on");
+    // console.log("lockpicking stat:");
+    // console.log(player.getStat("lockpicking"));
 
-    player.updateStat("lockpicking", "status", "off");
-    player.updateStat("strength", "value", 10, "add");
+    // player.updateStat("lockpicking", "status", "off");
+    // player.updateStat("strength", "value", 10, "add");
 
-    console.log("lockpicking stat:");
-    console.log(player.getStat("lockpicking"));
-    console.log("luck stat:");
-    console.log(player.getStat("luck"));
+    // console.log("lockpicking stat:");
+    // console.log(player.getStat("lockpicking"));
+    // console.log("luck stat:");
+    // console.log(player.getStat("luck"));
 
 }
 
