@@ -179,7 +179,6 @@ function Character(data) {
         this.stats = data.stats;
     }
 }
-// TODO a small function to check if a stat exists
 
 // check if the stat doesn't exist then add it to the stats object
 Character.prototype.addStat = function(stat, attr, val) {
@@ -203,7 +202,7 @@ Character.prototype.getStat = function(stat) {
 Character.prototype.updateStat = function(stat, attr, val, mod) {
     // if the stat exists add or subtract the val
     // if it's a string or integer it needs to be handled differently
-    if (this.stats[stat] != "" && this.stats[stat] != undefined) {
+    if (this.getStat(stat)) {
         if (typeof this.stats[stat][attr] == "string") {
             this.replaceStat(stat, attr, val);
         } else if (typeof this.stats[stat][attr] == "number") {
@@ -220,15 +219,12 @@ Character.prototype.replaceStat = function(stat, attr, val) {
 Character.prototype.modifyStat = function(stat, attr, val, mod) {
     // if the stat exists add or subtract the val
     var originalStat = this.stats[stat][attr];
-    console.log("modify stat");
-    console.log(originalStat);
     this.stats[stat][attr] = mathy(mod, originalStat, val);
-    console.log(this.stats[stat][attr]);
 }
 
 Character.prototype.deleteStat = function(stat) {
     // if the stat exists, delete it
-    if (this.stats[stat] != "" && this.stats[stat] != undefined) {
+    if (this.getStat(stat)) {
         delete this.stats[stat];
     }
 }
