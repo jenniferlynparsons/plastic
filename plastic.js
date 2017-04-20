@@ -199,6 +199,7 @@ Character.prototype.getStat = function(stat) {
     }
 }
 
+// TODO a way to store the modifiers for later comparision
 Character.prototype.updateStat = function(stat, attr, val, mod) {
     // if the stat exists add or subtract the val
     // if it's a string or integer it needs to be handled differently
@@ -226,6 +227,7 @@ Character.prototype.modifyStat = function(stat, attr, val, mod) {
 }
 
 Character.prototype.deleteStat = function(stat) {
+    // if the stat exists, delete it
     if (this.stats[stat] != "" && this.stats[stat] != undefined) {
         delete this.stats[stat];
     }
@@ -379,15 +381,12 @@ function Item(name, val) {
 /* TODO should also remove the item from any inventory */
 // #### Item destroyer
 // destroyItem deletes an item from the ItemDatabase as well as removing it from all inventories
-/* TODO use map and add IDs to allInventories for better performance */
+/* TODO add IDs to allInventories for more flexibility */
 function destroyItem(name) {
     delete ItemDatabase[name];
-
-    // do it with a for loop
-    for (var i = 0, length = Inventory.allInventories.length; i < length; i++) {
-        Inventory.allInventories[i].deleteItem(name);
-    }
-
-    // do it with map
-    Inventory.allInventories.map(deleteItem(name));
+    Inventory.allInventories.filter(function(inventory) {
+        return inventory.getItemByName(name);
+    }).map(function(inventory) {
+        inventory.deleteItem(name);
+    });
 }
