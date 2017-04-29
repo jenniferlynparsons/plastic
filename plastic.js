@@ -85,6 +85,66 @@ function mathy(operator, x, y) {
 var ItemDatabase = {};
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ## Stats Calculator
+
+
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ## Stats Functions
+
+// check if the stat doesn't exist then add it to the stats object
+function addStat(entity, stat, attr, val) {
+    if (!entity.stats[stat]) {
+        var attrObj = {};
+        attrObj[attr] = val;
+        entity.stats[stat] = attrObj;
+    } else {
+        throw new Error("This stat already exists");
+    }
+}
+
+// find the stat and return it if it exists
+function getStat(entity, stat) {
+    if (entity.stats[stat] != "" && entity.stats[stat] != undefined) {
+        return entity.stats[stat];
+    }
+}
+
+// TODO a way to store the modifiers for later comparision
+function updateStat(entity, stat, attr, val, mod) {
+    // if the stat exists add or subtract the val
+    // if it's a string or integer it needs to be handled differently
+    if (getStat(entity, stat)) {
+        if (typeof entity.stats[stat][attr] == "string") {
+            replaceStat(entity, stat, attr, val);
+        } else if (typeof entity.stats[stat][attr] == "number") {
+            modifyStat(entity, stat, attr, val, mod);
+        }
+    }
+}
+
+function replaceStat(entity, stat, attr, val) {
+    // if the stat exists add or subtract the val
+    entity.stats[stat][attr] = val;
+}
+
+function modifyStat(entity, stat, attr, val, mod) {
+    // if the stat exists add or subtract the val
+    var originalStat = entity.stats[stat][attr];
+    entity.stats[stat][attr] = mathy(mod, originalStat, val);
+}
+
+function deleteStat(entity, stat) {
+    // if the stat exists, delete it
+    if (entity.getStat(stat)) {
+        delete entity.stats[stat];
+    }
+}
+
+function getAllStats(entity) {
+    return entity.stats;
+}
+
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## Quest
 
 // #### Quest
@@ -179,60 +239,6 @@ function Character(data) {
         this.stats = data.stats;
     }
 }
-
-// check if the stat doesn't exist then add it to the stats object
-Character.prototype.addStat = function(stat, attr, val) {
-    if (!this.stats[stat]) {
-        var attrObj = {};
-        attrObj[attr] = val;
-        this.stats[stat] = attrObj;
-    } else {
-        throw new Error("This stat already exists");
-    }
-}
-
-// find the stat and return it if it exists
-Character.prototype.getStat = function(stat) {
-    if (this.stats[stat] != "" && this.stats[stat] != undefined) {
-        return this.stats[stat];
-    }
-}
-
-// TODO a way to store the modifiers for later comparision
-Character.prototype.updateStat = function(stat, attr, val, mod) {
-    // if the stat exists add or subtract the val
-    // if it's a string or integer it needs to be handled differently
-    if (this.getStat(stat)) {
-        if (typeof this.stats[stat][attr] == "string") {
-            this.replaceStat(stat, attr, val);
-        } else if (typeof this.stats[stat][attr] == "number") {
-            this.modifyStat(stat, attr, val, mod);
-        }
-    }
-}
-
-Character.prototype.replaceStat = function(stat, attr, val) {
-    // if the stat exists add or subtract the val
-    this.stats[stat][attr] = val;
-}
-
-Character.prototype.modifyStat = function(stat, attr, val, mod) {
-    // if the stat exists add or subtract the val
-    var originalStat = this.stats[stat][attr];
-    this.stats[stat][attr] = mathy(mod, originalStat, val);
-}
-
-Character.prototype.deleteStat = function(stat) {
-    // if the stat exists, delete it
-    if (this.getStat(stat)) {
-        delete this.stats[stat];
-    }
-}
-
-Character.prototype.getAllStats = function() {
-    return this.stats;
-}
-
 
 /* TODO this will be required when character is allowed more than one inventory. character inventory will need to be refactored as an array of inventories. */
 

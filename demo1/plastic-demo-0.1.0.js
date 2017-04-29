@@ -49,21 +49,21 @@ function startGame() {
     // console.log(JSON.stringify(Inventory.allInventories));
 
     console.log(JSON.stringify(player.stats));
-    player.addStat("luck", "value", 5);
+    addStat(player, "luck", "value", 5);
     console.log("luck stat:");
-    console.log(player.getStat("luck"));
+    console.log(getStat(player, "luck"));
 
-    player.addStat("lockpicking", "status", "on");
+    addStat(player, "lockpicking", "status", "on");
     console.log("lockpicking stat:");
-    console.log(player.getStat("lockpicking"));
+    console.log(getStat(player, "lockpicking"));
 
-    player.updateStat("lockpicking", "status", "off");
-    player.updateStat("luck", "value", 10, "add");
+    updateStat(player, "lockpicking", "status", "off");
+    updateStat(player, "luck", "value", 10, "add");
 
     console.log("lockpicking stat:");
-    console.log(player.getStat("lockpicking"));
+    console.log(getStat(player, "lockpicking"));
     console.log("luck stat:");
-    console.log(player.getStat("luck"));
+    console.log(getStat(player, "luck"));
 
 }
 
