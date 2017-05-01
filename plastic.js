@@ -87,6 +87,17 @@ var ItemDatabase = {};
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## Stats Calculator
 
+function statsCalc(entity) {
+    // should this calculate all stats in one swoop or just the total for one stat?
+    // grab entity stats
+    var estats = entity.stats;
+    // grab entity inventory
+    var einventory = entity.inventory.items;
+    // get inventory item stats
+
+    // use mathy to get total modifiers
+    // use mathy to return total adjusted stat value
+}
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## Stats Functions
