@@ -1,0 +1,32 @@
+The problem:
+
+Determining how to make a generic stats calculator that's flexible enough to be able to handle base stats, buffs, and equiptment modifiers in a non-destructive way.
+
+
+Current iteration:
+
+function statCalc(entity, stat) {
+    // grab entity stats
+    var estat = entity.stats[stat];
+    // grab entity inventory
+    var einventory = entity.inventory.items;
+    // get inventory item stats
+    einventory.filter(stats[stat]);
+
+    // use mathy to get total modifiers
+    // use mathy to return total adjusted stat value
+
+}
+
+The questions:
+- Should the calculator handle all stats in one swoop or just the total for one stat?
+- If it's one stat at a time, should there be another function that takes in all the stats from an entity?
+- What kind of system can be built that is simple but flexible?
+
+
+Resources:
+http://howtomakeanrpg.com/a/how-to-make-an-rpg-stats.html
+http://www.redblobgames.com/articles/probability/damage-rolls.html
+https://www.reddit.com/r/gamedesign/comments/29twkx/question_rpg_damage_formulacalculation/
+https://forum.unity3d.com/threads/rpg-math.282161/
+
