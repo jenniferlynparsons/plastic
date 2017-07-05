@@ -157,7 +157,7 @@
 
 /* character */
 {
-  "name": "Goober",
+  "name": "Harper",
   "role": "Rogue",
   "level": 1,
   "stats": {
@@ -171,6 +171,10 @@
     },
     "constitution": {
       "value": 20,
+      "locked": false
+    },
+    "luck": {
+      "value": 60,
       "locked": false
     },
   },
