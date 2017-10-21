@@ -165,97 +165,97 @@ function getAllStats(entity) {
 
 // #### Quest
 // The Quest creator function accepts a data object.
-function Quest(data) {
-  if (propertyExists(data, "name") && propertyExists(data, "state")) {
-    this.name = data.name;
-    this.state = data.state;
+class Quest {
+  constructor(data){
+    if (propertyExists(data, "name") && propertyExists(data, "state")) {
+      this.name = data.name;
+      this.state = data.state;
+    }
+    if (data.questType) {
+      this.questType = data.questType;
+    }
+    if (data.precondition) {
+      this.precondition = data.precondition;
+    } else {
+      this.precondition = () => true;
+    }
+    if (data.postcondition) {
+      this.postcondition = data.postcondition;
+    } else {
+      this.postcondition = () => true;
+    }
+    if (data.inventory) {
+      this.inventory = new Inventory(data.inventory);
+    } else {
+      this.inventory = new Inventory([]);
+    }
   }
-  if (data.questType) {
-    this.questType = data.questType;
-  }
-  if (data.precondition) {
-    this.precondition = data.precondition;
-  } else {
-    this.precondition = function() {
-      return true;
-    };
-  }
-  if (data.postcondition) {
-    this.postcondition = data.postcondition;
-  } else {
-    this.postcondition = function() {
-      return true;
-    };
-  }
-  if (data.inventory) {
-    this.inventory = new Inventory(data.inventory);
-  } else {
-    this.inventory = new Inventory([]);
-  }
+  
+  // #### changeState
+  // Updates the Quest state and availability
+  changeState() {
+    if (this.isAvailable()) {
+      this.state = "active";
+    } else if (this.isCompleteable()) {
+      this.state = "closed";
+    }
+  };
+  
+  // #### isAvailable
+  // Returns true if the Quest is available to start otherwise returns false.
+  isAvailable() {
+    return this.state == "open" && this.precondition();
+  };
+  
+  // #### isActive
+  // returns true if the Quest is active otherwise returns false
+  isActive() {
+    return this.state == "active";
+  };
+  
+  // #### isCompleteable
+  // returns true if the Quest is complete otherwise returns false
+  isCompleteable() {
+    return this.state == "active" && this.postcondition();
+  };
+  
+  // #### isComplete
+  // returns true if the Quest is complete otherwise returns false
+  isComplete() {
+    return this.state == "closed";
+  };
+  
+  // #### getState
+  // returns the current Quest state string
+  getState() {
+    return this.state;
+  };
 }
-
-// #### changeState
-// Updates the Quest state and availability
-Quest.prototype.changeState = function() {
-  if (this.isAvailable()) {
-    this.state = "active";
-  } else if (this.isCompleteable()) {
-    this.state = "closed";
-  }
-};
-
-// #### isAvailable
-// Returns true if the Quest is available to start otherwise returns false.
-Quest.prototype.isAvailable = function() {
-  return this.state == "open" && this.precondition();
-};
-
-// #### isActive
-// returns true if the Quest is active otherwise returns false
-Quest.prototype.isActive = function() {
-  return this.state == "active";
-};
-
-// #### isCompleteable
-// returns true if the Quest is complete otherwise returns false
-Quest.prototype.isCompleteable = function() {
-  return this.state == "active" && this.postcondition();
-};
-
-// #### isComplete
-// returns true if the Quest is complete otherwise returns false
-Quest.prototype.isComplete = function() {
-  return this.state == "closed";
-};
-
-// #### getState
-// returns the current Quest state string
-Quest.prototype.getState = function() {
-  return this.state;
-};
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## Character
 
 // #### Character
 // The Character creator function accepts a data object.
-function Character(data) {
-  if (propertyExists(data, "name")) {
-    this.name = data.name;
-  }
-  if (data.role) {
-    this.role = data.role;
-  }
-  if (data.level) {
-    this.level = data.level;
-  }
-  if (data.inventory) {
-    this.inventory = new Inventory(data.inventory);
-  } else {
-    this.inventory = new Inventory([]);
-  }
-  if (data.stats) {
-    this.stats = data.stats;
+class Character {
+  constructor(data){
+    if (propertyExists(data, "name")) {
+      this.name = data.name;
+    }
+    if (data.role) {
+      this.role = data.role;
+    }
+    if (data.level) {
+      this.level = data.level;
+    }
+    if (data.inventory) {
+      this.inventory = new Inventory(data.inventory);
+    } else {
+      this.inventory = new Inventory([]);
+    }
+    if (data.stats) {
+      this.stats = data.stats;
+    }
   }
 }
 
@@ -275,60 +275,64 @@ throw new Error("Inventory already exists");
 
 // #### Inventory
 // Inventory creator function accepts a data object.
-function Inventory(data) {
+class Inventory {
+  constructor(data){
   /* TODO check that data is array and not string or something else */
   /* TODO keep track of each inventory in array */
   this.items = data;
   Inventory.allInventories.push(this);
+  }
+
+  // #### getInventory
+  // returns the Inventory array
+  getInventory() {
+    return this.items;
+  };
+
+  // #### getItemByName
+  // returns the Item (truthy) if Item is in the Inventory
+  // all items in the inventory must be uniquely named
+  getItemByName(queryItemName) {
+    return this.items.find(function(item) {
+      return item.item.name === queryItemName;
+    });
+  };
+
+  // #### addItem
+  // adds the item to the inventory array
+  addItem(name, qty) {
+    const newItem = this.getItemByName(name);
+    if (newItem && qty != "" && qty != undefined) {
+      newItem.qty = newItem.qty + qty;
+    } else {
+      this.items.push(new InventoryItem(name, qty));
+    }
+  };
+
+  // #### removeItem
+  // subtracts the requested quantity of the item from the inventory array, if the remaining quantity is equal to zero, it removes the item entirely. If the remaining quantity is less than zero, it returns a negative number.
+  /* TODO should removeItem be different than updateItem? is it heavy handed to have it removed instead of setting it to 0? */
+  removeItem(name, qty) {
+    const itemToRemove = this.getItemByName(name);
+    if (itemToRemove) {
+      if (qty != "" && qty != undefined && itemToRemove.qty - qty >= 0) {
+        itemToRemove.qty = itemToRemove.qty - qty;
+      } else if (itemToRemove.qty - qty < 0) {
+        return itemToRemove.qty - qty;
+      }
+    }
+  };
+
+  deleteItem(name) {
+    const itemToDelete = this.getItemByName(name);
+    const index = this.items.indexOf(itemToDelete);
+    this.items.splice(index, 1);
+  };
 }
 
 Inventory.allInventories = [];
 
-// #### getInventory
-// returns the Inventory array
-Inventory.prototype.getInventory = function() {
-  return this.items;
-};
 
-// #### getItemByName
-// returns the Item (truthy) if Item is in the Inventory
-// all items in the inventory must be uniquely named
-Inventory.prototype.getItemByName = function(queryItemName) {
-  return this.items.find(function(item) {
-    return item.item.name === queryItemName;
-  });
-};
-
-// #### addItem
-// adds the item to the inventory array
-Inventory.prototype.addItem = function(name, qty) {
-  const newItem = this.getItemByName(name);
-  if (newItem && qty != "" && qty != undefined) {
-    newItem.qty = newItem.qty + qty;
-  } else {
-    this.items.push(new InventoryItem(name, qty));
-  }
-};
-
-// #### removeItem
-// subtracts the requested quantity of the item from the inventory array, if the remaining quantity is equal to zero, it removes the item entirely. If the remaining quantity is less than zero, it returns a negeative number.
-/* TODO should removeItem be different than updateItem? is it heavy handed to have it removed instead of setting it to 0? */
-Inventory.prototype.removeItem = function(name, qty) {
-  const itemToRemove = this.getItemByName(name);
-  if (itemToRemove) {
-    if (qty != "" && qty != undefined && itemToRemove.qty - qty >= 0) {
-      itemToRemove.qty = itemToRemove.qty - qty;
-    } else if (itemToRemove.qty - qty < 0) {
-      return itemToRemove.qty - qty;
-    }
-  }
-};
-
-Inventory.prototype.deleteItem = function(name) {
-  const itemToDelete = this.getItemByName(name);
-  const index = this.items.indexOf(itemToDelete);
-  this.items.splice(index, 1);
-};
 
 // #### InventoryItem
 // creates a new Inventory Item
