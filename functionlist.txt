@@ -1,0 +1,54 @@
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Helpers
+
+[x] simple Document ready function
+[x] local JSON file loading function
+[x] local JSON file loader call
+
+[o]isAString try catch utility
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// GameState
+
+[o] GameState creator
+[x] Item Database that holds the list of game items
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Quest
+
+[o] Quest creator
+[//] Quest.prototype.getQuest return the requested Quest name string
+[//] Quest.prototype.changeState sets the Quest state/availability
+[//] Quest.prototype.isAvailable returns true if the Quest is available
+[//] Quest.prototype.getState returns the quest state
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Character
+
+[o] Character creator
+[//] Character.prototype.getCharacter returns the Character name string
+[//] Character.prototype.getCharacterRole returns the Character role string
+[o] Character.prototype.addInventoryItem adds an inventory item to this Character's inventory
+[o] Character.prototype.addInventory adds an Inventory to the Character if one does not already exist
+[o] Character.prototype.getInventory returns the Character Inventory array
+[o] Character.prototype.tradeInventory abstraction layer for InventoryMediator
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Inventory
+
+[o] Inventory creator
+[o] Inventory.prototype.getInventory returns the Inventory array
+[//] Inventory.prototype.findItem returns true if Item is in the Inventory
+[o] Inventory.prototype.addItem adds the item to the inventory array
+[o] inventoryMediator trades items between a trader and a tradee
+
+[o] InventoryItem creator
+[//] InventoryItem.prototype.getValue returns the value of 1 of this item the InventoryItem from the ItemDatabase
+[//] InventoryItem.prototype.getTotalValue returns the total value of all items of this kind
+[o] NewInventoryItem adds an Item to the Inventory
+[o] DestroyInventoryItem removes an Item from the Inventory
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// Item
+
+[o] Item creator

@@ -1,0 +1,66 @@
+Phase one
+- a library of functions for controlling gameplay and character creation/tracking
+- creation of demo games
+At this phase, the author would implement the library into the game themselves, requiring front-end coding skills.
+
+0.1.0 alpha
+- enough functionality for a limited, minimal game where you can purchase items from a store, talk to a character, and complete a quest in console.
+
+- character
+  name
+    get
+  role
+    get
+  inventory
+
+- item
+  value
+    get
+  type
+    get
+
+- inventory
+  name
+  items
+  --
+  add
+  get
+  remove
+
+- quest
+  name
+    get
+  type
+    get
+  state
+    get
+    set
+  inventory
+
+- game state
+
+
+- basic plastic code
+  models
+  mediators
+  views
+
+
+0.2.0 alpha
+- characters have stats and items can now make changes to those stats
+
+- character
+skills
+level
+stats
+
+- items
+type
+stats effects
+
+
+
+note for later:
+store inventory could have the same core items but variable contents at the fringes, all vendors have the same items with some turned on and off, or could be entirely randomly generated. orrrrr be a reward at the end of a quest and have a set of particular items.
+
+also, i haven't even considered how "companion" characters would work. because my instinct is to want to make something where a character can have a companion animal. :)

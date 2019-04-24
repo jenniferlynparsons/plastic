@@ -1,0 +1,26 @@
+todo
+
+x move console logs to demo
+
+x take out arguments
+
+event triggers
+- talk
+- transfer item
+- get quest
+
+interaction mediator
+
+fancy inventory UI object
+
+interaction layer
+
+api
+
+LOOKUP
+.apply()
+.map()
+serialization layer
+deserialization
+delegate
+custom objects
