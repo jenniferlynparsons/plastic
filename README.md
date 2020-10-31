@@ -1,11 +1,11 @@
 # plastic
 A flexible text-based rpg engine built in JavaScript.
 
-plas·tic  (*plăs′tĭk*)  
-*adj.*  
-1. Capable of being moulded; malleable, flexible, pliant. [from 17th c.]  
-2. *(medicine, now rare)* Producing tissue. [from 17th c.]  
-3. *(dated)* Creative, formative. [from 17th c.]  
+plas·tic  (*plăs′tĭk*)
+*adj.*
+1. Capable of being moulded; malleable, flexible, pliant. [from 17th c.]
+2. *(medicine, now rare)* Producing tissue. [from 17th c.]
+3. *(dated)* Creative, formative. [from 17th c.]
 4. *(biology)* Capable of adapting to varying conditions; characterized by environmental adaptability.
 
 ## Purpose
@@ -99,3 +99,29 @@ useful for characters that have various abilities outside of tools/gear
 role
 - custom types for limiting skills, gear, tools, etc.
 - adds/subtracts attributes
+
+
+
+
+> ✨ Bootstrapped with Create Snowpack App (CSA).
+
+## Available Scripts
+
+### npm start
+
+Runs the app in the development mode.
+Open http://localhost:8080 to view it in the browser.
+
+The page will reload if you make edits.
+You will also see any lint errors in the console.
+
+### npm run build
+
+Builds a static copy of your site to the `build/` folder.
+Your app is ready to be deployed!
+
+**For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/master/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.json` config file.
+
+### Q: What about Eject?
+
+No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
