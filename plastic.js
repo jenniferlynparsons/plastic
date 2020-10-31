@@ -60,23 +60,6 @@ function gotData(data) {
   else throw new Error("There is no data.");
 }
 
-// #### Simple helpers
-// These are basic bits and pieces that are useful throughout the library and games
-
-function mathy(operator, x, y) {
-  if (operator == "add") {
-    return x + y;
-  } else if (operator == "subtract") {
-    return x - y;
-  } else if (operator == "multiply") {
-    return x * y;
-  } else if (operator == "divide") {
-    return x / y;
-  } else if (operator == "modulus") {
-    return x % y;
-  }
-}
-
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 // ## General Game Data
 
@@ -98,10 +81,7 @@ function statCalc(entity, stat) {
   // grab entity inventory
   const einventory = entity.inventory.items;
   // get inventory item stats
-  einventory.filter(stats[stat]);
-
-  // use mathy to get total modifiers
-  // use mathy to return total adjusted stat value
+  einventory.filter(stats[estat]);
 }
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -165,8 +145,8 @@ function getAllStats(entity) {
 
 // #### Quest
 // The Quest creator function accepts a data object.
-class Quest {
-  constructor(data){
+export class Quest {
+  constructor(data) {
     if (propertyExists(data, "name") && propertyExists(data, "state")) {
       this.name = data.name;
       this.state = data.state;
@@ -190,7 +170,7 @@ class Quest {
       this.inventory = new Inventory([]);
     }
   }
-  
+
   // #### changeState
   // Updates the Quest state and availability
   changeState() {
@@ -199,37 +179,37 @@ class Quest {
     } else if (this.isCompleteable()) {
       this.state = "closed";
     }
-  };
-  
+  }
+
   // #### isAvailable
   // Returns true if the Quest is available to start otherwise returns false.
   isAvailable() {
     return this.state == "open" && this.precondition();
-  };
-  
+  }
+
   // #### isActive
   // returns true if the Quest is active otherwise returns false
   isActive() {
     return this.state == "active";
-  };
-  
+  }
+
   // #### isCompleteable
   // returns true if the Quest is complete otherwise returns false
   isCompleteable() {
     return this.state == "active" && this.postcondition();
-  };
-  
+  }
+
   // #### isComplete
   // returns true if the Quest is complete otherwise returns false
   isComplete() {
     return this.state == "closed";
-  };
-  
+  }
+
   // #### getState
   // returns the current Quest state string
   getState() {
     return this.state;
-  };
+  }
 }
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -238,7 +218,7 @@ class Quest {
 // #### Character
 // The Character creator function accepts a data object.
 class Character {
-  constructor(data){
+  constructor(data) {
     if (propertyExists(data, "name")) {
       this.name = data.name;
     }
@@ -276,18 +256,18 @@ throw new Error("Inventory already exists");
 // #### Inventory
 // Inventory creator function accepts a data object.
 class Inventory {
-  constructor(data){
-  /* TODO check that data is array and not string or something else */
-  /* TODO keep track of each inventory in array */
-  this.items = data;
-  Inventory.allInventories.push(this);
+  constructor(data) {
+    /* TODO check that data is array and not string or something else */
+    /* TODO keep track of each inventory in array */
+    this.items = data;
+    Inventory.allInventories.push(this);
   }
 
   // #### getInventory
   // returns the Inventory array
   getInventory() {
     return this.items;
-  };
+  }
 
   // #### getItemByName
   // returns the Item (truthy) if Item is in the Inventory
@@ -296,7 +276,7 @@ class Inventory {
     return this.items.find(function(item) {
       return item.item.name === queryItemName;
     });
-  };
+  }
 
   // #### addItem
   // adds the item to the inventory array
@@ -307,7 +287,7 @@ class Inventory {
     } else {
       this.items.push(new InventoryItem(name, qty));
     }
-  };
+  }
 
   // #### removeItem
   // subtracts the requested quantity of the item from the inventory array, if the remaining quantity is equal to zero, it removes the item entirely. If the remaining quantity is less than zero, it returns a negative number.
@@ -321,18 +301,16 @@ class Inventory {
         return itemToRemove.qty - qty;
       }
     }
-  };
+  }
 
   deleteItem(name) {
     const itemToDelete = this.getItemByName(name);
     const index = this.items.indexOf(itemToDelete);
     this.items.splice(index, 1);
-  };
+  }
 }
 
 Inventory.allInventories = [];
-
-
 
 // #### InventoryItem
 // creates a new Inventory Item
