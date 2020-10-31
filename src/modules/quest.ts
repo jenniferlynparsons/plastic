@@ -13,7 +13,7 @@ interface DataInterface {
 
 // #### Quest
 // The Quest creator function accepts a data object.
-export class Quest {
+export default class Quest {
   questType: string;
   name: string;
   state: string;
