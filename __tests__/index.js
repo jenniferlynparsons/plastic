@@ -1,4 +1,4 @@
-import { Quest } from "../plastic";
+import { Quest } from "/modules/quest";
 
 let mockFunc;
 
