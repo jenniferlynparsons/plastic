@@ -10,6 +10,16 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: "body"
 });
 
+var TypedocWebpackPlugin = require("typedoc-webpack-plugin");
+
+const TypedocWebpackPluginConfig = new TypedocWebpackPlugin({
+  name: "plastic",
+  mode: "file",
+  theme: "./typedoc-theme/",
+  includeDeclarations: false,
+  ignoreCompilerErrors: true
+});
+
 module.exports = {
   entry: "./client/src/index.js",
   output: {
@@ -19,10 +29,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(sass|scss)$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
-      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -55,5 +61,5 @@ module.exports = {
   devServer: {
     historyApiFallback: true
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [HtmlWebpackPluginConfig, TypedocWebpackPluginConfig]
 };
